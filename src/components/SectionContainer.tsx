@@ -2,12 +2,10 @@ import styled from "styled-components";
 
 type SectionContainerProps = {
   children: React.ReactNode;
-}
-const SectionContainer = ({children}: SectionContainerProps) => {
-  return <Container>
-    {children}
-  </Container>
-}
+};
+const SectionContainer = ({ children }: SectionContainerProps) => {
+  return <Container>{children}</Container>;
+};
 
 export default SectionContainer;
 

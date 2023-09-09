@@ -5,14 +5,14 @@ import Title from "./ui/Title";
 type PlanCardProps = {
   title: string;
   plans: string[];
-}
-const PlanCard = ({title, plans}: PlanCardProps) => {
+};
+const PlanCard = ({ title, plans }: PlanCardProps) => {
   return (
     <Card type="double">
       <Title type="tertiary" content={title} />
     </Card>
-  )
-}
+  );
+};
 
 export default PlanCard;
 

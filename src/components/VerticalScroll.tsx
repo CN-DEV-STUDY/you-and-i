@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
 type ScrollProps = {
-  children: React.ReactNode
-}
+  children: React.ReactNode;
+};
 
-const VerticalScroll = ({children}: ScrollProps) => {
-  return <Container>{children}</Container>
-}
+const VerticalScroll = ({ children }: ScrollProps) => {
+  return <Container>{children}</Container>;
+};
 
 export default VerticalScroll;
 
@@ -16,10 +16,9 @@ const Container = styled.div`
   justify-content: start;
   align-items: center;
   gap: 15px;
-  
+
   padding: 10px 10px;
   height: 212px;
   width: 100%;
   overflow-x: scroll;
-  
 `;
