@@ -25,11 +25,12 @@ const Container = styled.div`
   background-color: var(--color__secondaty);
 
   :first-child {
-    position: absolute;
+    margin-left: auto;
+    margin-right: -35px;
   }
 
   :last-child {
     margin-left: auto;
-    margin-right: 40px;
+    margin-right: 10px;
   }
 `;
