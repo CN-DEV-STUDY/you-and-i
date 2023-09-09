@@ -9,10 +9,13 @@ const Plan = () => {
     <SectionContainer>
       <Title type="secondary" content="Plan" />
       <VerticalScroll>
-        <PlanCard title="2023-09-30" plans={Array.from("")} />
-        <PlanCard title="2023-08-05" plans={Array.from("")} />
-        <PlanCard title="2023-08-03" plans={Array.from("")} />
-        <PlanCard title="2023-08-01" plans={Array.from("")} />
+        <PlanCard
+          title="2023-09-30"
+          plans="1. A random string Very Very Long Long String \n 2. A random string Very Very Long Long String \n 2. A random string Very Very Long Long String \n 2. A random string Very Very Long Long String \n 2. A random string Very Very Long Long String \n 2. A random string Very Very Long Long String \n 2. A random string Very Very Long Long String \n 2. A random string Very Very Long Long String \n 2. A random string Very Very Long Long String "
+        />
+        <PlanCard title="2023-08-05" plans="A random string" />
+        <PlanCard title="2023-08-03" plans="A random string" />
+        <PlanCard title="2023-08-01" plans="A random string" />
       </VerticalScroll>
     </SectionContainer>
   );

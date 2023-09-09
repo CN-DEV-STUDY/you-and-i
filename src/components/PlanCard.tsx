@@ -4,12 +4,13 @@ import Title from "./ui/Title";
 
 type PlanCardProps = {
   title: string;
-  plans: string[];
+  plans: string;
 };
 const PlanCard = ({ title, plans }: PlanCardProps) => {
   return (
     <Card type="double">
       <Title type="tertiary" content={title} />
+      <Text>{plans}</Text>
     </Card>
   );
 };
@@ -17,6 +18,6 @@ const PlanCard = ({ title, plans }: PlanCardProps) => {
 export default PlanCard;
 
 // style
-const Container = styled.div`
-  height: 100%;
+const Text = styled.p`
+  margin-top: 10px;
 `;
