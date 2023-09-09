@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Logo from "../ui/Logo";
 import ToggleMenuBar from "../ToggleMenuBar";
 
-const Topbar = () => {
+const TopBar = () => {
   return (
     <Container>
       <Logo />
@@ -11,18 +11,19 @@ const Topbar = () => {
   );
 };
 
-export default Topbar;
+export default TopBar;
 
 // style
 const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 
   width: 100%;
   height: 55px;
-  background-color: var(--color__secondaty);
 
   :first-child {
     margin-left: auto;

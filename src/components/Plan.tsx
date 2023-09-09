@@ -7,7 +7,7 @@ import PlanCard from "./PlanCard";
 const Plan = () => {
   return (
     <SectionContainer>
-      <Title type="secondary" content="Plan" />
+      <Title type="secondary" content="Plans" />
       <VerticalScroll>
         <PlanCard
           title="2023-09-30"

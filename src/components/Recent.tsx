@@ -3,10 +3,7 @@ import SectionContainer from "./SectionContainer";
 import VerticalScroll from "./VerticalScroll";
 import RecentCard from "./RecentCard";
 
-type RecentProps = {
-  description: string;
-};
-const Recent = ({ description }: RecentProps) => {
+const Recent = () => {
   return (
     <SectionContainer>
       <Title type="secondary" content="Recent" />
