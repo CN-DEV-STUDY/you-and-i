@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import { GiHamburgerMenu } from "react-icons/gi";
 import Logo from "../ui/Logo";
+import ToggleMenuBar from "../ToggleMenuBar";
 
 const Topbar = () => {
   return (
     <Container>
       <Logo />
-      <GiHamburgerMenu size={24} color="var(--color__white)" />
+      <ToggleMenuBar />
     </Container>
   );
 };
@@ -30,6 +30,6 @@ const Container = styled.div`
 
   :last-child {
     margin-left: auto;
-    margin-right: 20px;
+    margin-right: 40px;
   }
 `;
