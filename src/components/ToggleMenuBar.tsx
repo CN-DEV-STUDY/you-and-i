@@ -73,6 +73,11 @@ function ToggleMenuBar() {
             open={isOpen[anchor]}
             onClose={toggleDrawer(anchor, false)}
             onOpen={toggleDrawer(anchor, true)}
+            ModalProps={{
+              style: {
+                backgroundColor: "rgba(3, 3, 3, 0.05)", // 배경 색상 및 투명도 설정
+              },
+            }}
           >
             {list(anchor)}
           </SwipeableDrawer>
