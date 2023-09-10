@@ -1,19 +1,41 @@
 import TopBar from "../../components/shared/TopBar";
-import { InputOutlined } from "@mui/icons-material";
-import { Input } from "@mui/joy";
+import { Button, Input } from "@mui/joy";
 import { HiOutlineSearch } from "react-icons/hi";
+import styled from "styled-components";
 
 const SearchPage = () => {
   return (
     <>
       <TopBar isSearch={true} />
-      <Input startDecorator={<HiOutlineSearch />} />
-      <div>SearchPage</div>
-      <div>SearchPage</div>
-      <div>SearchPage</div>
-      <div>SearchPage</div>
+      <Container>
+        <Input
+          color="neutral"
+          variant="plain"
+          sx={{ width: "95%", "--Input-focusedThickness": "none" }}
+          startDecorator={<HiOutlineSearch />}
+          endDecorator={<Button>검색</Button>}
+        />
+
+        <div>SearchPage</div>
+        <div>SearchPage</div>
+        <div>SearchPage</div>
+        <div>SearchPage</div>
+      </Container>
     </>
   );
 };
 
 export default SearchPage;
+
+// style
+const Container = styled.div`
+  background-color: var(--color__secondary);
+
+  .MuiInput-root {
+    margin: 0 auto;
+
+    .MuiButton-root {
+      background-color: var(--color__primary);
+    }
+  }
+`;
