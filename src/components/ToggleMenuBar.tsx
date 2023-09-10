@@ -8,11 +8,13 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Button,
 } from "@mui/material";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { useAuth } from "@clerk/clerk-react";
 
 type Anchor = "right";
 
@@ -20,6 +22,16 @@ function ToggleMenuBar() {
   const [isOpen, setIsOpen] = useState({
     right: false,
   });
+
+  const { isLoaded, userId, signOut } = useAuth();
+
+  const handleLogout = async () => {
+    try {
+      await signOut(); // 로그아웃을 호출
+    } catch (error) {
+      console.error("로그아웃 중 오류 발생:", error);
+    }
+  };
 
   const toggleDrawer =
     (anchor: Anchor, open: boolean) => (event: KeyboardEvent | MouseEvent) => {
@@ -43,21 +55,29 @@ function ToggleMenuBar() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List sx={{ backgroundColor: "var(--color__white)" }}>
-        {["로그인"].map((text, index) => (
-          <ListItem key={text} disablePadding>
+        {userId !== null ? (
+          // 로그인된 상태에서는 로그아웃 버튼을 표시
+          <ListItem>
+            <Button variant="outlined" color="error" onClick={handleLogout}>
+              로그아웃
+            </Button>
+          </ListItem>
+        ) : (
+          // 로그인되지 않은 상태에서는 로그인 링크를 표시
+          <ListItem key="로그인" disablePadding>
             <CustomLink to={"/login"}>
               <ListItemButton>
                 <ListItemIcon sx={{ backgroundColor: "var(--color__white)" }}>
                   <AccountBoxIcon />
                 </ListItemIcon>
                 <ListItemText
-                  primary={text}
+                  primary="로그인"
                   sx={{ backgroundColor: "var(--color__white)" }}
                 />
               </ListItemButton>
             </CustomLink>
           </ListItem>
-        ))}
+        )}
       </List>
       <Divider />
     </Box>
