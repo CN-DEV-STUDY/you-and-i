@@ -16,8 +16,6 @@ export default Period;
 
 const Section = styled.div`
   width: 100%;
-  height: 170px;
-  margin-bottom: 20px;
-
+  height: 180px;
   background-color: var(--color__secondary);
 `;
