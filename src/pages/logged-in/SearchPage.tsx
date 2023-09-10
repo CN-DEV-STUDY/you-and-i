@@ -2,6 +2,7 @@ import TopBar from "../../components/shared/TopBar";
 import { Button, Input } from "@mui/joy";
 import { HiOutlineSearch } from "react-icons/hi";
 import styled from "styled-components";
+import OtherCoupleCard from "../../components/OtherCoupleCard";
 
 const SearchPage = () => {
   return (
@@ -15,11 +16,18 @@ const SearchPage = () => {
           startDecorator={<HiOutlineSearch />}
           endDecorator={<Button>검색</Button>}
         />
-
-        <div>SearchPage</div>
-        <div>SearchPage</div>
-        <div>SearchPage</div>
-        <div>SearchPage</div>
+        <OtherCoupleCard />
+        <OtherCoupleCard />
+        <OtherCoupleCard />
+        <OtherCoupleCard />
+        <OtherCoupleCard />
+        <OtherCoupleCard />
+        <OtherCoupleCard />
+        <OtherCoupleCard />
+        <OtherCoupleCard />
+        <OtherCoupleCard />
+        <OtherCoupleCard />
+        <OtherCoupleCard />
       </Container>
     </>
   );
@@ -32,7 +40,7 @@ const Container = styled.div`
   background-color: var(--color__secondary);
 
   .MuiInput-root {
-    margin: 0 auto;
+    margin: 0 auto 10px auto;
 
     .MuiButton-root {
       background-color: var(--color__primary);

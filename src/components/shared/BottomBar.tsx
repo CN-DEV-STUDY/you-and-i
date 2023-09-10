@@ -4,7 +4,13 @@ import { HiOutlineSearch } from "react-icons/hi";
 import { AiOutlinePlus, AiOutlineHeart } from "react-icons/ai";
 import { BsPerson } from "react-icons/bs";
 import { Link } from "react-router-dom";
-const BottomBar = () => {
+import { Button, ModalDialogProps } from "@mui/joy";
+import React from "react";
+
+type BottomBarProps = {
+  setLayout: (layout: "center" | "fullscreen" | undefined) => void;
+};
+const BottomBar = ({ setLayout }: BottomBarProps) => {
   return (
     <Container>
       <Link to="/">
@@ -13,7 +19,16 @@ const BottomBar = () => {
       <Link to="/search">
         <HiOutlineSearch />
       </Link>
-      <AiOutlinePlus />
+      <Button
+        variant="outlined"
+        color="neutral"
+        onClick={() => {
+          setLayout("fullscreen");
+        }}
+      >
+        <AiOutlinePlus />
+      </Button>
+
       <AiOutlineHeart />
       <BsPerson />
     </Container>
@@ -38,5 +53,10 @@ const Container = styled.div`
     color: var(--color__white);
     width: 28px;
     height: 28px;
+  }
+
+  .MuiButton-root {
+    border: none;
+    padding: 0;
   }
 `;

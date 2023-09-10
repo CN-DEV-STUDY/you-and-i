@@ -17,15 +17,18 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
     font-size: 14px;
-    color: var(--color__text)
   }
   
   :root {
     --color__primary: #BEADFA;
     --color__secondary: #DFCCFB; 
+    --color__tertiary: #988ac8;
     --color__white: #fff;
     --color__text: #343a40;
+    --color__text__grey: #495057;
+    --color__light__grey: #e9ecef;
     --box__shadow: 0 5px 5px -1px;
+    
   }
 `;
 
