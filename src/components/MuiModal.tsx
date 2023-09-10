@@ -2,6 +2,7 @@ import { Button, Modal, ModalDialog, ModalDialogProps } from "@mui/joy";
 import { List, ListItem } from "@mui/material";
 import styled from "styled-components";
 import Title from "./ui/Title";
+import NewStoryInfo from "./NewStoryInfo";
 
 type MuiModal = {
   layout: ModalDialogProps["layout"] | undefined;
@@ -29,6 +30,7 @@ const MuiModal = ({ layout, setLayout }: MuiModal) => {
           </Button>
           <Title type="secondary" content="New Story" color="black" />
         </ModalHeader>
+        <NewStoryInfo />
         <List
           sx={{
             overflow: "scroll",
@@ -50,6 +52,9 @@ export default MuiModal;
 const ModalHeader = styled.div`
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
+  border-bottom: 1px solid var(--color__light__grey);
+  margin-top: -10px;
+  padding-bottom: 10px;
 
   h2 {
     justify-self: center;
@@ -57,5 +62,12 @@ const ModalHeader = styled.div`
 
   .MuiModalClose-root {
     left: 0;
+  }
+
+  .MuiButton-root {
+    padding: 0;
+    //align-self: start;
+    justify-self: start;
+    font-size: 16px;
   }
 `;
