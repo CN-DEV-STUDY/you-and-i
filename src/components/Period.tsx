@@ -1,5 +1,4 @@
 import React from "react";
-import SectionContainer from "./SectionContainer";
 import Title from "./ui/Title";
 import PeriodCard from "./PeriodCard";
 import styled from "styled-components";
@@ -19,4 +18,6 @@ const Section = styled.div`
   width: 100%;
   height: 170px;
   margin-bottom: 20px;
+
+  background-color: var(--color__secondary);
 `;

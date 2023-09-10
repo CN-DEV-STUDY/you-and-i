@@ -3,11 +3,16 @@ import { GoHomeFill } from "react-icons/go";
 import { HiOutlineSearch } from "react-icons/hi";
 import { AiOutlinePlus, AiOutlineHeart } from "react-icons/ai";
 import { BsPerson } from "react-icons/bs";
+import { Link } from "react-router-dom";
 const BottomBar = () => {
   return (
     <Container>
-      <GoHomeFill />
-      <HiOutlineSearch />
+      <Link to="/">
+        <GoHomeFill />
+      </Link>
+      <Link to="/search">
+        <HiOutlineSearch />
+      </Link>
       <AiOutlinePlus />
       <AiOutlineHeart />
       <BsPerson />

@@ -12,6 +12,8 @@ export default SectionContainer;
 // style
 const Container = styled.div`
   width: 100%;
-  height: 250px;
-  margin-bottom: 20px;
+  height: 270px;
+  padding-bottom: 20px;
+
+  background-color: var(--color__secondary);
 `;

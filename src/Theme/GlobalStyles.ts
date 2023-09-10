@@ -5,7 +5,6 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: var(--color__secondary);
   }
   
   h1, h2 {
@@ -22,11 +21,11 @@ const GlobalStyles = createGlobalStyle`
   }
   
   :root {
-    --color__primary: #132090;
-    --color__secondary: #00095e; 
+    --color__primary: #BEADFA;
+    --color__secondary: #DFCCFB; 
     --color__white: #fff;
     --color__text: #343a40;
-    --box__shadow: 0 10px 15px -3px;
+    --box__shadow: 0 5px 5px -1px;
   }
 `;
 
