@@ -4,8 +4,10 @@ import Plan from "../../components/Plan";
 import Story from "../../components/Story";
 import React from "react";
 import TopBar from "../../components/shared/TopBar";
+import { useAuth } from "@clerk/clerk-react";
 
 const HomePage = () => {
+  const { isLoaded, userId, sessionId, getToken } = useAuth();
   return (
     <>
       <TopBar />

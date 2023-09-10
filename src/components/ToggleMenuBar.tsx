@@ -11,6 +11,8 @@ import {
 } from "@mui/material";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 type Anchor = "right";
 
@@ -43,15 +45,17 @@ function ToggleMenuBar() {
       <List sx={{ backgroundColor: "var(--color__white)" }}>
         {["로그인"].map((text, index) => (
           <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon sx={{ backgroundColor: "var(--color__white)" }}>
-                <AccountBoxIcon />
-              </ListItemIcon>
-              <ListItemText
-                primary={text}
-                sx={{ backgroundColor: "var(--color__white)" }}
-              />
-            </ListItemButton>
+            <CustomLink to={"/login"}>
+              <ListItemButton>
+                <ListItemIcon sx={{ backgroundColor: "var(--color__white)" }}>
+                  <AccountBoxIcon />
+                </ListItemIcon>
+                <ListItemText
+                  primary={text}
+                  sx={{ backgroundColor: "var(--color__white)" }}
+                />
+              </ListItemButton>
+            </CustomLink>
           </ListItem>
         ))}
       </List>
@@ -88,3 +92,8 @@ function ToggleMenuBar() {
 }
 
 export default ToggleMenuBar;
+
+const CustomLink = styled(Link)`
+  text-decoration: none;
+  color: black;
+`;

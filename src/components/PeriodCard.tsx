@@ -9,7 +9,7 @@ function PeriodCard() {
         <Text fontWeight={"bold"} fontSize={24}>
           450일
         </Text>
-        <Text justifyContent={"flex-end"}>2022.06.18(토)</Text>
+        <Text justifycontent={"flex-end"}>2022.06.18(토)</Text>
       </RoundCard>
     </Container>
   );
@@ -44,11 +44,11 @@ const Text = styled.div<TextStyles>`
   color: var(--color__white);
   font-weight: ${(props) => props.fontWeight};
   font-size: ${(props) => props.fontSize}px;
-  justify-content: ${(props) => props.justifyContent};
+  justify-content: ${(props) => props.justifycontent};
 `;
 
 type TextStyles = {
   fontWeight?: string;
   fontSize?: number;
-  justifyContent?: string;
+  justifycontent?: string;
 };
