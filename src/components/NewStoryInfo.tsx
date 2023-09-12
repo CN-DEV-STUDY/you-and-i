@@ -66,17 +66,17 @@ const NewStoryInfo = ({ onAdd }: NewStoryInfoProps) => {
         <VerticalLine />
         {file ? (
           <ImageContainer>
-            <img src={previewURL} width="300px" />
+            <img src={previewURL} width="95%" />
           </ImageContainer>
         ) : (
           <MdAttachFile onClick={onFileClick} />
         )}
-        <Avatar
-          alt="Remy Sharp"
-          src={profilImg}
-          sx={{ width: "28px", height: "28px" }}
-        />
-        <PlaceHolder>Add a new Story</PlaceHolder>
+        {/*<Avatar*/}
+        {/*  alt="Remy Sharp"*/}
+        {/*  src={profilImg}*/}
+        {/*  sx={{ width: "28px", height: "28px" }}*/}
+        {/*/>*/}
+        {/*<PlaceHolder>Add a new Story</PlaceHolder>*/}
       </Grid>
       <input
         type="file"

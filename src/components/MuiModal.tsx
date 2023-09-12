@@ -36,7 +36,6 @@ const MuiModal = ({ layout, setLayout }: MuiModalProps) => {
           </Button>
           <Title type="secondary" content="New Story" color="black" />
         </ModalHeader>
-
         <List
           sx={{
             overflow: "scroll",
@@ -45,10 +44,12 @@ const MuiModal = ({ layout, setLayout }: MuiModalProps) => {
           }}
         >
           {[...Array(1)].map((item, index) => (
+            // <ListItem key={index}>
             <NewStoryInfo key={index} onAdd={setNewStories} />
-            // <ListItem key={index}>I&apos;m in a scrollable area.</ListItem>
+            // </ListItem>
           ))}
         </List>
+        <PostButton>게시</PostButton>
       </ModalDialog>
     </Modal>
   );
@@ -57,6 +58,7 @@ const MuiModal = ({ layout, setLayout }: MuiModalProps) => {
 export default MuiModal;
 
 const ModalHeader = styled.div`
+  position: relative;
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
   border-bottom: 1px solid var(--color__light__grey);
@@ -73,8 +75,17 @@ const ModalHeader = styled.div`
 
   .MuiButton-root {
     padding: 0;
-    //align-self: start;
     justify-self: start;
     font-size: 16px;
   }
+`;
+
+const PostButton = styled.button`
+  align-self: flex-end;
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+  font-size: 16px;
+  font-weight: bold;
+  color: dodgerblue;
 `;
