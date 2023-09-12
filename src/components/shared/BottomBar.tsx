@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { GoHomeFill } from "react-icons/go";
 import { HiOutlineSearch } from "react-icons/hi";
 import { AiOutlinePlus, AiOutlineHeart } from "react-icons/ai";
-import { BsPerson } from "react-icons/bs";
+import { BsCalendar2Minus, BsChatHeart, BsPerson } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/joy";
 import React from "react";
@@ -26,8 +26,8 @@ const BottomBar = ({ setLayout }: BottomBarProps) => {
       >
         <AiOutlinePlus />
       </Button>
-      <AiOutlineHeart />
-      <BsPerson />
+      <BsCalendar2Minus />
+      <BsChatHeart />
     </Container>
   );
 };
