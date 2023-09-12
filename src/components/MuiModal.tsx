@@ -1,16 +1,22 @@
 import { Button, Modal, ModalDialog, ModalDialogProps } from "@mui/joy";
-import { List, ListItem } from "@mui/material";
+import { List } from "@mui/material";
 import styled from "styled-components";
 import Title from "./ui/Title";
 import NewStoryInfo from "./NewStoryInfo";
+import { FunctionComponent, useState } from "react";
 
-type MuiModal = {
+type MuiModalProps = {
   layout: ModalDialogProps["layout"] | undefined;
   setLayout: (layout: "center" | "fullscreen" | undefined) => void;
 };
-const MuiModal = ({ layout, setLayout }: MuiModal) => {
+const MuiModal = ({ layout, setLayout }: MuiModalProps) => {
+  const [newStories, setNewStories] = useState<FunctionComponent | undefined>(
+    undefined,
+  );
+
   return (
     <Modal
+      autoFocus={false}
       open={!!layout}
       onClose={() => {
         setLayout(undefined);
@@ -30,7 +36,7 @@ const MuiModal = ({ layout, setLayout }: MuiModal) => {
           </Button>
           <Title type="secondary" content="New Story" color="black" />
         </ModalHeader>
-        <NewStoryInfo />
+
         <List
           sx={{
             overflow: "scroll",
@@ -38,8 +44,9 @@ const MuiModal = ({ layout, setLayout }: MuiModal) => {
             px: "var(--ModalDialog-padding)",
           }}
         >
-          {[...Array(100)].map((item, index) => (
-            <ListItem key={index}>I&apos;m in a scrollable area.</ListItem>
+          {[...Array(1)].map((item, index) => (
+            <NewStoryInfo key={index} onAdd={setNewStories} />
+            // <ListItem key={index}>I&apos;m in a scrollable area.</ListItem>
           ))}
         </List>
       </ModalDialog>

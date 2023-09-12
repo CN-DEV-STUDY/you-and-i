@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import "./App.css";
 import GlobalStyles from "./Theme/GlobalStyles";
 import BottomBar from "./components/shared/BottomBar";
@@ -16,7 +16,9 @@ function App() {
       <GlobalStyles />
       <Outlet />
       <BottomBar setLayout={setLayout} />
-      <MuiModal layout={layout} setLayout={setLayout} />
+      {layout === "fullscreen" && (
+        <MuiModal layout={layout} setLayout={setLayout} />
+      )}
     </>
   );
 }

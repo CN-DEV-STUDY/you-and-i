@@ -4,7 +4,7 @@ import { HiOutlineSearch } from "react-icons/hi";
 import { AiOutlinePlus, AiOutlineHeart } from "react-icons/ai";
 import { BsPerson } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import { Button, ModalDialogProps } from "@mui/joy";
+import { Button } from "@mui/joy";
 import React from "react";
 
 type BottomBarProps = {
@@ -22,13 +22,10 @@ const BottomBar = ({ setLayout }: BottomBarProps) => {
       <Button
         variant="outlined"
         color="neutral"
-        onClick={() => {
-          setLayout("fullscreen");
-        }}
+        onClick={() => setLayout("fullscreen")}
       >
         <AiOutlinePlus />
       </Button>
-
       <AiOutlineHeart />
       <BsPerson />
     </Container>

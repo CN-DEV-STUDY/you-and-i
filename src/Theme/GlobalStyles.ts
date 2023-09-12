@@ -27,6 +27,7 @@ const GlobalStyles = createGlobalStyle`
     --color__text: #343a40;
     --color__text__grey: #495057;
     --color__light__grey: #e9ecef;
+    --color__grey: #ced4da;
     --box__shadow: 0 5px 5px -1px;
     
   }
