@@ -26,7 +26,9 @@ const BottomBar = ({ setLayout }: BottomBarProps) => {
       >
         <AiOutlinePlus />
       </Button>
-      <BsCalendar2Minus />
+      <Link to="/plan">
+        <BsCalendar2Minus />
+      </Link>
       <BsChatHeart />
     </Container>
   );

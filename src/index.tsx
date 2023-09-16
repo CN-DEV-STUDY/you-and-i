@@ -6,9 +6,11 @@ import reportWebVitals from "./reportWebVitals";
 import { router } from "./router";
 import { RouterProvider } from "react-router-dom";
 import { ClerkProvider } from "@clerk/clerk-react";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement,
+  document.getElementById("root") as HTMLElement
 );
 
 if (!process.env.REACT_APP_CLERK_PUBLISHABLE_KEY) {
@@ -19,9 +21,11 @@ const clerkPubKey = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY;
 root.render(
   <React.StrictMode>
     <ClerkProvider publishableKey={clerkPubKey}>
-      <RouterProvider router={router} />
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <RouterProvider router={router} />
+      </LocalizationProvider>
     </ClerkProvider>
-  </React.StrictMode>,
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

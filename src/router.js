@@ -3,6 +3,8 @@ import App from "./App";
 import SearchPage from "./pages/logged-in/SearchPage";
 import HomePage from "./pages/logged-in/HomePage";
 import Login from "./pages/Login";
+import Calendar from "./components/Calendar";
+import DateTimeCalendar from "./components/DateTimeCalendar";
 
 export const router = createBrowserRouter([
   {
@@ -21,7 +23,10 @@ export const router = createBrowserRouter([
         path: "/login",
         element: <Login />,
       },
+      {
+        path: "/plan",
+        element: <DateTimeCalendar />,
+      },
     ],
   },
-  ,
 ]);
