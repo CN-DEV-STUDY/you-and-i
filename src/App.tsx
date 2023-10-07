@@ -1,5 +1,4 @@
-import React, { useEffect, useRef } from "react";
-import "./App.css";
+import React from "react";
 import GlobalStyles from "./Theme/GlobalStyles";
 import BottomBar from "./components/shared/BottomBar";
 import { Outlet } from "react-router-dom";

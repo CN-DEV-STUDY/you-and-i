@@ -1,8 +1,8 @@
 import { Button, Input } from "@mui/joy";
 import { HiOutlineSearch } from "react-icons/hi";
 import styled from "styled-components";
-import TopBar from "@/components/shared/TopBar";
-import OtherCoupleCard from "@/components/OtherCoupleCard";
+import TopBar from "../../components/shared/TopBar";
+import OtherCoupleCard from "../../components/OtherCoupleCard";
 
 const SearchPage = () => {
   return (
