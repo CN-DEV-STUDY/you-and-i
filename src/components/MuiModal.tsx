@@ -10,9 +10,6 @@ type MuiModalProps = {
   setLayout: (layout: "center" | "fullscreen" | undefined) => void;
 };
 const MuiModal = ({ layout, setLayout }: MuiModalProps) => {
-  const [newStories, setNewStories] = useState<FunctionComponent | undefined>(
-    undefined,
-  );
 
   return (
     <Modal
@@ -36,19 +33,8 @@ const MuiModal = ({ layout, setLayout }: MuiModalProps) => {
           </Button>
           <Title type="secondary" content="New Story" color="black" />
         </ModalHeader>
-        <List
-          sx={{
-            overflow: "scroll",
-            mx: "calc(-1 * var(--ModalDialog-padding))",
-            px: "var(--ModalDialog-padding)",
-          }}
-        >
-          {[...Array(1)].map((item, index) => (
-            // <ListItem key={index}>
-            <NewStory key={index} onAdd={setNewStories} />
-            // </ListItem>
-          ))}
-        </List>
+
+        <NewStory />
 
       </ModalDialog>
     </Modal>
@@ -78,14 +64,4 @@ const ModalHeader = styled.div`
     justify-self: start;
     font-size: 16px;
   }
-`;
-
-const PostButton = styled.button`
-  align-self: flex-end;
-  border: 0;
-  outline: 0;
-  background-color: transparent;
-  font-size: 16px;
-  font-weight: bold;
-  color: dodgerblue;
 `;
