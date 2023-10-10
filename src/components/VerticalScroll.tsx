@@ -17,7 +17,7 @@ const Container = styled.div`
   align-items: center;
   gap: 15px;
 
-  padding: 10px 10px;
+  padding: 10px 20px;
   height: 212px;
   width: 100%;
   overflow-x: scroll;

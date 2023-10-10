@@ -11,9 +11,15 @@ type CardProps = {
 };
 const Card = ({ children, type = "single", description }: CardProps) => {
   return (
-    <Container type={type}>
+    <Container type={type} className="rounded-2xl mx-auto pb-10 flex-col justify-center">
       {children}
-      {description && <Description>{description}</Description>}
+      {description && (
+        <Description>
+          <p>{description}</p>
+          <span>10 min</span>
+        </Description>
+      )}
+
     </Container>
   );
 };
@@ -24,25 +30,32 @@ export default Card;
 const Container = styled.div<ContainerProps>`
   position: relative;
   height: 100%;
-  overflow-y: ${(props) => (props.type === "single" ? "unset" : "scroll")};
+  overflow: ${(props) => (props.type === "single" ? "hidden" : "auto")};
   padding: ${(props) => (props.type === "single" ? "0" : "10px 20px")};
   min-width: ${(props) => (props.type === "single" ? "160px" : "335px")};
 
-  background-color: var(--color__white);
+  ${(props) => props.type === "double" && "background-color: var(--color__white);"}
   color: var(--color__text);
-  box-shadow: var(--box__shadow);
 `;
 
 const Description = styled.div`
-  position: absolute;
-  bottom: 0;
-  left: 0;
   width: 100%;
   height: 60px;
-  background-color: var(--color__primary);
+  background-color: var(--color__secondary);
   color: var(--color__white);
 
+  
+  
   display: flex;
+  flex-direction: column;
+  gap:5px;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  padding:0 10px;
+  p{
+    font-size:15px;
+  }
+  span{
+    font-size:12px;
+  }
 `;

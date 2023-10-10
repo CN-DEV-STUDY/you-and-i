@@ -1,11 +1,10 @@
 import styled from "styled-components";
 import { GoHomeFill } from "react-icons/go";
 import { HiOutlineSearch } from "react-icons/hi";
-import { AiOutlinePlus, AiOutlineHeart } from "react-icons/ai";
-import { BsCalendar2Minus, BsChatHeart, BsPerson } from "react-icons/bs";
+import { AiOutlinePlus } from "react-icons/ai";
+import { BsCalendar2Minus, BsChatHeart } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/joy";
-import React from "react";
 
 type BottomBarProps = {
   setLayout: (layout: "center" | "fullscreen" | undefined) => void;
@@ -13,6 +12,7 @@ type BottomBarProps = {
 const BottomBar = ({ setLayout }: BottomBarProps) => {
   return (
     <Container>
+      <Inner>
       <Link to="/">
         <GoHomeFill />
       </Link>
@@ -30,6 +30,7 @@ const BottomBar = ({ setLayout }: BottomBarProps) => {
         <BsCalendar2Minus />
       </Link>
       <BsChatHeart />
+      </Inner>
     </Container>
   );
 };
@@ -38,15 +39,22 @@ export default BottomBar;
 
 // style
 const Container = styled.div`
-  position: sticky;
-  bottom: 0;
+  position:fixed;
+  bottom:0;
+  padding:20px;
+  width:100%; 
+`
+const Inner = styled.div`
   width: 100%;
-  height: 45px;
-  background-color: var(--color__primary);
+  height: 60px;
+  border-radius:60px;
+  background-color: var(--color__secondary);
 
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  
+  box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.4);
 
   svg {
     color: var(--color__white);

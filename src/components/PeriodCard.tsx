@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import periodImg from "./../assets/period.jpg";
 
@@ -21,7 +20,7 @@ export default PeriodCard;
 const Container = styled.div`
   display: flex;
   justify-content: center;
-  padding: 0 10px;
+  padding: 0 20px;
   margin-bottom: 20px;
 `;
 const RoundCard = styled.div`

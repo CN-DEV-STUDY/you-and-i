@@ -1,5 +1,7 @@
 import Card from "./Card";
-import randomImg from "./../assets/tree-7823514.jpg";
+import randomImg from "./../assets/oc-gonzalez-FbN2z3bEaSs-unsplash.jpg";
+
+
 import styled from "styled-components";
 
 type RecentCardProps = {
@@ -8,7 +10,7 @@ type RecentCardProps = {
 const RecentCard = ({ description }: RecentCardProps) => {
   return (
     <Card type="single" description={description}>
-      <Image src={randomImg} alt="Somethin went wrong" />
+        <Image src={randomImg} alt="Somethin went wrong" />
     </Card>
   );
 };
@@ -18,6 +20,6 @@ export default RecentCard;
 // styled
 const Image = styled.img`
   width: 100%;
-  height: 100%;
-  object-fit: fill;
+  height: 66%;
+  object-fit: cover;
 `;

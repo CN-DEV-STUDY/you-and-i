@@ -2,7 +2,7 @@ import { Button, Modal, ModalDialog, ModalDialogProps } from "@mui/joy";
 import { List } from "@mui/material";
 import styled from "styled-components";
 import Title from "./ui/Title";
-import NewStoryInfo from "./NewStoryInfo";
+import NewStory from "./NewStory.tsx";
 import { FunctionComponent, useState } from "react";
 
 type MuiModalProps = {
@@ -45,11 +45,11 @@ const MuiModal = ({ layout, setLayout }: MuiModalProps) => {
         >
           {[...Array(1)].map((item, index) => (
             // <ListItem key={index}>
-            <NewStoryInfo key={index} onAdd={setNewStories} />
+            <NewStory key={index} onAdd={setNewStories} />
             // </ListItem>
           ))}
         </List>
-        <PostButton>게시</PostButton>
+
       </ModalDialog>
     </Modal>
   );

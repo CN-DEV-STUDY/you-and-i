@@ -25,24 +25,23 @@ const Grid = styled.div`
   grid-template-columns: 1fr 3fr 2fr;
 
   padding: 10px 20px;
-  border-bottom: 1px solid var(--color__light__grey);
+  border-bottom:  0.5px solid var(--color__secondary);
 
   .MuiButton-root {
     padding: 5px 37px;
-    background-color: var(--color__primary);
-  }
-
-  .MuiButton-root:active {
-    background-color: var(--color__tertiary);
+    background-color: var(--color__secondary);
   }
 `;
 
 const Id = styled.p`
   font-weight: bold;
+  color: var(--color__white);
 `;
 
 const Name = styled.p`
-  color: var(--color__text__grey);
+  color: var(--color__tertiary);
   margin-bottom: 10px;
 `;
-const Follower = styled.p``;
+const Follower = styled.p`
+  color: var(--color__tertiary);
+`;

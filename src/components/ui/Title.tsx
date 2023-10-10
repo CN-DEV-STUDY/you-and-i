@@ -31,7 +31,7 @@ export default Title;
 // style
 const StyledH1 = styled.h1``;
 const StyledH2 = styled.h2<StyledH2Props>`
-  padding: 5px 10px;
+  padding: 5px 20px;
   ${(props) => props.color === "black" && "color: var(--color__text)"}
 `;
 const StyledH3 = styled.h3``;

@@ -37,13 +37,13 @@ export default SearchPage;
 
 // style
 const Container = styled.div`
-  background-color: var(--color__secondary);
+  background-color: var(--color__primary);
 
   .MuiInput-root {
     margin: 0 auto 10px auto;
 
     .MuiButton-root {
-      background-color: var(--color__primary);
+      background-color: var(--color__secondary);
     }
   }
 `;

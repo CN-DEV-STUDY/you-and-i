@@ -1,4 +1,3 @@
-import React from "react";
 import Title from "./ui/Title";
 import PeriodCard from "./PeriodCard";
 import styled from "styled-components";
@@ -17,5 +16,4 @@ export default Period;
 const Section = styled.div`
   width: 100%;
   height: 180px;
-  background-color: var(--color__secondary);
 `;
