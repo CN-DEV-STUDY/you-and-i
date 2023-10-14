@@ -13,6 +13,7 @@ import {Button} from "@/components/ui/Button.tsx";
 import {Loader2} from "lucide-react";
 import {Label} from "@/components/ui/Label.tsx";
 import autosize from "autosize";
+import {saveStoryRequest} from "@/services/api/story/api.ts";
 
 const formSchema = z.object({
   content: z.string().min(1).max(50),
@@ -30,8 +31,10 @@ const NewStory = () => {
 
   // textarea에 autosize 적용
   useEffect(() => {
+    // @ts-ignore
     autosize(textareaRef.current);
     return () => {
+      // @ts-ignore
       autosize.destroy(textareaRef.current);
     };
   }, []);
@@ -76,6 +79,13 @@ const NewStory = () => {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.log(values)
+
+    const data = new FormData();
+    data.append("content", values.content);
+    // data.append("image", file as Blob);
+
+    saveStoryRequest(data);
+
   }
 
   return (
