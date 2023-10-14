@@ -1,21 +1,9 @@
-import {
-  ClerkProvider,
-  RedirectToSignIn,
-  SignedIn,
-  SignedOut,
-  useAuth,
-} from "@clerk/clerk-react";
-import HomePage from "./logged-in/HomePage";
+import CreateAccount from "@/components/CreateAccount.tsx";
 
 function Login() {
   return (
     <>
-      <SignedIn>
-        <HomePage />
-      </SignedIn>
-      <SignedOut>
-        <RedirectToSignIn />
-      </SignedOut>
+      <CreateAccount />
     </>
   );
 }

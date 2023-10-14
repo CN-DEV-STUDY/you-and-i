@@ -1,4 +1,4 @@
-import React, { useState, KeyboardEvent, MouseEvent, Fragment } from "react";
+import { useState, KeyboardEvent, MouseEvent, Fragment } from "react";
 import {
   Box,
   SwipeableDrawer,

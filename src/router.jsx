@@ -3,30 +3,35 @@ import App from "./App";
 import SearchPage from "./pages/logged-in/SearchPage";
 import HomePage from "./pages/logged-in/HomePage";
 import Login from "./pages/Login";
-import Calendar from "./components/Calendar";
 import DateTimeCalendar from "./components/DateTimeCalendar";
+import SocialLogin from "./pages/SocialLogin";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <App/>,
     children: [
       {
         path: "",
-        element: <HomePage />,
+        element: <HomePage/>,
       },
       {
         path: "search",
-        element: <SearchPage />,
-      },
-      {
-        path: "/login",
-        element: <Login />,
+        element: <SearchPage/>,
       },
       {
         path: "/plan",
-        element: <DateTimeCalendar />,
+        element: <DateTimeCalendar/>,
       },
     ],
   },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/social-login",
+    element: <SocialLogin />,
+  }
+
 ]);
