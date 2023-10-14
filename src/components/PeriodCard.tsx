@@ -1,14 +1,40 @@
 import styled from "styled-components";
 import periodImg from "./../assets/period.jpg";
+import {useEffect, useState} from "react";
+import {getPeriod} from "@/services/api/period/api.ts";
+
+interface PeriodCardProps {
+  period: number;
+  startedAt: string;
+}
 
 function PeriodCard() {
+
+  // state
+  const [period, setPeriod] = useState<PeriodCardProps>({
+    period: 0,
+    startedAt: "",
+  });
+
+  // method
+  const fetchPeriod = async () => {
+    const data = await getPeriod();
+    setPeriod(data);
+  }
+
+  // watch
+  useEffect(() => {
+    fetchPeriod();
+  }, []);
+
+
   return (
     <Container>
       <RoundCard>
         <Text fontWeight={"bold"} fontSize={24}>
-          450일
+          {period.period}일
         </Text>
-        <Text justifycontent={"flex-end"}>2022.06.18(토)</Text>
+        <Text justifycontent={"flex-end"}>{period.startedAt}</Text>
       </RoundCard>
     </Container>
   );
@@ -40,6 +66,7 @@ const RoundCard = styled.div`
 
 const Text = styled.div<TextStyles>`
   display: flex;
+  padding-top: 10px;
   color: var(--color__white);
   font-weight: ${(props) => props.fontWeight};
   font-size: ${(props) => props.fontSize}px;
