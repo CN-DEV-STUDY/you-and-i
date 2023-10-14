@@ -5,9 +5,11 @@ import {LocalizationProvider} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {RouterProvider} from "react-router-dom";
 // @ts-ignore
-import {router} from "./router";
+import {router} from "@/router";
 import "./index.css";
 import axios from "axios";
+import {Provider} from "react-redux";
+import {store} from "@/store";
 
 if (!import.meta.env.VITE_REACT_APP_CLERK_PUBLISHABLE_KEY) {
   throw new Error("Missing Publishable Key");
@@ -44,8 +46,10 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ClerkProvider publishableKey={clerkPubKey}>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <RouterProvider router={router} />
+        <Provider store={store}>
+          <RouterProvider router={router} />
+        </Provider>
       </LocalizationProvider>
     </ClerkProvider>
-  </React.StrictMode>,
+  </React.StrictMode>
 )
