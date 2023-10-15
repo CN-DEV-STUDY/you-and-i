@@ -7,6 +7,6 @@ export const savePeriodRequest = async (startedAt:string) => {
 }
 
 export const getPeriod = async () => {
-    const {data} = await axios.get('http://localhost:8080/period');
+    const {data} = await axios.get('/period');
     return data;
 }
