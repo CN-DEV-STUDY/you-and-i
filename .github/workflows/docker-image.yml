@@ -21,12 +21,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Set up env
-        run: |
-          touch .env
-          echo "${{ secrets.env }}" > .env
 
       - name: Build other images
+        env:
+          VITE_REACT_APP_CLERK_PUBLISHABLE_KEY: ${{secrets.VITE_REACT_APP_CLERK_PUBLISHABLE_KEY}}
+          VITE_BASE_URL: ${{secrets.VITE_BASE_URL}}
         run: |
           docker build -t nohyunha95/you-and-i-frontend .
           echo ${{secrets.DOCKER_HUB_PASSWORD}} | docker login -u ${{secrets.DOCKER_HUB_ID}} --password-stdin
