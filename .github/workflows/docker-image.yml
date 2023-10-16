@@ -22,6 +22,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+        # 도커 이미지에 env 파일 포함
+      - name: Create .env file
+        run: |
+          touch .env
+          echo VITE_REACT_APP_CLERK_PUBLISHABLE_KEY=${{ secrets.VITE_REACT_APP_CLERK_PUBLISHABLE_KEY }}\ >> .env
+          echo VITE_BASE_URL=${{ secrets.VITE_BASE_URL }}\ >> .env
+
+
       - name: Build other images
         env:
           VITE_REACT_APP_CLERK_PUBLISHABLE_KEY: ${{secrets.VITE_REACT_APP_CLERK_PUBLISHABLE_KEY}}
