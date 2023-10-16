@@ -16,7 +16,7 @@ import {Calendar} from "@/components/ui/Calendar.tsx";
 import { toast } from "@/components/ui/use-toast"
 
 const FormSchema = z.object({
-    dob: z.date({
+    startedDate: z.date({
         required_error: "started date is required.",
     }),
 })
@@ -32,6 +32,7 @@ function CreatePeriod({onClick}: Props) {
     })
 
     function onSubmit(data: z.infer<typeof FormSchema>) {
+
         toast({
             title: "You submitted the following values:",
             description: (
@@ -50,7 +51,7 @@ function CreatePeriod({onClick}: Props) {
                         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                             <FormField
                                 control={form.control}
-                                name="dob"
+                                name="startedDate"
                                 render={({ field }) => (
                                     <FormItem className="flex flex-col">
                                         <FormLabel className="font-bold">Started Date</FormLabel>
@@ -75,6 +76,7 @@ function CreatePeriod({onClick}: Props) {
                                             </PopoverTrigger>
                                             <PopoverContent className="w-auto p-0" align="start">
                                                 <Calendar
+                                                    className="z-40"
                                                     mode="single"
                                                     selected={field.value}
                                                     onSelect={field.onChange}
@@ -108,7 +110,7 @@ const Container = styled.div`
   top: 22%;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 1000;
+  z-index: 10;
   box-shadow: 0 0 15px 10px rgba(94, 53, 177, 0.1),
   0 0 15px 12px rgba(94, 53, 177, 0.1),
   0 0 15px 15px rgba(94, 53, 177, 0.1);
