@@ -1,6 +1,4 @@
 FROM node:alpine as builder
-ARG VITE_REACT_APP_CLERK_PUBLISHABLE_KEY=\${{secrets.VITE_REACT_APP_CLERK_PUBLISHABLE_KEY}}
-ARG VITE_BASE_URL=\${{secrets.VITE_BASE_URL}}
 
 WORKDIR /app
 COPY ./package.json .
