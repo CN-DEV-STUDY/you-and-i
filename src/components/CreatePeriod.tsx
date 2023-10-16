@@ -14,6 +14,8 @@ import {cn} from "@/lib/utils.ts";
 import {format} from "date-fns";
 import {Calendar} from "@/components/ui/Calendar.tsx";
 import { toast } from "@/components/ui/use-toast"
+import {getPeriod, savePeriodRequest} from "@/services/api/period/api.ts";
+import {useEffect, useState} from "react";
 
 const FormSchema = z.object({
     startedDate: z.date({
@@ -27,11 +29,32 @@ interface Props {
 
 function CreatePeriod({onClick}: Props) {
 
+    // hook form
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
     })
 
+    // state
+    const [isSuccess, setSuccess] = useState<boolean>(false);
+
+    // watch
+    useEffect(() => {
+        if (isSuccess) {
+            getPeriod();
+        }
+    } , [])
+
+
+    // method
+    const savePeriod = async (formattedDate : string) => {
+        await savePeriodRequest(formattedDate);
+        setSuccess(true);
+    }
+
     function onSubmit(data: z.infer<typeof FormSchema>) {
+
+        const formattedDate = format(data.startedDate, 'yyyy-MM-dd')
+        savePeriod(formattedDate)
 
         toast({
             title: "You submitted the following values:",
@@ -66,7 +89,7 @@ function CreatePeriod({onClick}: Props) {
                                                         )}
                                                     >
                                                         {field.value ? (
-                                                            format(field.value, "PPP")
+                                                            format(field.value, "yyyy-MM-dd")
                                                         ) : (
                                                             <span>Pick a date</span>
                                                         )}

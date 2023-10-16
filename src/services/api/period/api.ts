@@ -2,7 +2,8 @@ import axios from 'axios';
 
 
 export const savePeriodRequest = async (startedAt:string) => {
-    const {data} = await axios.post('/period', {"startedAt" : startedAt});
+    const {data} = await axios.post(`/period?startedAt=${startedAt}`);
+    // const {data} = await axios.post('/period', {"startedAt" : startedAt});
     return data
 }
 

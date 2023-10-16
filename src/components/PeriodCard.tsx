@@ -40,7 +40,9 @@ function PeriodCard() {
 
   // watch
   useEffect(() => {
-    fetchPeriod();
+    if (isLoggedIn) {
+      fetchPeriod();
+    }
   }, []);
 
 
