@@ -1,7 +1,7 @@
 version: "3"
 services:
   frontend:
-    image: nohyunha95/docker-frontend
+    image: nohyunha95/you-and-i-frontend
     volumes:
       - /app/node_modules
       - .:/app
