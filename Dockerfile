@@ -1,7 +1,6 @@
 FROM node:18-alpine3.17 as builder
+ENV NODE_ENV=production
 WORKDIR /app
-ENV ENV_FILE=.env
-COPY $ENV_FILE /app/.env
 COPY ./package.json .
 RUN yarn
 COPY . .
