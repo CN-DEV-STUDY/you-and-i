@@ -19,6 +19,9 @@ RUN yarn run build
 #CMD ["nginx", "-g", "daemon off;"]
 
 FROM nginx
-EXPOSE 5173
+EXPOSE 80
 COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder /app/dist /usr/share/nginx/html
+
+# nginx 서버를 실행하고 백그라운드로 동작하도록 한다.
+CMD ["nginx", "-g", "daemon off;"]
