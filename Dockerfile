@@ -1,4 +1,4 @@
-FROM node:18-alpine3.17 as builder
+FROM node:alpine as builder
 ARG VITE_REACT_APP_CLERK_PUBLISHABLE_KEY=\${{secrets.VITE_REACT_APP_CLERK_PUBLISHABLE_KEY}}
 ARG VITE_BASE_URL=\${{secrets.VITE_BASE_URL}}
 
