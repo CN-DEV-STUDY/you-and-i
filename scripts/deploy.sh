@@ -1,15 +1,16 @@
 #!/bin/bash
 
-# Set the path to the docker-compose executable
-DOCKER_COMPOSE_PATH=$(command -v docker-compose)
-
-# Check if docker-compose is available
-if [ -x "$DOCKER_COMPOSE_PATH" ]
-then
-    # docker-compose is available, so run your commands
-    $DOCKER_COMPOSE_PATH up -d
-else
-    # docker-compose is not available
-    echo "Error: docker-compose not found. Please make sure it's installed and in your PATH."
-    exit 1
-fi
+docker-compose -f docker-compose.yml up -d
+## Set the path to the docker-compose executable
+#DOCKER_COMPOSE_PATH=$(command -v docker-compose)
+#
+## Check if docker-compose is available
+#if [ -x "$DOCKER_COMPOSE_PATH" ]
+#then
+#    # docker-compose is available, so run your commands
+#    $DOCKER_COMPOSE_PATH up -d
+#else
+#    # docker-compose is not available
+#    echo "Error: docker-compose not found. Please make sure it's installed and in your PATH."
+#    exit 1
+#fi
