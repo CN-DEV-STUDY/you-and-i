@@ -4,9 +4,10 @@ services:
     image: nohyunha95/you-and-i-frontend
     volumes:
       - /app/node_modules
-      - .:/app
+      - ./:/app
     stdin_open: true
-    env_file:
-      - .env
     ports:
       - "80:5173"
+    environment:
+      VITE_REACT_APP_CLERK_PUBLISHABLE_KEY: pk_test_Z3JhbmQtcGhvZW5peC00OS5jbGVyay5hY2NvdW50cy5kZXYk
+      VITE_BASE_URL: http://3.37.184.159:8080
