@@ -1,0 +1,10 @@
+version: "3"
+services:
+  frontend:
+    image: nohyunha95/docker-frontend
+    volumes:
+      - /app/node_modules
+      - .:/app
+    stdin_open: true
+    ports:
+      - "80:80"

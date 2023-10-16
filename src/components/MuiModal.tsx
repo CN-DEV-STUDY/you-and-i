@@ -1,9 +1,7 @@
 import { Button, Modal, ModalDialog, ModalDialogProps } from "@mui/joy";
-import { List } from "@mui/material";
 import styled from "styled-components";
 import Title from "./ui/Title";
 import NewStory from "./NewStory.tsx";
-import { FunctionComponent, useState } from "react";
 
 type MuiModalProps = {
   layout: ModalDialogProps["layout"] | undefined;

@@ -1,6 +1,5 @@
 import SectionContainer from "./SectionContainer";
 import Title from "./ui/Title";
-import Card from "./Card";
 import VerticalScroll from "./VerticalScroll";
 import PlanCard from "./PlanCard";
 

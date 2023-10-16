@@ -23,7 +23,7 @@ function ToggleMenuBar() {
     right: false,
   });
 
-  const { isLoaded, userId, signOut } = useAuth();
+  const {  userId, signOut } = useAuth();
 
   const handleLogout = async () => {
     try {

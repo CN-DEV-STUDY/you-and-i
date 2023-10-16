@@ -16,12 +16,8 @@ if (!import.meta.env.VITE_REACT_APP_CLERK_PUBLISHABLE_KEY) {
 }
 const clerkPubKey = import.meta.env.VITE_REACT_APP_CLERK_PUBLISHABLE_KEY;
 
-
 // axios
 axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
-axios.defaults.headers.post['Content-Type'] = 'application/json';
-
-console.log("import.meta.env.VITE_BASE_URL", import.meta.env.VITE_BASE_URL);
 
 axios.interceptors.request.use(request => {
   console.log(request);
@@ -40,6 +36,7 @@ axios.interceptors.response.use(response => {
   console.log(error);
   return Promise.reject(error);
 });
+
 
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
