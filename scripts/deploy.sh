@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Set the path to the docker-compose executable
-DOCKER_COMPOSE_PATH=/path/to/docker-compose
+DOCKER_COMPOSE_PATH=$(command -v docker-compose)
 
 # Check if docker-compose is available
-if command -v "$DOCKER_COMPOSE_PATH" &> /dev/null
+if [ -x "$DOCKER_COMPOSE_PATH" ]
 then
     # docker-compose is available, so run your commands
     $DOCKER_COMPOSE_PATH up -d
