@@ -24,7 +24,7 @@ jobs:
       - name: Set up env
         run: |
           touch .env
-          echo "${{ secrets.env }}" >> .env
+          echo "${{ secrets.env }}" > .env
 
       - name: Build other images
         run: |
