@@ -16,6 +16,6 @@ RUN yarn run build
 #CMD ["nginx", "-g", "daemon off;"]
 
 FROM nginx
-EXPOSE 3000
+EXPOSE 5173
 COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder /app/dist /usr/share/nginx/html

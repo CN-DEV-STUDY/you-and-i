@@ -21,6 +21,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - name: Set up env
+        run: |
+          touch .env
+          echo "${{ secrets.env }}" >> .env
+
       - name: Build other images
         run: |
           docker build -t nohyunha95/you-and-i-frontend .
