@@ -1,6 +1,6 @@
 #!/bin/bash
 
-docker-compose -f docker-compose.yml up -d
+docker-compose -f /home/ec2-user/action/docker-compose.yml up -d
 ## Set the path to the docker-compose executable
 #DOCKER_COMPOSE_PATH=$(command -v docker-compose)
 #
