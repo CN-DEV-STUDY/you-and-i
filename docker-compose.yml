@@ -6,5 +6,7 @@ services:
       - /app/node_modules
       - .:/app
     stdin_open: true
+    env_file:
+      - .env
     ports:
       - "80:5173"
