@@ -11,13 +11,22 @@ import axios from "axios";
 import {Provider} from "react-redux";
 import {store} from "@/store";
 
-const clerkPubKey = import.meta.env.production.local.VITE_CLERK_PUBLISHABLE_KEY;
-if (!clerkPubKey) {
+if (import.meta.env.DEV) {
+  console.log("DEV")
+}
+
+if (import.meta.env.PROD) {
+  console.log("PROD")
+}
+
+const {VITE_CLERK_PUBLISHABLE_KEY, VITE_BASE_URL} = import.meta.env;
+
+if (!VITE_CLERK_PUBLISHABLE_KEY) {
   throw new Error("Missing Publishable Key");
 }
 
 // axios
-axios.defaults.baseURL = import.meta.env.production.local.VITE_BASE_URL;
+axios.defaults.baseURL = VITE_BASE_URL
 
 axios.interceptors.request.use(request => {
   console.log(request);
