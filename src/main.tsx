@@ -9,6 +9,7 @@ import "./index.css";
 import axios from "axios";
 import {Provider} from "react-redux";
 import {store} from "@/store";
+import {ClerkProvider} from "@clerk/clerk-react";
 
 if (import.meta.env.DEV) {
   console.log("DEV")
@@ -49,12 +50,12 @@ axios.interceptors.response.use(response => {
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    {/*<ClerkProvider publishableKey={VITE_CLERK_PUBLISHABLE_KEY}>*/}
+    <ClerkProvider publishableKey="pk_test_Z3JhbmQtcGhvZW5peC00OS5jbGVyay5hY2NvdW50cy5kZXYk">
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <Provider store={store}>
           <RouterProvider router={router} />
         </Provider>
       </LocalizationProvider>
-    {/*</ClerkProvider>*/}
+    </ClerkProvider>
   </React.StrictMode>
 )
