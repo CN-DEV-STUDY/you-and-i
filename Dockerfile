@@ -8,7 +8,7 @@ RUN yarn
 
 COPY . .
 
-RUN yarn run build
+RUN yarn run build --force
 
 FROM nginx
 EXPOSE 80
