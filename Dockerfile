@@ -13,7 +13,7 @@ COPY . .
 RUN yarn run build --force
 
 FROM nginx
-EXPOSE 80
+EXPOSE 5173
 COPY --from=builder /app/dist /usr/share/nginx/html
 COPY default.conf /etc/nginx/conf.d/default.conf
 
