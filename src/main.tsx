@@ -19,7 +19,7 @@ if (import.meta.env.PROD) {
   console.log("PROD")
 }
 
-const {VITE_BASE_URL} = import.meta.env;
+const {VITE_CLERK_PUBLISHABLE_KEY, VITE_BASE_URL} = import.meta.env;
 //
 // if (!VITE_CLERK_PUBLISHABLE_KEY) {
 //   throw new Error("Missing Publishable Key");
@@ -50,7 +50,7 @@ axios.interceptors.response.use(response => {
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <ClerkProvider publishableKey="pk_test_Z3JhbmQtcGhvZW5peC00OS5jbGVyay5hY2NvdW50cy5kZXYk">
+    <ClerkProvider publishableKey={VITE_CLERK_PUBLISHABLE_KEY}>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <Provider store={store}>
           <RouterProvider router={router} />
