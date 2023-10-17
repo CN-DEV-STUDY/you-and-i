@@ -9,7 +9,7 @@ sleep 3
 
 sudo chmod 777 .env
 
-docker-compose --env-file ./.env up -d
+docker-compose up -d
 ## Set the path to the docker-compose executable
 #DOCKER_COMPOSE_PATH=$(command -v docker-compose)
 #
