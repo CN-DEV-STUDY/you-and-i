@@ -1,7 +1,9 @@
 version: "3"
 services:
   frontend:
-    image: nohyunha95/you-and-i-frontend
+    build:
+      dockerfile: Dockerfile
+      context: .
     env_file: .env
     volumes:
       - /app/node_modules
