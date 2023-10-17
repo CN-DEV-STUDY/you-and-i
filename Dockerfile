@@ -1,11 +1,11 @@
 FROM node:18.15.0-slim as builder
-RUN npm install -g yarn@1.22.19 --force
+# RUN #npm install -g yarn@1.22.19 --force
 
 WORKDIR /app
 COPY . .
 RUN yarn
 
-RUN yarn run build --ignore-scripts
+RUN yarn run build
 
 FROM nginx
 EXPOSE 80
