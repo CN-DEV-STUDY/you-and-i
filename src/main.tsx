@@ -11,6 +11,10 @@ import axios from "axios";
 import {Provider} from "react-redux";
 import {store} from "@/store";
 
+// dotenv를 사용하여 환경 변수 로드
+import dotenv from 'dotenv';
+dotenv.config();
+
 if (!import.meta.env.VITE_CLERK_PUBLISHABLE_KEY) {
   throw new Error("Missing Publishable Key");
 }
