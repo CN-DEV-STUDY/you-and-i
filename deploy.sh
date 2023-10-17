@@ -1,13 +1,13 @@
 #!/bin/bash
 
-#docker stop $(docker ps -a -q)
-#sleep 3
-#docker rm $(docker ps -aq)
-#sleep 3
-#docker rmi nohyunha95/you-and-i-frontend
-#sleep 3
+docker stop $(docker ps -a -q)
+sleep 3
+docker rm $(docker ps -aq)
+sleep 3
+docker rmi nohyunha95/you-and-i-frontend
+sleep 3
 
-docker-compose -f ../docker-compose.yml up -d
+docker-compose -f docker-compose.yml up -d
 ## Set the path to the docker-compose executable
 #DOCKER_COMPOSE_PATH=$(command -v docker-compose)
 #
