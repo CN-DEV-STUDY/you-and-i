@@ -28,7 +28,7 @@ jobs:
       - name: Create .env file
         run: |
           touch .env
-          echo VITE_REACT_APP_CLERK_PUBLISHABLE_KEY=${{ secrets.VITE_REACT_APP_CLERK_PUBLISHABLE_KEY }}\ >> .env
+          echo VITE_CLERK_PUBLISHABLE_KEY=${{ secrets.VITE_REACT_APP_CLERK_PUBLISHABLE_KEY }}\ >> .env
           echo VITE_BASE_URL=${{ secrets.VITE_BASE_URL }}\ >> .env
 
       - name: Build other images
