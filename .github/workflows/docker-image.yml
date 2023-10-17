@@ -32,7 +32,7 @@ jobs:
           echo VITE_BASE_URL=${{ secrets.VITE_BASE_URL }}\ >> .env
 
       - name: copy env
-        run: copy .env /app
+        run: cp .env /app
 
 
       - name: Build other images
