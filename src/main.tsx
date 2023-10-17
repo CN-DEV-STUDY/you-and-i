@@ -11,7 +11,7 @@ import axios from "axios";
 import {Provider} from "react-redux";
 import {store} from "@/store";
 
-if (!import.meta.env.VITE_CLERK_PUBLISHABLE_KEY) {
+if (!import.meta.env.production.local.VITE_CLERK_PUBLISHABLE_KEY) {
   throw new Error("Missing Publishable Key");
 }
 const clerkPubKey = import.meta.env.production.local.VITE_CLERK_PUBLISHABLE_KEY;
