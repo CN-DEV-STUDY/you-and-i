@@ -1,4 +1,4 @@
-FROM node:alpine as builder
+FROM --platform=linux/amd64 node:18 as builder
 
 WORKDIR /app
 COPY ./package.json .
@@ -16,7 +16,7 @@ RUN yarn run build
 #EXPOSE 80
 #CMD ["nginx", "-g", "daemon off;"]
 
-FROM nginx
+FROM --platform=linux/amd64 nginx
 
 COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder /app/dist /usr/share/nginx/html
