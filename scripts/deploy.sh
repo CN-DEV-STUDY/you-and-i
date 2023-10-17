@@ -1,9 +1,13 @@
 #!/bin/bash
 
 docker stop $(docker ps -a -q)
-sleep 5
+sleep 3
+docker rm $(docker ps -aq)
+sleep 3
+docker rmi nohyunha95/you-and-i-frontend
+sleep 3
 
-docker-compose --env-file /home/ec2-user/env/.env up --remove-orphans -d
+docker-compose --env-file ../env/.env up -d
 ## Set the path to the docker-compose executable
 #DOCKER_COMPOSE_PATH=$(command -v docker-compose)
 #
