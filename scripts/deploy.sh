@@ -7,7 +7,7 @@ sleep 3
 docker rmi nohyunha95/you-and-i-frontend
 sleep 3
 
-docker-compose up -d
+docker-compose -f Dockerfile up
 ## Set the path to the docker-compose executable
 #DOCKER_COMPOSE_PATH=$(command -v docker-compose)
 #
