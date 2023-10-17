@@ -50,7 +50,7 @@ axios.interceptors.response.use(response => {
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <ClerkProvider publishableKey={clerkPubKey}>
+    <ClerkProvider publishableKey={VITE_CLERK_PUBLISHABLE_KEY}>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <Provider store={store}>
           <RouterProvider router={router} />
