@@ -14,10 +14,10 @@ import {store} from "@/store";
 if (!import.meta.env.VITE_CLERK_PUBLISHABLE_KEY) {
   throw new Error("Missing Publishable Key");
 }
-const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+const clerkPubKey = import.meta.env.production.local.VITE_CLERK_PUBLISHABLE_KEY;
 
 // axios
-axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
+axios.defaults.baseURL = import.meta.env.production.local.VITE_BASE_URL;
 
 axios.interceptors.request.use(request => {
   console.log(request);
