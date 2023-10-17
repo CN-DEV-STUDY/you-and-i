@@ -10,7 +10,7 @@ RUN yarn
 
 COPY . .
 
-RUN yarn run build --force
+RUN yarn run build
 
 FROM nginx
 EXPOSE 5173
