@@ -31,8 +31,9 @@ jobs:
           echo VITE_REACT_APP_CLERK_PUBLISHABLE_KEY=${{ secrets.VITE_REACT_APP_CLERK_PUBLISHABLE_KEY }}\ >> .env
           echo VITE_BASE_URL=${{ secrets.VITE_BASE_URL }}\ >> .env
 
-      - name: cat env
-        run: cat .env
+      - name: copy env
+        run: copy .env /app
+
 
       - name: Build other images
         run: |
