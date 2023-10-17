@@ -5,21 +5,16 @@ import {resolve} from "url";
 
 // https://vitejs.dev/config/
 export default defineConfig(({command, mode}) => {
-  const env = loadEnv(mode, process.cwd(), '')
   return {
-    build: {
-      rollupOptions: {
-        input: {
-          main: resolve(__dirname, 'index.html'),
-        },
-      },
-    },
-    define: {
-      // VITE_MY_VARIABLE 환경 변수를 로드합니다.
-      'import.meta.env.VITE_REACT_APP_CLERK_PUBLISHABLE_KEY': process.env.VITE_REACT_APP_CLERK_PUBLISHABLE_KEY,
-      'import.meta.env.VITE_BASE_URL': process.env.VITE_BASE_URL,
-    },
-    plugins: [react()],
+
+    plugins: [react(),
+      require("@import-meta-env/unplugin").webpack({
+        env: ".env",
+        example: ".env.example",
+        transformMode: "compile-time",
+        include: ["VITE_*", "NODE_ENV"],
+      }),
+    ],
     server: {
       host: true,
       port: 5173
