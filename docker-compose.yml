@@ -1,13 +1,21 @@
+# 도커 컴포즈의 버전
 version: "3"
+# 실행하는 컨테이너들을 정의
 services:
-  frontend:
+  # 서비스 이름
+  react:
+    # 현 디렉터리에 있는 Dockerfile 사용
+    image: nohyunha95/you-and-i-frontend
     build:
-      dockerfile: Dockerfile
+      # 도커 이미지를 구성하기 위한 파일과 폴더들이 있는 위치
       context: .
-    env_file: .env
+      # 도커 파일 어떤 것인지 작성
+      dockerfile: Dockerfile
+    # 포트 매핑 로컬 포트 : 컨테이너 포트
+    ports:
+      - "80:80"
+    # 로컬 머신에 있는 파일들을 매핑
     volumes:
       - /app/node_modules
       - ./:/app
     stdin_open: true
-    ports:
-      - "80:5173"
