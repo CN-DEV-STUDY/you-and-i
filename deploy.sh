@@ -7,6 +7,11 @@ sleep 3
 docker rmi nohyunha95/you-and-i-frontend
 sleep 3
 
+pwd
+ls
+
+cd /home/ec2-user/action
+
 docker-compose -f docker-compose.yml up -d
 ## Set the path to the docker-compose executable
 #DOCKER_COMPOSE_PATH=$(command -v docker-compose)
