@@ -9,3 +9,5 @@ node_modules
 docker-compose.yml
 Dockerfile
 README.md
+.env.production
+.env.production.local
