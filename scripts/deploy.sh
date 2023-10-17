@@ -1,8 +1,8 @@
 #!/bin/bash
 
-docker stop $(docker ps -a -q)
+docker stop \$(docker ps -a -q)
 sleep 3
-docker rm $(docker ps -aq)
+docker rm \$(docker ps -aq)
 sleep 3
 docker rmi nohyunha95/you-and-i-frontend
 sleep 3
