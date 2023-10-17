@@ -6,11 +6,6 @@ services:
   react:
     # 현 디렉터리에 있는 Dockerfile 사용
     image: nohyunha95/you-and-i-frontend
-    build:
-      # 도커 이미지를 구성하기 위한 파일과 폴더들이 있는 위치
-      context: .
-      # 도커 파일 어떤 것인지 작성
-      dockerfile: Dockerfile
     # 포트 매핑 로컬 포트 : 컨테이너 포트
     ports:
       - "80:80"
