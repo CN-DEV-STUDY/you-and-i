@@ -7,7 +7,7 @@ sleep 3
 docker rmi nohyunha95/you-and-i-frontend
 sleep 3
 
-chmod 777 .env
+sudo chmod 777 .env
 
 docker-compose --env-file .env up -d
 ## Set the path to the docker-compose executable
