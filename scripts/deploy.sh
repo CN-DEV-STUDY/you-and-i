@@ -7,7 +7,7 @@ sleep 3
 docker rmi nohyunha95/you-and-i-frontend
 sleep 3
 
-docker-compose --env-file ../env/.env up -d
+docker-compose --env-file /home/ec2-user/env/.env up -d
 ## Set the path to the docker-compose executable
 #DOCKER_COMPOSE_PATH=$(command -v docker-compose)
 #
