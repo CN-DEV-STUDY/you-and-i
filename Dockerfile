@@ -8,7 +8,7 @@ RUN yarn
 
 COPY . .
 
-RUN yarn run build --mode production
+RUN yarn run build
 
 FROM nginx
 EXPOSE 80
