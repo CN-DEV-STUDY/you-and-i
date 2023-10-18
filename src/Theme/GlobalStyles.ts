@@ -35,6 +35,14 @@ const GlobalStyles = createGlobalStyle`
     width: 0;  /* Remove scrollbar space */
     background: transparent;  /* Optional: just make scrollbar invisible */
   }
+
+  body {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+  }
+  body::-webkit-scrollbar {
+    display: none;  /* Safari and Chrome */
+  }
   
   #root{
     background-color: var(--color__primary);
