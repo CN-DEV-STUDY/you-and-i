@@ -40,7 +40,7 @@ const Container = styled.div<ContainerProps>`
 
 const Description = styled.div`
   width: 100%;
-  height: 60px;
+  height: 66px;
   background-color: var(--color__secondary);
   color: var(--color__white);
 
