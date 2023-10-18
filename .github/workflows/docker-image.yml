@@ -9,9 +9,6 @@ env:
   AWS_REGION: ${{ secrets.AWS_REGION }}
   CODEDEPLOY_NAME: ${{ secrets.CODEDEPLOY_NAME }}
   CODEDEPLOY_GROUP: ${{ secrets.CODEDEPLOY_GROUP }}
-  VITE_CLERK_PUBLISHABLE_KEY: ${{ secrets.VITE_CLERK_PUBLISHABLE_KEY }}
-  VITE_BASE_URL: ${{ secrets.VITE_BASE_URL }}
-
 
 # 코드의 내용을 이 파일을 실행하여 action을 수행하는 주체(Github Actions에서 사용하는 VM)가 읽을 수 있도록 허용합니다.
 permissions:
@@ -28,20 +25,11 @@ jobs:
       - name: Create .env file
         run: |
           touch .env
-          echo VITE_CLERK_PUBLISHABLE_KEY=${{ secrets.VITE_CLERK_PUBLISHABLE_KEY }}\ >> .env
-          echo VITE_BASE_URL=${{ secrets.VITE_BASE_URL }}\ >> .env
-      - name: copy .env
-        run: cp .env ./
-#
-#      - name: Create .env file
-#        run: |
-#          touch .env.production.local
-#          echo VITE_CLERK_PUBLISHABLE_KEY=${{ secrets.VITE_CLERK_PUBLISHABLE_KEY }}\ >> .env.production.local
-#          echo VITE_BASE_URL=${{ secrets.VITE_BASE_URL }}\ >> .env.production.local
+          echo ${{ secrets.ENVIRONMENT_VARIABLES }}\ >> .env
 
       - name: Build other images
         run: |
-          docker build -t nohyunha95/you-and-i-frontend -f Dockerfile . --build-arg VITE_CLERK_PUBLISHABLE_KEY=${{ secrets.VITE_CLERK_PUBLISHABLE_KEY }} --build-arg VITE_BASE_URL=${{ secrets.VITE_BASE_URL }}
+          docker build -t nohyunha95/you-and-i-frontend -f Dockerfile .
           echo ${{secrets.DOCKER_HUB_PASSWORD}} | docker login -u ${{secrets.DOCKER_HUB_ID}} --password-stdin
           
           docker push nohyunha95/you-and-i-frontend
