@@ -5,10 +5,10 @@ services:
   # 서비스 이름
   react:
     # 현 디렉터리에 있는 Dockerfile 사용
-#    image: nohyunha95/you-and-i-frontend
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: nohyunha95/you-and-i-frontend
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
     # 포트 매핑 로컬 포트 : 컨테이너 포트
     ports:
       - "80:80"
