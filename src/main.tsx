@@ -11,22 +11,25 @@ import {Provider} from "react-redux";
 import {store} from "@/store";
 import {ClerkProvider} from "@clerk/clerk-react";
 
+// const {VITE_CLERK_PUBLISHABLE_KEY, VITE_BASE_URL} = import.meta.env.production.local;
+
 if (import.meta.env.DEV) {
   console.log("DEV")
 }
 
 if (import.meta.env.PROD) {
   console.log("PROD")
+  console.log("VITE_CLERK_PUBLISHABLE_KEY", import.meta.env.VITE_CLERK_PUBLISHABLE_KEY)
+  console.log("VITE_BASE_URL", import.meta.env.VITE_BASE_URL)
 }
 
-const {VITE_CLERK_PUBLISHABLE_KEY, VITE_BASE_URL} = import.meta.env;
 //
 // if (!VITE_CLERK_PUBLISHABLE_KEY) {
 //   throw new Error("Missing Publishable Key");
 // }
 
 // axios
-axios.defaults.baseURL = VITE_BASE_URL
+axios.defaults.baseURL = import.meta.env.VITE_BASE_URL
 
 axios.interceptors.request.use(request => {
   console.log(request);
@@ -50,7 +53,7 @@ axios.interceptors.response.use(response => {
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <ClerkProvider publishableKey={VITE_CLERK_PUBLISHABLE_KEY}>
+    <ClerkProvider publishableKey={import.meta.env.VITE_CLERK_PUBLISHABLE_KEY}>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <Provider store={store}>
           <RouterProvider router={router} />
