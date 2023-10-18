@@ -27,6 +27,12 @@ jobs:
           touch .env
           echo ${{ secrets.ENVIRONMENT_VARIABLES }} > .env
 
+      - name: PWD
+        run: pwd
+
+      - name: LS
+        run: ls
+
       - name: Build other images
         run: |
           docker build -t nohyunha95/you-and-i-frontend -f Dockerfile .
