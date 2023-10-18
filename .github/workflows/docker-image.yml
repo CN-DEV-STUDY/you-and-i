@@ -24,17 +24,17 @@ jobs:
         # 도커 이미지에 env 파일 포함
       - name: Create .env file
         run: |
-          pwd
-          ls
-          cd /home/runner/work/you-and-i-frontend/you-and-i-frontend
-          touch .env
-          echo ${{ secrets.ENVIRONMENT_VARIABLES }} > .env
+          pwd 
+          ls 
+          cd /home/runner/work/you-and-i-frontend/you-and-i-frontend 
+          touch .env \
+          echo ${{ secrets.ENVIRONMENT_VARIABLES }} > .env \
 
       - name: PWD
         run: pwd
 
-      - name: LS
-        run: ls
+      - name: LS -al
+        run: ls -al
 
       - name: Build other images
         run: |
