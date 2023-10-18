@@ -30,14 +30,8 @@ const NewStory = () => {
   const fileRef = useRef<HTMLInputElement>(null);
 
   // textarea에 autosize 적용
-  useEffect(() => {
-    // @ts-ignore
-    autosize(textareaRef.current);
-    return () => {
-      // @ts-ignore
-      autosize.destroy(textareaRef.current);
-    };
-  }, []);
+  // @ts-ignore
+  autosize(textareaRef.current);
 
   // 컴포넌트가 마운트되면 textarea에 포커스
   useEffect(() => {

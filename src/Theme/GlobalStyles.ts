@@ -23,7 +23,6 @@ const GlobalStyles = createGlobalStyle`
     font-weight: 400;
     font-style: normal;
   }
-
   
   html, body {
     font-family: 'LINESeedKR-Rg', sans-serif;
@@ -33,15 +32,9 @@ const GlobalStyles = createGlobalStyle`
 
   ::-webkit-scrollbar {
     width: 0;  /* Remove scrollbar space */
+    height: 0;
     background: transparent;  /* Optional: just make scrollbar invisible */
-  }
-
-  body {
-    -ms-overflow-style: none;  /* Internet Explorer 10+ */
-    scrollbar-width: none;  /* Firefox */
-  }
-  body::-webkit-scrollbar {
-    display: none;  /* Safari and Chrome */
+    display: none;
   }
   
   #root{

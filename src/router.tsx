@@ -4,6 +4,7 @@ import SearchPage from "./pages/logged-in/SearchPage";
 import HomePage from "./pages/logged-in/HomePage";
 import Login from "./pages/Login";
 import SocialLogin from "./pages/SocialLogin";
+import CreateAccount from "@/components/CreateAccount.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ export const router = createBrowserRouter([
   {
     path: "/social-login",
     element: <SocialLogin />,
-  }
+  },
+  {
+    path: "/create-account",
+    element: <CreateAccount />,
+  },
 
 ]);

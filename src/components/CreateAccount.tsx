@@ -1,4 +1,3 @@
-import { Icons } from "@/components/Icons"
 import { Button } from "@/components/ui/Button"
 import {
   Card,
@@ -22,6 +21,8 @@ import {Loader2} from "lucide-react";
 import AlertPopup from "@/components/shared/AlertPopup";
 import {useDispatch} from "react-redux";
 import {login} from "@/slices/user/loginSlice";
+import {Icons} from "@/components/Icons.tsx";
+import {useMutation} from "@tanstack/react-query";
 
 interface Jwt {
   exp: number;
@@ -37,6 +38,14 @@ const formSchema = z.object({
   confirmPassword: z.string().min(8).max(15),
   name: z.string().min(1).max(30),
   nickname: z.string().min(1).max(30),
+}).superRefine(({password, confirmPassword}, ctx) => {
+  if (password !== confirmPassword) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: "Passwords do not match",
+      path: ["confirmPassword"],
+    })
+  }
 })
 
 const CreateAccount = () => {
@@ -62,6 +71,16 @@ const CreateAccount = () => {
     form.formState.isValid ? setCanSubmit(true) : setCanSubmit(false);
   }, [form.formState.isValid])
 
+  const {mutate: mutation} = useMutation({
+    mutationFn: saveUserRequest,
+    onSuccess: () => {
+      // show alert popup and redirect
+      setShowAlertPopup(true);
+    },
+    onError: () => {
+
+    }
+  })
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setIsLoading(true);
@@ -73,13 +92,15 @@ const CreateAccount = () => {
       nickname: values.nickname,
     });
 
+    // TODO: LOGIN으로 이동
     // set cookie
     const jwt: Jwt = jwtDecode(data.accessToken);
     const in30Minutes = new Date(jwt.exp * 1000);
     Cookies.set('accessToken', data.accessToken, { expires: in30Minutes })
-
     // set global state
     dispatch(login())
+
+
 
     // show alert popup and redirect
     setShowAlertPopup(true);
@@ -88,38 +109,18 @@ const CreateAccount = () => {
   return (
     <Form {...form}>
       {showAlertPopup && <AlertPopup message="회원가입이 완료되었습니다." onClose={() => navigate("/")} />}
-      <form onSubmit={form.handleSubmit(onSubmit)}>
-        <Card className="rounded-none h-screen mx-auto pt-[5vh]">
-          <Link to="/" className="px-6">home</Link>
+      <form onSubmit={form.handleSubmit(((form) => mutation(form)))}>
+        <Card className="rounded-none h-screen mx-auto pt-[1vh]">
           <CardHeader className="space-y-1">
-            <CardTitle className="text-2xl">Create an account</CardTitle>
+            <div className="flex justify-between items-center">
+              <CardTitle className="text-2xl">Create an account</CardTitle>
+              <Link to="/"><Icons.close /></Link>
+            </div>
             <CardDescription>
               Enter your email below to create your account
             </CardDescription>
           </CardHeader>
           <CardContent className="grid gap-4">
-            <div className="grid grid-cols-2 gap-6">
-              <Button variant="outline">
-                <Icons.gitHub className="mr-2 h-4 w-4"/>
-                Github
-              </Button>
-              <Button variant="outline" asChild>
-                <Link to="/social-login">
-                  <Icons.google className="mr-2 h-4 w-4"/>
-                  Google
-                </Link>
-              </Button>
-            </div>
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <span className="w-full border-t"/>
-              </div>
-              <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-background px-2 text-muted-foreground">
-              Or continue with
-            </span>
-              </div>
-            </div>
             <FormField
               control={form.control}
               name="email"
@@ -181,7 +182,7 @@ const CreateAccount = () => {
               )}
             />
           </CardContent>
-          <CardFooter className="pb-auto">
+          <CardFooter className="block pb-auto">
             <Button
               className={`w-full ${canSubmit && isLoading ? 'cursor-not-allowed' : ''}`}
               disabled={!canSubmit || isLoading}
@@ -196,6 +197,10 @@ const CreateAccount = () => {
                 'Create account'
               )}
             </Button>
+            <div className="flex mt-2">
+              <p>Already have an account?&nbsp;</p>
+              <Link to="/login" className="text-blue-600">Sign in</Link>
+            </div>
           </CardFooter>
         </Card>
       </form>
