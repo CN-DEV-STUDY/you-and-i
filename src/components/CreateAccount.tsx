@@ -14,23 +14,11 @@ import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Form, FormControl, FormField, FormItem, FormLabel} from "@/components/ui/Form";
 import {saveUserRequest} from "@/services/api/user/api";
-import Cookies from "js-cookie";
-import jwtDecode from "jwt-decode";
 import {useEffect, useState} from "react";
 import {Loader2} from "lucide-react";
 import AlertPopup from "@/components/shared/AlertPopup";
-import {useDispatch} from "react-redux";
-import {login} from "@/slices/user/loginSlice";
 import {Icons} from "@/components/Icons.tsx";
 import {useMutation} from "@tanstack/react-query";
-
-interface Jwt {
-  exp: number;
-  iat: number;
-  sub: string;
-  id: number;
-  iss: string;
-}
 
 const formSchema = z.object({
   email: z.string().min(1).max(30).email(),
@@ -50,11 +38,9 @@ const formSchema = z.object({
 
 const CreateAccount = () => {
   const [canSubmit, setCanSubmit] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showAlertPopup, setShowAlertPopup] = useState<boolean>(false);
 
   const navigate = useNavigate();
-  const dispatch = useDispatch()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -71,45 +57,18 @@ const CreateAccount = () => {
     form.formState.isValid ? setCanSubmit(true) : setCanSubmit(false);
   }, [form.formState.isValid])
 
-  const {mutate: mutation} = useMutation({
+  const {mutate: submit, isPending} = useMutation({
     mutationFn: saveUserRequest,
     onSuccess: () => {
       // show alert popup and redirect
       setShowAlertPopup(true);
-    },
-    onError: () => {
-
     }
   })
-
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    setIsLoading(true);
-
-    const { data } = await saveUserRequest({
-      email: values.email,
-      password: values.password,
-      name: values.name,
-      nickname: values.nickname,
-    });
-
-    // TODO: LOGIN으로 이동
-    // set cookie
-    const jwt: Jwt = jwtDecode(data.accessToken);
-    const in30Minutes = new Date(jwt.exp * 1000);
-    Cookies.set('accessToken', data.accessToken, { expires: in30Minutes })
-    // set global state
-    dispatch(login())
-
-
-
-    // show alert popup and redirect
-    setShowAlertPopup(true);
-  }
 
   return (
     <Form {...form}>
       {showAlertPopup && <AlertPopup message="회원가입이 완료되었습니다." onClose={() => navigate("/")} />}
-      <form onSubmit={form.handleSubmit(((form) => mutation(form)))}>
+      <form onSubmit={form.handleSubmit(((form) => submit(form)))}>
         <Card className="rounded-none h-screen mx-auto pt-[1vh]">
           <CardHeader className="space-y-1">
             <div className="flex justify-between items-center">
@@ -184,11 +143,11 @@ const CreateAccount = () => {
           </CardContent>
           <CardFooter className="block pb-auto">
             <Button
-              className={`w-full ${canSubmit && isLoading ? 'cursor-not-allowed' : ''}`}
-              disabled={!canSubmit || isLoading}
+              className={`w-full ${canSubmit && isPending ? 'cursor-not-allowed' : ''}`}
+              disabled={!canSubmit || isPending}
               type="submit"
             >
-              {canSubmit && isLoading ? (
+              {canSubmit && isPending ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                   Please wait...

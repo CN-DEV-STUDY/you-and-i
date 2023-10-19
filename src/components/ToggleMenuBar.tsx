@@ -15,6 +15,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useAuth } from "@clerk/clerk-react";
+import Cookies from "js-cookie";
 
 type Anchor = "right";
 
@@ -22,6 +23,8 @@ function ToggleMenuBar() {
   const [isOpen, setIsOpen] = useState({
     right: false,
   });
+
+  const loggedIn = Cookies.get('loggedIn');
 
   const {  userId, signOut } = useAuth();
 
@@ -55,7 +58,7 @@ function ToggleMenuBar() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List sx={{ backgroundColor: "var(--color__white)" }}>
-        {userId !== null ? (
+        {loggedIn ? (
           // 로그인된 상태에서는 로그아웃 버튼을 표시
           <ListItem>
             <Button variant="outlined" color="error" onClick={handleLogout}>

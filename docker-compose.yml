@@ -6,6 +6,7 @@ services:
   react:
     # 현 디렉터리에 있는 Dockerfile 사용
     image: nohyunha95/you-and-i-frontend
+    container_name: you-and-i-frontend-container
 #    build:
 #      context: .
 #      dockerfile: Dockerfile
