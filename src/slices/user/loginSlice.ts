@@ -17,7 +17,7 @@ export const loginSlice = createSlice({
     },
     logout: (state) => {
       state.isLoggedIn = false;
-    }
+    },
   }
 })
 
