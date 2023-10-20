@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import periodImg from "./../assets/period.jpg";
-import {useEffect, useState} from "react";
-import {getPeriod} from "@/services/api/period/api.ts";
-import {useSelector} from "react-redux";
-import {RootState} from "@/store.ts";
-import {Button} from "@/components/ui/Button.tsx";
-import {Plus} from "lucide-react";
+import { useEffect, useState } from "react";
+import { getPeriod } from "@/services/api/period/api.ts";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store.ts";
+import { Button } from "@/components/ui/Button.tsx";
+import { Plus } from "lucide-react";
 import CreatePeriod from "@/components/CreatePeriod.tsx";
 
 interface PeriodCardProps {
@@ -14,7 +14,6 @@ interface PeriodCardProps {
 }
 
 function PeriodCard() {
-
   // global state
   const isLoggedIn = useSelector((state: RootState) => state.login.isLoggedIn);
 
@@ -26,47 +25,68 @@ function PeriodCard() {
 
   const [isClicked, setIsClicked] = useState<boolean>(false);
 
+  const [isSuccess, setSuccess] = useState<boolean>(false);
 
   // event
   const onClick = () => {
+    if (!isLoggedIn) {
+      alert("login is required!!");
+      return;
+    }
+
     setIsClicked((prevState) => !prevState);
-  }
+  };
+
+  const onChangeSuccess = (status: boolean) => {
+    setSuccess(status);
+  };
 
   // method
   const fetchPeriod = async () => {
     const data = await getPeriod();
     setPeriod(data);
-  }
+  };
 
   // watch
   useEffect(() => {
     if (isLoggedIn) {
       fetchPeriod();
     }
-  }, []);
-
+  }, [isSuccess]);
 
   return (
-      <>
-      {isClicked && <div><CreatePeriod onClick={onClick}/></div>}
+    <>
+      {isClicked && (
+        <div>
+          <CreatePeriod
+            onClick={onClick}
+            onChangeSuccess={onChangeSuccess}
+            isSuccess={isSuccess}
+          />
+        </div>
+      )}
       <Container>
         <RoundCard>
-          {!isLoggedIn &&
-              <Button variant="outline"
-                      className="h-14 bg-indigo-400 border-0 text-indigo-100 text-xl"
-                      onClick={onClick}>
-                  <Plus className="mr-2 h-6 w-6" /> Register Period
-              </Button>}
-          {isLoggedIn &&
-              <>
+          {!isLoggedIn && (
+            <Button
+              variant="outline"
+              className="h-14 bg-indigo-400 border-0 text-indigo-100 text-xl hover:bg-indigo-400 hover:text-indigo-100"
+              onClick={onClick}
+            >
+              <Plus className="mr-2 h-6 w-6" /> Register Period
+            </Button>
+          )}
+          {isLoggedIn && (
+            <>
               <Text fontWeight={"bold"} fontSize={24}>
                 {period.period}일
               </Text>
               <Text justifycontent={"flex-end"}>{period.startedAt}</Text>
-            </>}
+            </>
+          )}
         </RoundCard>
       </Container>
-      </>
+    </>
   );
 }
 
