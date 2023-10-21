@@ -36,11 +36,18 @@ axios.interceptors.response.use(response => {
 });
 
 //=== react query ===//
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <ClerkProvider publishableKey={VITE_CLERK_PUBLISHABLE_KEY}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -50,5 +57,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         </LocalizationProvider>
       </ClerkProvider>
     </QueryClientProvider>
-  </React.StrictMode>
+  // </React.StrictMode>
 )

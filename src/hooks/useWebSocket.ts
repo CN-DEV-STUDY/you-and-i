@@ -39,12 +39,7 @@ const useWebSocket = () => {
     });
   }
 
-  useEffect(() => {
-    activate();
-    return () => {
-      deactivate();
-    }
-  }, [])
+  activate();
 
   return {client, activate, deactivate, publish}
 }
