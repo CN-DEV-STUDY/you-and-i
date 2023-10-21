@@ -11,7 +11,7 @@ import {useMutation} from "@tanstack/react-query";
 import {loginRequest} from "@/services/api/user/api.ts";
 import jwtDecode from "jwt-decode";
 import Cookies from "js-cookie";
-import {Jwt} from "@/services/types/user/userTypes.ts";
+import {Jwt} from "@/services/types/user/types.ts";
 import {useDispatch} from "react-redux";
 import {login} from "@/slices/user/loginSlice.ts";
 import {Loader2} from "lucide-react";
