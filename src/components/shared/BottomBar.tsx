@@ -19,17 +19,19 @@ const BottomBar = ({ setLayout }: BottomBarProps) => {
       <Link to="/search">
         <HiOutlineSearch />
       </Link>
-      <Button
-        variant="outlined"
-        color="neutral"
-        onClick={() => setLayout("fullscreen")}
-      >
-        <AiOutlinePlus />
-      </Button>
+        <Button
+          variant="outlined"
+          color="neutral"
+          onClick={() => setLayout("fullscreen")}
+        >
+          <AiOutlinePlus />
+        </Button>
       <Link to="/plan">
         <BsCalendar2Minus />
       </Link>
-      <BsChatHeart />
+      <Link to="/chat">
+        <BsChatHeart />
+      </Link>
       </Inner>
     </Container>
   );

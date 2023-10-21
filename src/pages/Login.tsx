@@ -40,6 +40,7 @@ const Login = () => {
       const jwt: Jwt = jwtDecode(data.accessToken);
       const in30Minutes = new Date(jwt.exp * 1000);
       Cookies.set('accessToken', data.accessToken, { expires: in30Minutes })
+      Cookies.set('chatRoomId', data.chatRoomId, { expires: in30Minutes })
       Cookies.set('loggedIn', 'true', { expires: in30Minutes })
 
       // set global state
