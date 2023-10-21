@@ -5,6 +5,7 @@ import HomePage from "./pages/logged-in/HomePage";
 import Login from "./pages/Login";
 import SocialLogin from "./pages/SocialLogin";
 import CreateAccount from "@/components/CreateAccount.tsx";
+import ChatPage from "@/pages/logged-in/ChatPage.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -34,5 +35,8 @@ export const router = createBrowserRouter([
     path: "/create-account",
     element: <CreateAccount />,
   },
-
+  {
+    path: "/chat",
+    element: <ChatPage />,
+  },
 ]);
