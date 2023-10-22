@@ -12,6 +12,7 @@ import axios from "axios";
 import {saveUserRequest} from "@/services/api/chat/api.ts";
 import {useQuery} from "@tanstack/react-query";
 import {GetChatResponse} from "@/services/types/chat/types.ts";
+import Cookies from "js-cookie";
 
 const users = [
   {
@@ -49,58 +50,35 @@ type User = (typeof users)[number]
  */
 const ChatPage = () => {
   const inputRef = useRef<HTMLInputElement>(null)
+  const messageEndRef = useRef<HTMLDivElement | null>(null);
   const {client, activate, deactivate, publish} = useMemo(() => useWebSocket(), []);
-  const [messages, setMessages] = React.useState([
-    {
-      role: "agent",
-      content: "Hi, how can I help you today?",
-    },
-    {
-      role: "user",
-      content: "Hey, I'm having trouble with my account.",
-    },
-    {
-      role: "agent",
-      content: "What seems to be the problem?",
-    },
-    {
-      role: "user",
-      content: "I can't log in.",
-    },
-  ])
+  const [messages, setMessages] = React.useState([])
+  const email = Cookies.get("email");
+  const chatRoomId = Cookies.get("chatRoomId");
 
+  // 초기 데이터 불러오기
   useEffect(() => {
-    saveUserRequest({chatRoomId: "chatRoom:496bdd94-94a2-4c8c-8fa0-012e1eb5cecf", email: "nohyunha95@gmail.com"})
+    saveUserRequest({chatRoomId: chatRoomId, email: email})
       .then((res) => {
         res.data.forEach((data: GetChatResponse) => {
           setMessages((prev) => [...prev, {
-            role: "agent",
+            sender: data.sender,
             content: data.message,
           }])
         })
       });
   }, []);
 
-  const {data, isPending, isSuccess} = useQuery(
-    {
-      queryKey: ['chats'],
-      queryFn: () => saveUserRequest({
-        chatRoomId: "chatRoom:496bdd94-94a2-4c8c-8fa0-012e1eb5cecf",
-        email: "nohyunha95@gmail.com"
-      }),
-      refetchOnMount: false,
-    });
-  if (isSuccess) {
-
-  }
-
+  useEffect(() => {
+    messageEndRef.current.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
 
   client.onConnect = function (frame) {
     activate();
     client.subscribe('/topic/enter', (message) => {
       const chat = JSON.parse(message.body) as GetChatResponse;
       setMessages((prev) => [...prev, {
-        role: "agent",
+        sender: chat.sender,
         content: chat.message,
       }])
     })
@@ -108,10 +86,14 @@ const ChatPage = () => {
 
   const onSendMessage = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    activate();
+
+    if (inputRef.current && inputRef.current.value === "") {
+      return;
+    }
+
     publish("/app/chat", JSON.stringify({
-      email: "nohyunha95@gmail.com",
-      chatRoomId: "chatRoom:496bdd94-94a2-4c8c-8fa0-012e1eb5cecf",
+      email: email,
+      chatRoomId: chatRoomId,
       message: inputRef.current.value
     }));
 
@@ -143,15 +125,17 @@ const ChatPage = () => {
                 key={index}
                 className={cn(
                   "flex w-max max-w-[75%] flex-col gap-2 rounded-lg px-3 py-2 text-sm",
-                  message.role === "user"
+                  message.sender === email
                     ? "ml-auto bg-primary text-primary-foreground"
                     : "bg-muted"
                 )}
               >
                 {message.content}
               </div>
+
             ))}
           </div>
+          <div ref={messageEndRef}></div>
         </CardContent>
         <CardFooter>
           <form
