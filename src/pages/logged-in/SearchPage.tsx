@@ -7,7 +7,6 @@ import OtherCoupleCard from "../../components/OtherCoupleCard";
 const SearchPage = () => {
   return (
     <>
-      <TopBar isSearch={true} />
       <Container>
         <Input
           color="neutral"

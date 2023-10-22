@@ -113,7 +113,7 @@ const Login = () => {
                 )}
               />
             </CardContent>
-            <CardFooter className="pb-auto">
+            <CardFooter className="pb-auto block">
               <Button
                 className="w-full"
                 type="submit"
@@ -127,10 +127,13 @@ const Login = () => {
                   'Login'
                 )}
               </Button>
+              <div className="flex mt-4">
+                <p>Don't have an account?&nbsp;</p>
+                <Link to="/create-account" className="text-blue-600">Create account</Link>
+              </div>
             </CardFooter>
             <CardFooter>
-              <p>Don't have an account?&nbsp;</p>
-              <Link to="/create-account" className="text-blue-600">Create account</Link>
+
             </CardFooter>
           </Card>
         </form>

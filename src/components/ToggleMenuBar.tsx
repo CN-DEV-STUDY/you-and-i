@@ -60,11 +60,18 @@ function ToggleMenuBar() {
       <List sx={{ backgroundColor: "var(--color__white)" }}>
         {loggedIn ? (
           // 로그인된 상태에서는 로그아웃 버튼을 표시
+          <>
+            <ListItem>
+              <Button variant="outlined" color="error" onClick={handleLogout}>
+                내 정보
+              </Button>
+            </ListItem>
           <ListItem>
             <Button variant="outlined" color="error" onClick={handleLogout}>
               로그아웃
             </Button>
           </ListItem>
+          </>
         ) : (
           // 로그인되지 않은 상태에서는 로그인 링크를 표시
           <ListItem key="로그인" disablePadding>
