@@ -1,20 +1,17 @@
-import React from "react";
-import GlobalStyles from "./Theme/GlobalStyles";
-import BottomBar from "./components/shared/BottomBar";
-import { Outlet } from "react-router-dom";
-import MuiModal from "./components/MuiModal";
-import { ModalDialogProps } from "@mui/joy";
 import TopBar from "@/components/shared/TopBar.tsx";
+import {Outlet} from "react-router-dom";
+import BottomBar from "@/components/shared/BottomBar.tsx";
+import MuiModal from "@/components/MuiModal.tsx";
+import React from "react";
+import {ModalDialogProps} from "@mui/joy";
 
-function App() {
+const BottomBarOnly = () => {
   const [layout, setLayout] = React.useState<
     ModalDialogProps["layout"] | undefined
   >(undefined);
 
   return (
     <>
-      <GlobalStyles />
-      <TopBar />
       <Outlet />
       <BottomBar setLayout={setLayout} />
       {layout === "fullscreen" && (
@@ -24,4 +21,4 @@ function App() {
   );
 }
 
-export default App;
+export default BottomBarOnly;

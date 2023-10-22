@@ -71,11 +71,9 @@ const Login = () => {
                   <Icons.gitHub className="mr-2 h-4 w-4"/>
                   Github
                 </Button>
-                <Button variant="outline" asChild>
-                  <Link to="/social-login">
-                    <Icons.google className="mr-2 h-4 w-4"/>
-                    Google
-                  </Link>
+                <Button variant="outline">
+                  <Icons.google className="mr-2 h-4 w-4"/>
+                  Google
                 </Button>
               </div>
               <div className="relative">
@@ -113,7 +111,7 @@ const Login = () => {
                 )}
               />
             </CardContent>
-            <CardFooter className="pb-auto">
+            <CardFooter className="pb-auto block">
               <Button
                 className="w-full"
                 type="submit"
@@ -127,10 +125,13 @@ const Login = () => {
                   'Login'
                 )}
               </Button>
+              <div className="flex mt-4">
+                <p>Don't have an account?&nbsp;</p>
+                <Link to="/create-account" className="text-blue-600">Create account</Link>
+              </div>
             </CardFooter>
             <CardFooter>
-              <p>Don't have an account?&nbsp;</p>
-              <Link to="/create-account" className="text-blue-600">Create account</Link>
+
             </CardFooter>
           </Card>
         </form>

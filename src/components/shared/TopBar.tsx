@@ -1,34 +1,22 @@
 import styled from "styled-components";
-import ToggleMenuBar from "../ToggleMenuBar";
-import Title from "../ui/Title";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/Avatar";
+import {Avatar, AvatarFallback, AvatarImage} from "../ui/Avatar";
 import bImage from "./../../assets/mountains-7561636_1280.png";
+import HamburgerMenu from "@/components/shared/HamburgerMenu.tsx";
+import {memo} from "react";
 
-type TopBarProps = {
-  isSearch?: boolean;
-};
-
-const TopBar = ({ isSearch }: TopBarProps) => {
-  if (isSearch) {
-    return (
-      <Container>
-        <Title type="secondary" content="검색" />
-      </Container>
-    );
-  }
-
+const TopBar = () => {
   return (
     <Container>
       <Avatar>
         <AvatarImage src="https://github.com/shadcn.png" />
         <AvatarFallback>CN</AvatarFallback>
       </Avatar>
-      <ToggleMenuBar />
+      <HamburgerMenu />
     </Container>
   );
 };
 
-export default TopBar;
+export default memo(TopBar);
 
 // style
 const Container = styled.div`

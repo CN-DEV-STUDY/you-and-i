@@ -1,20 +1,13 @@
-import { Button } from "@/components/ui/Button"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/Card"
-import { Input } from "@/components/ui/Input"
+import {Button} from "@/components/ui/Button"
+import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle,} from "@/components/ui/Card"
+import {Input} from "@/components/ui/Input"
 import {Link, useNavigate} from "react-router-dom";
 import * as z from "zod";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {Form, FormControl, FormField, FormItem, FormLabel} from "@/components/ui/Form";
+import {Form, FormControl, FormDescription, FormField, FormItem, FormLabel} from "@/components/ui/Form";
 import {saveUserRequest} from "@/services/api/user/api";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {Loader2} from "lucide-react";
 import AlertPopup from "@/components/shared/AlertPopup";
 import {Icons} from "@/components/Icons.tsx";
@@ -23,7 +16,7 @@ import {useMutation} from "@tanstack/react-query";
 const formSchema = z.object({
   email: z.string().min(1).max(30).email(),
   password: z.string().min(8).max(15),
-  confirmPassword: z.string().min(8).max(15),
+  confirmPassword: z.string(),
   name: z.string().min(1).max(30),
   nickname: z.string().min(1).max(30),
 }).superRefine(({password, confirmPassword}, ctx) => {
@@ -36,10 +29,8 @@ const formSchema = z.object({
   }
 })
 
-const CreateAccount = () => {
-  const [canSubmit, setCanSubmit] = useState<boolean>(false);
+const CreateAccountForm = () => {
   const [showAlertPopup, setShowAlertPopup] = useState<boolean>(false);
-
   const navigate = useNavigate();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -52,10 +43,6 @@ const CreateAccount = () => {
       nickname: "",
     },
   })
-
-  useEffect(() => {
-    form.formState.isValid ? setCanSubmit(true) : setCanSubmit(false);
-  }, [form.formState.isValid])
 
   const {mutate: submit, isPending} = useMutation({
     mutationFn: saveUserRequest,
@@ -83,71 +70,76 @@ const CreateAccount = () => {
             <FormField
               control={form.control}
               name="email"
-              render={({field}) => (
+              render={({field, fieldState}) => (
                 <FormItem>
-                  <FormLabel htmlFor="email">Email</FormLabel>
+                  <FormLabel htmlFor="email" className="font-bold">Email</FormLabel>
                   <FormControl>
                     <Input {...field} id="email" type="email" placeholder="email@email.com"/>
                   </FormControl>
+                  {fieldState.error && <FormDescription className="text-destructive">이메일 형식이 아닙니다.</FormDescription>}
                 </FormItem>
               )}
             />
             <FormField
               control={form.control}
               name="password"
-              render={({field}) => (
+              render={({field, fieldState}) => (
                 <FormItem>
-                  <FormLabel htmlFor="password">Password</FormLabel>
+                  <FormLabel htmlFor="password" className="font-bold">Password</FormLabel>
                   <FormControl>
                     <Input {...field} id="password" type="password"/>
                   </FormControl>
+                  {fieldState.error && <FormDescription className="text-destructive">비밀번호는 8~16자리까지 입력할 수 있습니다.</FormDescription>}
                 </FormItem>
               )}
             />
             <FormField
               control={form.control}
               name="confirmPassword"
-              render={({field}) => (
+              render={({field, fieldState, formState}) => (
                 <FormItem>
-                  <FormLabel htmlFor="confirm-password">Confirm Password</FormLabel>
+                  <FormLabel htmlFor="confirm-password" className="font-bold">Confirm Password</FormLabel>
                   <FormControl>
                     <Input {...field} id="confirm-password" type="password"/>
                   </FormControl>
+                  {form.formState.errors.confirmPassword && <FormDescription className="text-destructive">비밀번호가 일치하지 않습니다.</FormDescription>}
                 </FormItem>
               )}
             />
             <FormField
               control={form.control}
               name="name"
-              render={({field}) => (
+              render={({field, fieldState}) => (
                 <FormItem>
-                  <FormLabel htmlFor="name">Name</FormLabel>
+                  <FormLabel htmlFor="name" className="font-bold">Name</FormLabel>
                   <FormControl>
                     <Input {...field} id="name" type="text"/>
                   </FormControl>
+                  {fieldState.error && <FormDescription className="text-destructive">이름을 입력해주세요.</FormDescription>}
                 </FormItem>
               )}
             />
             <FormField
               control={form.control}
               name="nickname"
-              render={({field}) => (
+              render={({field, fieldState}) => (
                 <FormItem>
-                  <FormLabel htmlFor="nickname">Nickname</FormLabel>
+                  <FormLabel htmlFor="nickname" className="font-bold">Nickname</FormLabel>
                   <FormControl>
                     <Input {...field} id="nickname" type="text"/>
                   </FormControl>
+                  {fieldState.error && <FormDescription className="text-destructive">닉네임을 입력해주세요.</FormDescription>}
                 </FormItem>
               )}
             />
           </CardContent>
           <CardFooter className="block pb-auto">
             <Button
-              className={`w-full ${canSubmit && isPending ? 'cursor-not-allowed' : ''}`}
-              disabled={!canSubmit || isPending}
+              className={`w-full ${isPending ? 'cursor-not-allowed' : ''}`}
+              disabled={isPending}
               type="submit"
             >
-              {canSubmit && isPending ? (
+              {isPending ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                   Please wait...
@@ -156,7 +148,7 @@ const CreateAccount = () => {
                 'Create account'
               )}
             </Button>
-            <div className="flex mt-2">
+            <div className="flex mt-4">
               <p>Already have an account?&nbsp;</p>
               <Link to="/login" className="text-blue-600">Sign in</Link>
             </div>
@@ -167,4 +159,4 @@ const CreateAccount = () => {
   )
 }
 
-export default CreateAccount;
+export default CreateAccountForm;
