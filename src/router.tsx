@@ -1,11 +1,14 @@
-import { createBrowserRouter } from "react-router-dom";
+import {createBrowserRouter} from "react-router-dom";
 import App from "./App";
 import SearchPage from "./pages/logged-in/SearchPage";
 import HomePage from "./pages/logged-in/HomePage";
 import Login from "./pages/Login";
 import SocialLogin from "./pages/SocialLogin";
-import CreateAccount from "@/components/CreateAccount.tsx";
+import CreateAccountForm from "@/components/CreateAccountForm.tsx";
 import ChatPage from "@/pages/logged-in/ChatPage.tsx";
+import ProfilePage from "@/pages/logged-in/ProfilePage.tsx";
+import TopBarOnly from "@/components/shared/TopBarOnly.tsx";
+import BottomBarOnly from "@/components/shared/BottomBarOnly.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -20,7 +23,6 @@ export const router = createBrowserRouter([
         path: "search",
         element: <SearchPage/>,
       },
-
     ],
   },
   {
@@ -33,10 +35,29 @@ export const router = createBrowserRouter([
   },
   {
     path: "/create-account",
-    element: <CreateAccount />,
+    element: <CreateAccountForm />,
   },
   {
     path: "/chat",
     element: <ChatPage />,
   },
+  {
+    path: "/",
+    element: <TopBarOnly />,
+    children: [
+      {
+        path: "profile",
+        element: <ProfilePage />,
+      },
+    ]
+  },
+  {
+    path: "/",
+    element: <BottomBarOnly />,
+    children: [
+
+    ]
+  },
 ]);
+
+
