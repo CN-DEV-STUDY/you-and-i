@@ -18,3 +18,5 @@ services:
       - /app/node_modules
       - ./:/app
     stdin_open: true
+    environment:
+      - WDS_SOCKET_PORT=0
