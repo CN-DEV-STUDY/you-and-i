@@ -7,6 +7,6 @@ sleep 3
 docker rmi nohyunha95/you-and-i-frontend
 sleep 3
 
-cd /home/ec2-user/action
+cd /home/ec2-user/action/frontend
 
 docker-compose -f docker-compose.yml up -d
