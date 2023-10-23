@@ -64,6 +64,7 @@
         "tailwindcss-animate": "^1.0.7",
         "zod": "^3.22.4"
     },
+    "proxy": "http://localhost:8080",
     "devDependencies": {
         "@tanstack/eslint-plugin-query": "^5.0.0",
         "@types/react": "^18.2.15",
