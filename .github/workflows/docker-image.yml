@@ -21,12 +21,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-        # 도커 이미지에 .env.production 파일 포함
-      - name: Create .env.production file
-        run: touch .env.production
-
-      - name: Add env variables to .env.production file
-        run: echo "${{ secrets.ENVIRONMENT_VARIABLES }}" > .env.production
+#        # 도커 이미지에 .env.production 파일 포함
+#      - name: Create .env.production file
+#        run: touch .env.production
+#
+#      - name: Add env variables to .env.production file
+#        run: echo "${{ secrets.ENVIRONMENT_VARIABLES }}" > .env.production
 
       - name: Build an image and push to Docker Hub
         run: |
