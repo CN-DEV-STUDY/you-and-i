@@ -66,7 +66,10 @@ const ChatPage = () => {
             content: data.message,
           }])
         })
-      });
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }, []);
 
   useEffect(() => {
