@@ -22,7 +22,6 @@ axios.interceptors.request.use(
         console.log(request);
         // Edit request config
         const accessToken = Cookies.get("accessToken");
-        console.log(accessToken);
 
         try {
             if (accessToken) {
