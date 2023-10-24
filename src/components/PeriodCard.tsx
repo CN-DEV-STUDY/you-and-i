@@ -22,7 +22,7 @@ function PeriodCard() {
     const loggedIn = Cookies.get("loggedIn");
 
     // state
-    const [period, setPeriod] = useState<PeriodCardProps>({
+    const [period, setPeriod] = useState<PeriodCardProps|string>({
         period: 0,
         startedAt: "",
     });
@@ -33,7 +33,7 @@ function PeriodCard() {
 
     // event
     const onClick = () => {
-        if (loggedIn) {
+        if (!loggedIn) {
             alert("login is required!!");
             return;
         }
@@ -48,11 +48,18 @@ function PeriodCard() {
     // method
     const fetchPeriod = async () => {
         const data = await getPeriod();
+
+        if(data === '') {
+            setPeriod('')
+            return;
+        }
+
         setPeriod(data);
     };
 
     // watch
     useEffect(() => {
+
         if (loggedIn) {
             fetchPeriod();
         }
@@ -71,7 +78,7 @@ function PeriodCard() {
             )}
             <Container>
                 <RoundCard>
-                    {!loggedIn && (
+                    {(!loggedIn || period === '' )&& (
                         <Button
                             variant="outline"
                             className="h-14 bg-indigo-400 border-0 text-indigo-100 text-xl hover:bg-indigo-400 hover:text-indigo-100"
@@ -80,7 +87,7 @@ function PeriodCard() {
                             <Plus className="mr-2 h-6 w-6" /> Register Period
                         </Button>
                     )}
-                    {loggedIn && (
+                    {(loggedIn && period !== '') && (
                         <>
                             <Text fontWeight={"bold"} fontSize={24}>
                                 {period.period}일
