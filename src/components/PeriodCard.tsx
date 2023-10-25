@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/Button.tsx";
 import { Plus } from "lucide-react";
 import CreatePeriod from "@/components/CreatePeriod.tsx";
 import Cookies from "js-cookie";
+import {COOKIE_NAME} from "@/services/types/user/types.ts";
 
 interface PeriodCardProps {
     period: number;
@@ -19,7 +20,7 @@ function PeriodCard() {
     const isLoggedIn = useSelector(
         (state: RootState) => state.login.isLoggedIn
     );
-    const loggedIn = Cookies.get("loggedIn");
+    const isLoggedIn = Cookies.get(COOKIE_NAME.IS_LOGGED_IN);
 
     // state
     const [period, setPeriod] = useState<PeriodCardProps|string>({
@@ -33,7 +34,7 @@ function PeriodCard() {
 
     // event
     const onClick = () => {
-        if (!loggedIn) {
+        if (!isLoggedIn) {
             alert("login is required!!");
             return;
         }
@@ -60,7 +61,7 @@ function PeriodCard() {
     // watch
     useEffect(() => {
 
-        if (loggedIn) {
+        if (isLoggedIn) {
             fetchPeriod();
         }
     }, [isSuccess]);
@@ -78,7 +79,7 @@ function PeriodCard() {
             )}
             <Container>
                 <RoundCard>
-                    {(!loggedIn || period === '' )&& (
+                    {(!isLoggedIn || period === '' )&& (
                         <Button
                             variant="outline"
                             className="h-14 bg-indigo-400 border-0 text-indigo-100 text-xl hover:bg-indigo-400 hover:text-indigo-100"
@@ -87,7 +88,7 @@ function PeriodCard() {
                             <Plus className="mr-2 h-6 w-6" /> Register Period
                         </Button>
                     )}
-                    {(loggedIn && period !== '') && (
+                    {(isLoggedIn && period !== '') && (
                         <>
                             <Text fontWeight={"bold"} fontSize={24}>
                                 {period.period}일
