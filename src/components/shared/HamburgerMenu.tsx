@@ -2,14 +2,15 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel, DropdownMenuSeparator,
+  DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/DropdownMenu"
 import {GiHamburgerMenu} from "react-icons/gi";
 import {LogIn, LogOut, Settings, User, UserPlus} from "lucide-react";
 import useAuthorization from "@/hooks/useAuthorization.ts";
 import {useNavigate} from "react-router-dom";
-import {memo} from "react";
+import {useDispatch} from "react-redux";
+import {openAlertPopup} from "@/slices/popup/alertPopupSlice.ts";
 
 const HamburgerMenu = () => {
   const { isLoggedIn, handleLogout } = useAuthorization();
@@ -60,6 +61,8 @@ const LoggedInMenu = ({onLogout}: LoggedInMenuProps) => {
 
 const LoggedOutMenu = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   return (
     <>
       <DropdownMenuItem onClick={() => navigate("/login")}>
@@ -67,6 +70,10 @@ const LoggedOutMenu = () => {
         <DropdownMenuLabel>Log in</DropdownMenuLabel>
       </DropdownMenuItem>
       <DropdownMenuItem onClick={() => navigate("/create-account")}>
+        <UserPlus className="mr-2 h-4 w-4" />
+        <DropdownMenuLabel>Sign up</DropdownMenuLabel>
+      </DropdownMenuItem>
+      <DropdownMenuItem onClick={() => dispatch(openAlertPopup("dfd"))}>
         <UserPlus className="mr-2 h-4 w-4" />
         <DropdownMenuLabel>Sign up</DropdownMenuLabel>
       </DropdownMenuItem>

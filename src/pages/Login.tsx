@@ -11,7 +11,7 @@ import {useMutation} from "@tanstack/react-query";
 import {loginRequest} from "@/services/api/user/api.ts";
 import jwtDecode from "jwt-decode";
 import Cookies from "js-cookie";
-import {Jwt} from "@/services/types/user/types.ts";
+import {COOKIE_NAME, Jwt} from "@/services/types/user/types.ts";
 import {useDispatch} from "react-redux";
 import {login} from "@/slices/user/loginSlice.ts";
 import {Loader2} from "lucide-react";
@@ -50,10 +50,10 @@ const Login = () => {
       // set cookie
       const jwt: Jwt = jwtDecode(data.accessToken);
       const in30Minutes = new Date(jwt.exp * 1000);
-      Cookies.set('accessToken', data.accessToken, {expires: in30Minutes})
-      Cookies.set('chatRoomId', data.chatRoomId, {expires: in30Minutes})
-      Cookies.set('email', data.email, {expires: in30Minutes})
-      Cookies.set('loggedIn', 'true', {expires: in30Minutes})
+      Cookies.set(COOKIE_NAME.ACCESS_TOKEN, data.accessToken, {expires: in30Minutes})
+      Cookies.set(COOKIE_NAME.CHAT_ROOM_ID, data.chatRoomId, {expires: in30Minutes})
+      Cookies.set(COOKIE_NAME.EMAIL, data.email, {expires: in30Minutes})
+      Cookies.set(COOKIE_NAME.IS_LOGGED_IN, 'true', {expires: in30Minutes})
 
       // set global state
       dispatch(login())

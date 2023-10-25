@@ -13,6 +13,7 @@ import {saveUserRequest} from "@/services/api/chat/api.ts";
 import {useQuery} from "@tanstack/react-query";
 import {GetChatResponse} from "@/services/types/chat/types.ts";
 import Cookies from "js-cookie";
+import {COOKIE_NAME} from "@/services/types/user/types.ts";
 
 const users = [
   {
@@ -53,8 +54,8 @@ const ChatPage = () => {
   const messageEndRef = useRef<HTMLDivElement | null>(null);
   const {client, activate, deactivate, publish} = useMemo(() => useWebSocket(), []);
   const [messages, setMessages] = React.useState([])
-  const email = Cookies.get("email");
-  const chatRoomId = Cookies.get("chatRoomId");
+  const email = Cookies.get(COOKIE_NAME.EMAIL);
+  const chatRoomId = Cookies.get(COOKIE_NAME.CHAT_ROOM_ID);
 
   // 초기 데이터 불러오기
   useEffect(() => {

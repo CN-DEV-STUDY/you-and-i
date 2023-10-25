@@ -16,7 +16,7 @@ export const router = createBrowserRouter([
     path: "/",
     element: <App/>,
     children: [
-      // TOP BAR, BOTTOM BAR
+      // TOP AND BOTTOM BAR
       {
         element: <TopBottomBar />,
         children: [
@@ -50,25 +50,24 @@ export const router = createBrowserRouter([
         ]
       },
 
+      // NO TOP OR BOTTOM BAR
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/social-login",
+        element: <SocialLogin />,
+      },
+      {
+        path: "/create-account",
+        element: <CreateAccountForm />,
+      },
+      {
+        path: "/chat",
+        element: <ChatPage />,
+      },
     ],
-  },
-
-  // NO BARS
-  {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/social-login",
-    element: <SocialLogin />,
-  },
-  {
-    path: "/create-account",
-    element: <CreateAccountForm />,
-  },
-  {
-    path: "/chat",
-    element: <ChatPage />,
   },
 ]);
 
