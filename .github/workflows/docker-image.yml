@@ -2,7 +2,7 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "release" ]
+    branches: [ "main" ]
 
 env:
   S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
