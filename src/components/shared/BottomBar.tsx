@@ -6,10 +6,8 @@ import { BsCalendar2Minus, BsChatHeart } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/joy";
 
-type BottomBarProps = {
-  setLayout: (layout: "center" | "fullscreen" | undefined) => void;
-};
-const BottomBar = ({ setLayout }: BottomBarProps) => {
+
+const BottomBar = () => {
   return (
     <Container>
       <Inner>
@@ -22,7 +20,6 @@ const BottomBar = ({ setLayout }: BottomBarProps) => {
         <Button
           variant="outlined"
           color="neutral"
-          onClick={() => setLayout("fullscreen")}
         >
           <AiOutlinePlus />
         </Button>
