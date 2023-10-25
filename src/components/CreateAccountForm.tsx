@@ -7,11 +7,11 @@ import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Form, FormControl, FormDescription, FormField, FormItem, FormLabel} from "@/components/ui/Form";
 import {saveUserRequest} from "@/services/api/user/api";
-import {useState} from "react";
 import {Loader2} from "lucide-react";
-import AlertPopup from "@/components/shared/AlertPopup";
 import {Icons} from "@/components/Icons.tsx";
 import {useMutation} from "@tanstack/react-query";
+import {useDispatch} from "react-redux";
+import {openAlertPopup} from "@/slices/popup/alertPopupSlice.ts";
 
 const formSchema = z.object({
   email: z.string().min(1).max(30).email(),
@@ -30,8 +30,8 @@ const formSchema = z.object({
 })
 
 const CreateAccountForm = () => {
-  const [showAlertPopup, setShowAlertPopup] = useState<boolean>(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -48,13 +48,12 @@ const CreateAccountForm = () => {
     mutationFn: saveUserRequest,
     onSuccess: () => {
       // show alert popup and redirect
-      setShowAlertPopup(true);
+      dispatch(openAlertPopup({title: "회원가입 완료", message: "회원가입이 완료되었습니다.", onClose: () => navigate("/")}));
     }
   })
 
   return (
     <Form {...form}>
-      {showAlertPopup && <AlertPopup message="회원가입이 완료되었습니다." onClose={() => navigate("/")} />}
       <form onSubmit={form.handleSubmit(((form) => submit(form)))}>
         <Card className="rounded-none h-screen mx-auto pt-[1vh]">
           <CardHeader className="space-y-1">
