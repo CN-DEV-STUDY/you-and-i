@@ -10,13 +10,14 @@ import ProfilePage from "@/pages/logged-in/ProfilePage.tsx";
 import TopBarOnly from "@/layout/TopBarOnly.tsx";
 import BottomBarOnly from "@/layout/BottomBarOnly.tsx";
 import TopBottomBar from "@/layout/TopBottomBar.tsx";
+import PlanCalendar from "@/components/PlanCalendar.tsx";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <App/>,
     children: [
-      // TOP AND BOTTOM BAR
+      // TOP BAR, BOTTOM BAR
       {
         element: <TopBottomBar />,
         children: [
@@ -27,6 +28,10 @@ export const router = createBrowserRouter([
           {
             path: "search",
             element: <SearchPage/>,
+          },
+          {
+            path: "plan",
+            element: <PlanCalendar/>,
           },
         ]
       },
@@ -50,24 +55,25 @@ export const router = createBrowserRouter([
         ]
       },
 
-      // NO TOP OR BOTTOM BAR
-      {
-        path: "/login",
-        element: <Login />,
-      },
-      {
-        path: "/social-login",
-        element: <SocialLogin />,
-      },
-      {
-        path: "/create-account",
-        element: <CreateAccountForm />,
-      },
-      {
-        path: "/chat",
-        element: <ChatPage />,
-      },
     ],
+  },
+
+  // NO BARS
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/social-login",
+    element: <SocialLogin />,
+  },
+  {
+    path: "/create-account",
+    element: <CreateAccountForm />,
+  },
+  {
+    path: "/chat",
+    element: <ChatPage />,
   },
 ]);
 
