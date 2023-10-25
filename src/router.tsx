@@ -7,24 +7,53 @@ import SocialLogin from "./pages/SocialLogin";
 import CreateAccountForm from "@/components/CreateAccountForm.tsx";
 import ChatPage from "@/pages/logged-in/ChatPage.tsx";
 import ProfilePage from "@/pages/logged-in/ProfilePage.tsx";
-import TopBarOnly from "@/components/shared/TopBarOnly.tsx";
-import BottomBarOnly from "@/components/shared/BottomBarOnly.tsx";
+import TopBarOnly from "@/layout/TopBarOnly.tsx";
+import BottomBarOnly from "@/layout/BottomBarOnly.tsx";
+import TopBottomBar from "@/layout/TopBottomBar.tsx";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <App/>,
     children: [
+      // TOP BAR, BOTTOM BAR
       {
-        path: "",
-        element: <HomePage/>,
+        element: <TopBottomBar />,
+        children: [
+          {
+            path: "",
+            element: <HomePage/>,
+          },
+          {
+            path: "search",
+            element: <SearchPage/>,
+          },
+        ]
       },
+
+      // TOP BAR ONLY
       {
-        path: "search",
-        element: <SearchPage/>,
+        element: <TopBarOnly />,
+        children: [
+          {
+            path: "profile",
+            element: <ProfilePage />,
+          },
+        ]
       },
+
+      // BOTTOM BAR ONLY
+      {
+        element: <BottomBarOnly />,
+        children: [
+
+        ]
+      },
+
     ],
   },
+
+  // NO BARS
   {
     path: "/login",
     element: <Login />,
@@ -40,23 +69,6 @@ export const router = createBrowserRouter([
   {
     path: "/chat",
     element: <ChatPage />,
-  },
-  {
-    path: "/",
-    element: <TopBarOnly />,
-    children: [
-      {
-        path: "profile",
-        element: <ProfilePage />,
-      },
-    ]
-  },
-  {
-    path: "/",
-    element: <BottomBarOnly />,
-    children: [
-
-    ]
   },
 ]);
 

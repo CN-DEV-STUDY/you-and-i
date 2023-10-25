@@ -7,19 +7,17 @@ import { ModalDialogProps } from "@mui/joy";
 import TopBar from "@/components/shared/TopBar.tsx";
 
 function App() {
-  const [layout, setLayout] = React.useState<
-    ModalDialogProps["layout"] | undefined
-  >(undefined);
+  // const [layout, setLayout] = React.useState<
+  //   ModalDialogProps["layout"] | undefined
+  // >(undefined);
 
   return (
     <>
       <GlobalStyles />
-      <TopBar />
       <Outlet />
-      <BottomBar setLayout={setLayout} />
-      {layout === "fullscreen" && (
-        <MuiModal layout={layout} setLayout={setLayout} />
-      )}
+      {/*{layout === "fullscreen" && (*/}
+      {/*  <MuiModal layout={layout} setLayout={setLayout} />*/}
+      {/*)}*/}
     </>
   );
 }
