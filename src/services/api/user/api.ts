@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '@/services/api/AxiosInterceptor';
 import {LoginRequest, SaveUserRequest} from "@/services/types/user/types.ts";
 
 export const saveUserRequest = async (data: SaveUserRequest) => {

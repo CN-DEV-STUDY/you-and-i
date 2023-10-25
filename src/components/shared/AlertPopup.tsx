@@ -6,20 +6,32 @@ import {
   CardTitle,
 } from "@/components/ui/Card"
 import {Button} from "@/components/ui/Button.tsx";
+import {useDispatch} from "react-redux";
+import {closeAlertPopup} from "@/slices/popup/alertPopupSlice.ts";
 
 type Props = {
-  message: string;
-  onClose: () => void;
+  title: string;
+  content: string;
+  onClose?: () => void;
 }
-const AlertPopup = ({ message, onClose }: Props) => {
+const AlertPopup = ({ title, content, onClose }: Props) => {
+  const dispatch = useDispatch();
+
+
+  if (!onClose) {
+    onClose = () => {
+      dispatch(closeAlertPopup());
+    }
+  }
+
   return (
-    <div className="z-10 w-full h-full backdrop-blur absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+    <div data-modal-backdrop="static" className="z-10 w-full h-full backdrop-blur-sm absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
       <Card className="w-4/5 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
         <CardHeader>
-          <CardTitle>축하합니다!</CardTitle>
+          <CardTitle>{title}</CardTitle>
         </CardHeader>
         <CardContent>
-          <p>{message}</p>
+          <p>{content}</p>
         </CardContent>
         <CardFooter>
           <Button className="w-full" onClick={onClose}>확인</Button>
