@@ -12,6 +12,7 @@ import { ClerkProvider } from "@clerk/clerk-react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import GlobalStyles from "@/Theme/GlobalStyles.ts";
 import Cookies from "js-cookie";
+import {COOKIE_NAME} from "@/services/types/user/types.ts";
 
 const { VITE_CLERK_PUBLISHABLE_KEY, VITE_BASE_URL } = import.meta.env;
 
@@ -21,7 +22,7 @@ axios.interceptors.request.use(
     (request) => {
         console.log(request);
         // Edit request config
-        const accessToken = Cookies.get("accessToken");
+        const accessToken = Cookies.get(COOKIE_NAME.ACCESS_TOKEN);
 
         try {
             if (accessToken) {

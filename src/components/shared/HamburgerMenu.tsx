@@ -2,14 +2,13 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel, DropdownMenuSeparator,
+  DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/DropdownMenu"
 import {GiHamburgerMenu} from "react-icons/gi";
 import {LogIn, LogOut, Settings, User, UserPlus} from "lucide-react";
 import useAuthorization from "@/hooks/useAuthorization.ts";
 import {useNavigate} from "react-router-dom";
-import {memo} from "react";
 
 const HamburgerMenu = () => {
   const { isLoggedIn, handleLogout } = useAuthorization();

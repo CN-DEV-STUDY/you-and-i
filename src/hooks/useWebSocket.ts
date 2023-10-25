@@ -1,6 +1,7 @@
 import { Client } from '@stomp/stompjs';
 import Cookies from "js-cookie";
 import {useEffect} from "react";
+import {COOKIE_NAME} from "@/services/types/user/types.ts";
 
 const useWebSocket = () => {
 
@@ -9,7 +10,7 @@ const useWebSocket = () => {
   const client = new Client({
     brokerURL: `ws://${VITE_BROKER_URL}/you-and-i-websocket`,
     connectHeaders: {
-      Authorization: 'Bearer ' + Cookies.get('accessToken'),
+      Authorization: 'Bearer ' + Cookies.get(COOKIE_NAME.ACCESS_TOKEN),
     },
     debug: function (str) {
       console.log(str);
