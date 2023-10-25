@@ -6,17 +6,11 @@ import React from "react";
 import {ModalDialogProps} from "@mui/joy";
 
 const BottomBarOnly = () => {
-  const [layout, setLayout] = React.useState<
-    ModalDialogProps["layout"] | undefined
-  >(undefined);
 
   return (
     <>
       <Outlet />
-      <BottomBar setLayout={setLayout} />
-      {layout === "fullscreen" && (
-        <MuiModal layout={layout} setLayout={setLayout} />
-      )}
+      <BottomBar />
     </>
   );
 }

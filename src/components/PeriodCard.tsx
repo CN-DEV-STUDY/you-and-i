@@ -5,6 +5,7 @@ import { getPeriod } from "@/services/api/period/api.ts";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store.ts";
 import { Button } from "@/components/ui/Button.tsx";
+import {toast, useToast} from "@/components/ui/use-toast"
 import { Plus } from "lucide-react";
 import CreatePeriod from "@/components/CreatePeriod.tsx";
 import Cookies from "js-cookie";
@@ -20,7 +21,7 @@ function PeriodCard() {
     const isLoggedIn = Cookies.get(COOKIE_NAME.IS_LOGGED_IN);
 
     // state
-    const [period, setPeriod] = useState<PeriodCardProps|string>({
+    const [period, setPeriod] = useState<PeriodCardProps>({
         period: 0,
         startedAt: "",
     });
@@ -32,7 +33,9 @@ function PeriodCard() {
     // event
     const onClick = () => {
         if (!isLoggedIn) {
-            alert("login is required!!");
+            toast({
+                description: "로그인 후 이용해주세요.",
+            })
             return;
         }
 
@@ -48,7 +51,10 @@ function PeriodCard() {
         const data = await getPeriod();
 
         if(data === '') {
-            setPeriod('')
+            setPeriod({
+                period: 0,
+                startedAt: "",
+            })
             return;
         }
 
@@ -76,7 +82,7 @@ function PeriodCard() {
             )}
             <Container>
                 <RoundCard>
-                    {(!isLoggedIn || period === '' )&& (
+                    {(!isLoggedIn || period.period === 0 )&& (
                         <Button
                             variant="outline"
                             className="h-14 bg-indigo-400 border-0 text-indigo-100 text-xl hover:bg-indigo-400 hover:text-indigo-100"
@@ -85,7 +91,7 @@ function PeriodCard() {
                             <Plus className="mr-2 h-6 w-6" /> Register Period
                         </Button>
                     )}
-                    {(isLoggedIn && period !== '') && (
+                    {(isLoggedIn && period.period !== 0) && (
                         <>
                             <Text fontWeight={"bold"} fontSize={24}>
                                 {period.period}일
