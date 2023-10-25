@@ -17,9 +17,6 @@ interface PeriodCardProps {
 
 function PeriodCard() {
     // global state
-    const isLoggedIn = useSelector(
-        (state: RootState) => state.login.isLoggedIn
-    );
     const isLoggedIn = Cookies.get(COOKIE_NAME.IS_LOGGED_IN);
 
     // state
