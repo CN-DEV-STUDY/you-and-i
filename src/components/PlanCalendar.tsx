@@ -10,7 +10,7 @@ import {
     TableHead,
     TableHeader,
     TableRow,
-} from "./ui/table";
+} from "./ui/Table";
 
 function PlanCalendar() {
     // state
