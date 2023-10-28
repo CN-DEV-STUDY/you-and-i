@@ -79,7 +79,7 @@ const ChatPage = () => {
 
   client.onConnect = function (frame) {
     activate();
-    client.subscribe('/topic/enter', (message) => {
+    client.subscribe('/queue/chat', (message) => {
       const chat = JSON.parse(message.body) as GetChatResponse;
       setMessages((prev) => [...prev, {
         sender: chat.sender,
@@ -95,7 +95,7 @@ const ChatPage = () => {
       return;
     }
 
-    publish("/app/chat", JSON.stringify({
+    publish("/publish/chat", JSON.stringify({
       email: email,
       chatRoomId: chatRoomId,
       message: inputRef.current.value
