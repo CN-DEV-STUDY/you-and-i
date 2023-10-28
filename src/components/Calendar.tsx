@@ -1,61 +1,75 @@
-import { TextField } from "@mui/material";
-import { DateCalendar } from "@mui/x-date-pickers";
+import styled from "styled-components";
+import { PlanCalendar } from "@/components/ui/PlanCalendar";
 import { useState } from "react";
+import CreatePlan from "./CreatePlan";
+import { Card, CardDescription } from "./ui/Card";
+import {Trash2} from "lucide-react";
 
 function Calendar() {
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-  const [plans, setPlans] = useState<{ [date: string]: string }>({});
-  const [planInput, setPlanInput] = useState<string>("");
-  const [showPlanForm, setShowPlanForm] = useState<boolean>(false);
+    // state
+    const [date, setDate] = useState<Date | undefined>(new Date());
+    const [open, setOpen] = useState<boolean>(false);
 
-  const handleDateChange = (date: Date | null) => {
-    setSelectedDate(date);
-  };
+    // event
+    const onSelect = (selectDate: Date) => {
+        // 날짜 더블 클릭하면 계획 추가 팝업 노출
+        if (selectDate === undefined || selectDate === date) {
+            setOpen(true);
+        } else {
+            setOpen(false);
+        }
 
-  const handlePlanChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPlanInput(e.target.value);
-  };
+        if (selectDate !== undefined) {
+            setDate(selectDate);
+        }
+    };
 
-  const handlePlanSubmit = () => {
-    if (selectedDate && planInput.trim() !== "") {
-      setPlans((prevPlans) => ({
-        ...prevPlans,
-        [selectedDate.toString()]: planInput,
-      }));
-      setPlanInput("");
-      setShowPlanForm(false);
-    }
-  };
-  return (
-    <>
-      <DateCalendar value={selectedDate} onChange={handleDateChange} />
-      {selectedDate && (
+    const onClose = () => {
+        setOpen(false);
+    };
+
+    return (
         <div>
-          <h3>선택한 날짜:</h3>
-          <p>{selectedDate.toString()}</p>
-          {showPlanForm ? (
-            <div>
-              <TextField
-                label="계획 입력"
-                variant="outlined"
-                value={planInput}
-                onChange={handlePlanChange}
-              />
-              <button onClick={handlePlanSubmit}>계획 저장</button>
-            </div>
-          ) : (
-            <button onClick={() => setShowPlanForm(true)}>계획 추가</button>
-          )}
+            <Container className="h-screen">
+                {open && <CreatePlan onClose={onClose} date={date} />}
+                <PlanCalendar
+                    mode="single"
+                    selected={date}
+                    onSelect={onSelect}
+                    className="border flex justify-center align-center h-90 w-full pt-7 pb-7"
+                    classNames={{
+                        month: "text-2xl",
+                    }}
+                />
+
+                <Card className="h-fit pl-9 py-2 flex justify-start items-center mx-5 mb-2.5 ">
+                    <div className="flex gap-4 items-center">
+                        <div className="w-1 bg-indigo-600 h-[30px]"></div>
+                        <CardDescription className="text-base w-[200px] mr-6">
+                            강남역 파이브 가이즈 점심 약속
+                        </CardDescription>
+                        <Trash2  className="w-[20px] h-[25px]"/>
+                    </div>
+                </Card>
+
+                <Card className="h-fit pl-9 py-2 flex justify-start items-center mx-5 mb-2.5">
+                    <div className="flex gap-4 items-center">
+                        <div className="w-1 bg-indigo-600 h-[30px]"></div>
+                        <CardDescription className="text-base w-[200px] mr-6">
+                            사당역 부추 삼겹살 삼겹살 삼겹살 삼겹살 사당역 부추 삼겹살 삼겹살 삼겹살 삼겹살
+                        </CardDescription>
+                        <Trash2  className="w-[20px] h-[25px]"/>
+                    </div>
+                </Card>
+            </Container>
         </div>
-      )}
-      {selectedDate && plans[selectedDate.toString()] && (
-        <div>
-          <h3>계획:</h3>
-          <p>{plans[selectedDate.toString()]}</p>
-        </div>
-      )}
-    </>
-  );
+    );
 }
 
 export default Calendar;
+
+// style
+const Container = styled.div`
+    width: 100%;
+    /* margin-bottom: 20px; */
+`;

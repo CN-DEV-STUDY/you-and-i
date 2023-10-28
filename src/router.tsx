@@ -1,4 +1,4 @@
-import {createBrowserRouter} from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import SearchPage from "./pages/logged-in/SearchPage";
 import HomePage from "./pages/logged-in/HomePage";
@@ -10,71 +10,66 @@ import ProfilePage from "@/pages/logged-in/ProfilePage.tsx";
 import TopBarOnly from "@/layout/TopBarOnly.tsx";
 import BottomBarOnly from "@/layout/BottomBarOnly.tsx";
 import TopBottomBar from "@/layout/TopBottomBar.tsx";
-import PlanCalendar from "@/components/PlanCalendar.tsx";
+import PlanCalendar from "@/components/Calendar";
 
 export const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App/>,
-    children: [
-      // TOP BAR, BOTTOM BAR
-      {
-        element: <TopBottomBar />,
+    {
+        path: "/",
+        element: <App />,
         children: [
-          {
-            path: "",
-            element: <HomePage/>,
-          },
-          {
-            path: "search",
-            element: <SearchPage/>,
-          },
-          {
-            path: "plan",
-            element: <PlanCalendar/>,
-          },
-        ]
-      },
+            // TOP BAR, BOTTOM BAR
+            {
+                element: <TopBottomBar />,
+                children: [
+                    {
+                        path: "",
+                        element: <HomePage />,
+                    },
+                    {
+                        path: "search",
+                        element: <SearchPage />,
+                    },
+                    {
+                        path: "plan",
+                        element: <PlanCalendar />,
+                    },
+                ],
+            },
 
-      // TOP BAR ONLY
-      {
-        element: <TopBarOnly />,
-        children: [
-          {
-            path: "profile",
-            element: <ProfilePage />,
-          },
-        ]
-      },
+            // TOP BAR ONLY
+            {
+                element: <TopBarOnly />,
+                children: [
+                    {
+                        path: "profile",
+                        element: <ProfilePage />,
+                    },
+                ],
+            },
 
-      // BOTTOM BAR ONLY
-      {
-        element: <BottomBarOnly />,
-        children: [
+            // BOTTOM BAR ONLY
+            {
+                element: <BottomBarOnly />,
+                children: [],
+            },
+        ],
+    },
 
-        ]
-      },
-
-    ],
-  },
-
-  // NO BARS
-  {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/social-login",
-    element: <SocialLogin />,
-  },
-  {
-    path: "/create-account",
-    element: <CreateAccountForm />,
-  },
-  {
-    path: "/chat",
-    element: <ChatPage />,
-  },
+    // NO BARS
+    {
+        path: "/login",
+        element: <Login />,
+    },
+    {
+        path: "/social-login",
+        element: <SocialLogin />,
+    },
+    {
+        path: "/create-account",
+        element: <CreateAccountForm />,
+    },
+    {
+        path: "/chat",
+        element: <ChatPage />,
+    },
 ]);
-
-

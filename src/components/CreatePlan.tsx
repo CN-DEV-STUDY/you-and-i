@@ -52,7 +52,7 @@ function CreatePlan({ onClose, date }: Props) {
     // method
     function onSubmit(data: z.infer<typeof FormSchema>) {
         const formattedStartDate = format(data.startDate, "yyyy-MM-dd");
-        const formattedEndDate = format(data.startDate, "yyyy-MM-dd");
+        const formattedEndDate = format(endDate, "yyyy-MM-dd");
 
         toast({
             title: "You submitted the following values:",
@@ -71,8 +71,8 @@ function CreatePlan({ onClose, date }: Props) {
     };
 
     return (
-        <Container>
-            <Card className="w-[350px] pt-3 pb-3">
+        <Container className="rounded-lg">
+            <Card className="w-[350px] pt-3 pb-3 ">
                 <CardContent className=" p-6 flex justify-center">
                     <Form {...form}>
                         <form
