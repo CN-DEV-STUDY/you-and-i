@@ -1,3 +1,11 @@
+export const COOKIE_NAME = {
+  ACCESS_TOKEN : "ACCESS_TOKEN",
+  IS_LOGGED_IN : "IS_LOGGED_IN",
+  EMAIL: "EMAIL",
+  CHAT_ROOM_ID: "CHAT_ROOM_ID",
+} as const;
+export type COOKIE_NAME = typeof COOKIE_NAME[keyof typeof COOKIE_NAME];
+
 export interface Jwt {
   exp: number;
   iat: number;
@@ -18,11 +26,13 @@ export interface LoginRequest {
   rememberMe: boolean,
 }
 
+export interface FindUserRequest {
+  searchType: string,
+  searchWord: string,
+  page: number
+}
 
-export const COOKIE_NAME = {
-  ACCESS_TOKEN : "ACCESS_TOKEN",
-  IS_LOGGED_IN : "IS_LOGGED_IN",
-  EMAIL: "EMAIL",
-  CHAT_ROOM_ID: "CHAT_ROOM_ID",
-} as const;
-export type COOKIE_NAME = typeof COOKIE_NAME[keyof typeof COOKIE_NAME]; // 'iOS' | 'Android'
+export interface SearchUserResponse {
+  nickname: string
+  email: string
+}
