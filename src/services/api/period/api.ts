@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "@/services/api/AxiosInterceptor";
 
 export const savePeriodRequest = async (startedAt: string) => {
     const { data } = await axios.post(`/period?startedAt=${startedAt}`);
