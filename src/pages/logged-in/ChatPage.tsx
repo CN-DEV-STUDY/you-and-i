@@ -1,4 +1,5 @@
 import * as React from "react"
+import {useEffect, useMemo, useRef} from "react"
 import {Send} from "lucide-react"
 
 import {cn} from "@/lib/utils"
@@ -7,13 +8,11 @@ import {Button} from "@/components/ui/Button"
 import {Card, CardContent, CardFooter, CardHeader,} from "@/components/ui/Card"
 import {Input} from "@/components/ui/Input"
 import useWebSocket from "@/hooks/useWebSocket.ts";
-import {useEffect, useMemo, useRef} from "react";
-import axios from "axios";
 import {saveUserRequest} from "@/services/api/chat/api.ts";
-import {useQuery} from "@tanstack/react-query";
 import {GetChatResponse} from "@/services/types/chat/types.ts";
 import Cookies from "js-cookie";
 import {COOKIE_NAME} from "@/services/types/user/types.ts";
+import {ScrollArea} from "@/components/ui/ScrollArea.tsx";
 
 const users = [
   {
@@ -74,12 +73,12 @@ const ChatPage = () => {
   }, []);
 
   useEffect(() => {
-    messageEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    messageEndRef.current.scrollIntoView({behavior: 'smooth'});
   }, [messages]);
 
   client.onConnect = function (frame) {
     activate();
-    client.subscribe('/queue/chat', (message) => {
+    client.subscribe(`/queue/chat/${chatRoomId}`, (message) => {
       const chat = JSON.parse(message.body) as GetChatResponse;
       setMessages((prev) => [...prev, {
         sender: chat.sender,
@@ -95,7 +94,7 @@ const ChatPage = () => {
       return;
     }
 
-    publish("/publish/chat", JSON.stringify({
+    publish(`/publish/chat/${chatRoomId}`, JSON.stringify({
       email: email,
       chatRoomId: chatRoomId,
       message: inputRef.current.value
@@ -106,14 +105,13 @@ const ChatPage = () => {
     }
   }
 
-  console.log("messages", messages)
   return (
     <>
-      <Card>
+      <Card className="rounded-none h-screen">
         <CardHeader className="flex flex-row items-center">
           <div className="flex items-center space-x-4">
             <Avatar>
-              <AvatarImage src="/avatars/01.png" alt="Image" />
+              <AvatarImage src="/avatars/01.png" alt="Image"/>
               <AvatarFallback>OM</AvatarFallback>
             </Avatar>
             <div>
@@ -122,26 +120,28 @@ const ChatPage = () => {
             </div>
           </div>
         </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            {messages.map((message, index) => (
-              <div
-                key={index}
-                className={cn(
-                  "flex w-max max-w-[75%] flex-col gap-2 rounded-lg px-3 py-2 text-sm",
-                  message.sender === email
-                    ? "ml-auto bg-primary text-primary-foreground"
-                    : "bg-muted"
-                )}
-              >
-                {message.content}
-              </div>
+        <ScrollArea className="h-4/5">
+          <CardContent>
+            <div className="space-y-4">
+              {messages.map((message, index) => (
+                <div
+                  key={index}
+                  className={cn(
+                    "flex w-max max-w-[75%] flex-col gap-2 rounded-lg px-3 py-2 text-sm",
+                    message.sender === email
+                      ? "ml-auto bg-primary text-primary-foreground"
+                      : "bg-muted"
+                  )}
+                >
+                  {message.content}
+                </div>
 
-            ))}
-          </div>
-          <div ref={messageEndRef}></div>
-        </CardContent>
-        <CardFooter>
+              ))}
+            </div>
+            <div ref={messageEndRef}></div>
+          </CardContent>
+        </ScrollArea>
+        <CardFooter className="mt-auto mb-0">
           <form
             onSubmit={(e) => onSendMessage(e)}
             className="flex w-full items-center space-x-2"
@@ -154,7 +154,7 @@ const ChatPage = () => {
               ref={inputRef}
             />
             <Button size="icon">
-              <Send className="h-4 w-4" />
+              <Send className="h-4 w-4"/>
               <span className="sr-only">Send</span>
             </Button>
           </form>

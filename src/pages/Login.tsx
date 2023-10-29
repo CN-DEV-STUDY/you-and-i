@@ -62,10 +62,6 @@ const Login = () => {
     }
   })
 
-  const onRememberMeChange = (checked: boolean) => {
-    console.log(checked)
-  }
-
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit((form) => submit(form))}>
@@ -135,9 +131,7 @@ const Login = () => {
                     className="flex flex-row items-start space-x-3 space-y-0 mb-5"
                   >
                     <FormControl>
-                      <Checkbox
-                        onCheckedChange={onRememberMeChange}
-                      />
+                      <Checkbox />
                     </FormControl>
                     <FormLabel className="font-normal">
                       로그인 상태 유지

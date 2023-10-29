@@ -1,7 +1,7 @@
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useFieldArray, useForm } from "react-hook-form"
+import {zodResolver} from "@hookform/resolvers/zod"
+import {useFieldArray, useForm} from "react-hook-form"
 import * as z from "zod"
-import { cn } from "@/lib/utils"
+import {cn} from "@/lib/utils.ts"
 import {
   Form,
   FormControl,
@@ -10,14 +10,13 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/Form"
-import { Input } from "@/components/ui/Input"
-import { Textarea } from "@/components/ui/Textarea"
+} from "@/components/ui/Form.tsx"
+import {Input} from "@/components/ui/Input.tsx"
+import {Textarea} from "@/components/ui/Textarea.tsx"
 import {toast} from "@/components/ui/use-toast.ts";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/Select.tsx";
 import {Link} from "react-router-dom";
 import {Button} from "@/components/ui/Button.tsx";
-import FindYouForm from "@/components/domain/profile/FindYouForm.tsx";
 
 const profileFormSchema = z.object({
   username: z

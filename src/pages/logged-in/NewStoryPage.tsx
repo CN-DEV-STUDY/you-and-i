@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import profilImg from "../assets/sanibell-bv-xvOML5tdKMk-unsplash.jpg";
+import profileImg from "../../assets/sanibell-bv-xvOML5tdKMk-unsplash.jpg";
 import {Avatar} from "@mui/joy";
-import React, { useEffect, useRef, useState } from "react";
-import { MdAttachFile } from "react-icons/md";
+import React, {useEffect, useRef, useState} from "react";
+import {MdAttachFile} from "react-icons/md";
 import {Textarea} from "@/components/ui/Textarea.tsx";
 import {Input} from "@/components/ui/Input.tsx";
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
+import {zodResolver} from "@hookform/resolvers/zod"
+import {useForm} from "react-hook-form"
 import * as z from "zod"
 import {Form, FormControl, FormField, FormItem} from "@/components/ui/Form.tsx";
 import {Button} from "@/components/ui/Button.tsx";
@@ -14,31 +14,26 @@ import {Loader2} from "lucide-react";
 import {Label} from "@/components/ui/Label.tsx";
 import autosize from "autosize";
 import {saveStoryRequest} from "@/services/api/story/api.ts";
+import {Card, CardContent, CardFooter, CardHeader} from "@/components/ui/Card.tsx";
+import {Link} from "react-router-dom";
+import {Icons} from "@/components/Icons.tsx";
+import useAutoFocus from "@/hooks/useAutoFocus.ts";
 
 const formSchema = z.object({
   content: z.string().min(1).max(50),
 })
 
-const NewStory = () => {
+const NewStoryPage = () => {
   // state
   const [file, setFile] = useState<File | null>(null);
   const [previewURL, setPreviewURL] = useState<string>("");
   const [disabled, setDisabled] = useState<boolean>(false);
 
   // ref
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const textareaRef = useAutoFocus(useRef<HTMLTextAreaElement>(null));
   const fileRef = useRef<HTMLInputElement>(null);
+  // useAutoFocus(textareaRef);
 
-  // textarea에 autosize 적용
-  // @ts-ignore
-  autosize(textareaRef.current);
-
-  // 컴포넌트가 마운트되면 textarea에 포커스
-  useEffect(() => {
-    if (textareaRef.current) {
-      textareaRef.current.focus();
-    }
-  }, []);
 
   const onFileClick = () => {
     if (fileRef.current) {
@@ -85,59 +80,68 @@ const NewStory = () => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <Grid>
-          <div className="h-full">
-            <Avatar alt="Something when wrong" src={profilImg} />
-            <VerticalLine />
-          </div>
-          <FormField
-            control={form.control}
-            name="content"
-            render={({ field }) => (
-              <FormItem>
-                <Label className="font-bold">호날두</Label>
-                <FormControl>
-                  <Textarea
-                    {...field}
-                    ref={textareaRef}
-                    name="content"
-                    placeholder="Start a new story"
-                    className="border-transparent min-h-[20px] overflow-visible px-0 py-0 focus-border-transparent focus-visible:outline-none focus-visible:right-0 focus-visible:ring-transparent focus-visible:ring-offset-0 focus:ring-0"
-                  />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-          {file ? (
-            <ImageContainer>
-              <img src={previewURL} width="95%" alt="cannot upload an image" />
-            </ImageContainer>
-          ) : (
-            <MdAttachFile onClick={onFileClick} />
-          )}
-        </Grid>
-        <Input
-          type="file"
-          name="image"
-          hidden
-          ref={fileRef}
-          onChange={(e) => onFileChange(e)}
-          value=""
-        />
-        <Button disabled={disabled} className="float-right mt-8">
-          {disabled ?
-            <>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin"/>LOADING...
-            </>
-            : "Upload"
-          }
-        </Button>
+        <Card className="rounded-none h-screen pt-[1vh]">
+          <CardHeader className="float-right">
+            <Link to="/"><Icons.close/></Link>
+          </CardHeader>
+          <CardContent className="grid gap-4">
+            <Grid>
+              <div className="h-full">
+                <Avatar alt="Something when wrong" src={profileImg} />
+                <VerticalLine />
+              </div>
+              <FormField
+                control={form.control}
+                name="content"
+                render={({ field }) => (
+                  <FormItem>
+                    <Label className="font-bold">호날두</Label>
+                    <FormControl>
+                      <Textarea
+                        {...field}
+                        ref={textareaRef}
+                        name="content"
+                        placeholder="Start a new story"
+                        className="border-transparent min-h-[20px] overflow-visible px-0 py-0 focus-border-transparent focus-visible:outline-none focus-visible:right-0 focus-visible:ring-transparent focus-visible:ring-offset-0 focus:ring-0"
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+              {file ? (
+                <ImageContainer>
+                  <img src={previewURL} width="95%" alt="cannot upload an image" />
+                </ImageContainer>
+              ) : (
+                <MdAttachFile onClick={onFileClick} />
+              )}
+            </Grid>
+            <Input
+              type="file"
+              name="image"
+              hidden
+              ref={fileRef}
+              onChange={(e) => onFileChange(e)}
+              value=""
+            />
+          </CardContent>
+          <CardFooter className="float-right">
+            <Button disabled={disabled} className="float-right mt-8">
+              {disabled ?
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin"/>LOADING...
+                </>
+                : "Upload"
+              }
+            </Button>
+          </CardFooter>
+        </Card>
       </form>
     </Form>
   );
 };
 
-export default NewStory;
+export default NewStoryPage;
 
 // style
 const Grid = styled.div`

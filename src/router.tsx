@@ -11,6 +11,7 @@ import TopBarOnly from "@/layout/TopBarOnly.tsx";
 import BottomBarOnly from "@/layout/BottomBarOnly.tsx";
 import TopBottomBar from "@/layout/TopBottomBar.tsx";
 import PlanCalendar from "@/components/Calendar";
+import NewStoryPage from "@/pages/logged-in/NewStoryPage.tsx";
 
 export const router = createBrowserRouter([
     {
@@ -63,6 +64,10 @@ export const router = createBrowserRouter([
     {
         path: "/social-login",
         element: <SocialLogin />,
+    },
+    {
+        path: "/new-story",
+        element: <NewStoryPage />
     },
     {
         path: "/create-account",

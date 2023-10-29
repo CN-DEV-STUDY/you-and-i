@@ -1,7 +1,7 @@
 import { Button, Modal, ModalDialog, ModalDialogProps } from "@mui/joy";
 import styled from "styled-components";
 import Title from "./ui/Title";
-import NewStory from "./NewStory.tsx";
+import NewStoryPage from "../pages/logged-in/NewStoryPage.tsx";
 
 type MuiModalProps = {
   layout: ModalDialogProps["layout"] | undefined;
@@ -32,7 +32,7 @@ const MuiModal = ({ layout, setLayout }: MuiModalProps) => {
           <Title type="secondary" content="New Story" color="black" />
         </ModalHeader>
 
-        <NewStory />
+        <NewStoryPage />
 
       </ModalDialog>
     </Modal>

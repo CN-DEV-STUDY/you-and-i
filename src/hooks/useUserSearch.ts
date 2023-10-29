@@ -10,6 +10,7 @@ const useUserSearch = (searchType: string, searchWord: string, pageNumber: numbe
   const [hasMore, setHasMore] = useState(false);
 
   useEffect(() => {
+    pageNumber = 0;
     setUsers([]);
   }, [searchType, searchWord]);
 
@@ -27,10 +28,11 @@ const useUserSearch = (searchType: string, searchWord: string, pageNumber: numbe
       },
       cancelToken: new axios.CancelToken(c => cancel = c)
     }).then((response) => {
-      setUsers(prevUsers =>[...prevUsers, ...response.data.data]);
+      setUsers(prevUsers => {
+        return [...new Set([...prevUsers, ...response.data.data])]
+      });
       setHasMore(!response.data.pagination.last);
       setLoading(false);
-      console.log(response.data);
     }).catch((error) => {
       if (error.isCancel) return;
       setError(true);

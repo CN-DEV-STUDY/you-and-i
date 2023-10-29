@@ -1,4 +1,4 @@
-import {ProfileForm} from "@/components/ProfileForm.tsx";
+import {ProfileForm} from "@/components/domain/profile/ProfileForm.tsx";
 import TopBar from "@/components/shared/TopBar.tsx";
 import FindYouForm from "@/components/domain/profile/FindYouForm.tsx";
 

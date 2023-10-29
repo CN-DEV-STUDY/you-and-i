@@ -17,12 +17,11 @@ const BottomBar = () => {
       <Link to="/search">
         <HiOutlineSearch />
       </Link>
-        <Button
-          variant="outlined"
-          color="neutral"
-        >
-          <AiOutlinePlus />
-        </Button>
+        {/*<Button variant="outlined" color="neutral">*/}
+      <Link to="/new-story">
+        <AiOutlinePlus />
+      </Link>
+        {/*</Button>*/}
       <Link to="/plan">
         <BsCalendar2Minus />
       </Link>

@@ -26,13 +26,12 @@ export interface LoginRequest {
   rememberMe: boolean,
 }
 
-export interface FindUserRequest {
-  searchType: string,
-  searchWord: string,
-  page: number
-}
-
 export interface SearchUserResponse {
   nickname: string
   email: string
+}
+
+export interface SetUserRelationShipRequest {
+  myEmail: string,
+  yourEmail: string,
 }
