@@ -53,28 +53,28 @@ export const router = createBrowserRouter([
                 element: <BottomBarOnly />,
                 children: [],
             },
-        ],
-    },
 
-    // NO BARS
-    {
-        path: "/login",
-        element: <Login />,
-    },
-    {
-        path: "/social-login",
-        element: <SocialLogin />,
-    },
-    {
-        path: "/new-story",
-        element: <NewStoryPage />
-    },
-    {
-        path: "/create-account",
-        element: <CreateAccountForm />,
-    },
-    {
-        path: "/chat",
-        element: <ChatPage />,
+            // NO BARS
+            {
+                path: "/login",
+                element: <Login />,
+            },
+            {
+                path: "/social-login",
+                element: <SocialLogin />,
+            },
+            {
+                path: "/new-story",
+                element: <NewStoryPage />
+            },
+            {
+                path: "/create-account",
+                element: <CreateAccountForm />,
+            },
+            {
+                path: "/chat",
+                element: <ChatPage />,
+            },
+        ],
     },
 ]);

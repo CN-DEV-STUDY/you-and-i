@@ -17,11 +17,9 @@ type Props = {
 const AlertPopup = ({ title, content, onClose }: Props) => {
   const dispatch = useDispatch();
 
-
-  if (!onClose) {
-    onClose = () => {
-      dispatch(closeAlertPopup());
-    }
+  const onCloseHandler = () => {
+    dispatch(closeAlertPopup());
+    onClose();
   }
 
   return (
@@ -34,7 +32,7 @@ const AlertPopup = ({ title, content, onClose }: Props) => {
           <p>{content}</p>
         </CardContent>
         <CardFooter>
-          <Button className="w-full" onClick={onClose}>확인</Button>
+          <Button className="w-full" onClick={onCloseHandler}>확인</Button>
         </CardFooter>
       </Card>
     </div>
