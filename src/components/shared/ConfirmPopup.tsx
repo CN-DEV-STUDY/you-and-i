@@ -3,30 +3,38 @@ import {
   AlertDialogContent, AlertDialogDescription, AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger
 } from "@/components/ui/AlertDialog.tsx";
 
 type Props = {
-  trigger: React.ReactNode;
+  open: boolean;
   title: string;
+  content: string;
+  onClose?: () => void;
+  onConfirm?: () => void;
 }
 
-const ConfirmPopup = ({trigger, title}: Props) => {
+const ConfirmPopup = ({open, title, content, onClose, onConfirm}: Props) => {
+
+  const closeHandler = () => {
+    open = false;
+    onClose();
+  }
+
+  const confirmHandler = () => {
+    open = false;
+    onConfirm();
+  }
 
   return (
-    <AlertDialog>
-      <AlertDialogTrigger asChild>{trigger}</AlertDialogTrigger>
+    <AlertDialog open={open}>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>{title}</AlertDialogTitle>
-          <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete your account
-            and remove your data from our servers.
-          </AlertDialogDescription>
+          <AlertDialogTitle className="text-black">{title}</AlertDialogTitle>
+          <AlertDialogDescription>{content}</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction>Continue</AlertDialogAction>
+          <AlertDialogCancel onClick={closeHandler}>취소</AlertDialogCancel>
+          <AlertDialogAction onClick={confirmHandler}>확인</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

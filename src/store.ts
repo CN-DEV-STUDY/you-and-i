@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import loginReducer from '@/slices/user/loginSlice'
 import alertPopupReducer from '@/slices/popup/alertPopupSlice'
+import confirmPopupReducer from '@/slices/popup/confirmPopupSlice'
 
 export const store = configureStore({
     reducer: {
         login: loginReducer,
         alertPopup: alertPopupReducer,
+        confirmPopup: confirmPopupReducer,
     },
 })
 
