@@ -1,5 +1,5 @@
 import axios from '@/services/api/AxiosInterceptor';
-import {LoginRequest, SaveUserRequest, FindUserRequest} from "@/services/types/user/types.ts";
+import {LoginRequest, SaveUserRequest, SetUserRelationShipRequest } from "@/services/types/user/types.ts";
 
 export const saveUserRequest = async (data: SaveUserRequest) => {
   const response = await axios.post('/users', data);
@@ -11,8 +11,7 @@ export const loginRequest = async (data: LoginRequest) => {
   return response.data;
 }
 
-export const findUserRequest = async (data: FindUserRequest) => {
-  const queryString = new URLSearchParams(data.toString());
-  const response = await axios.get(`/users/search?${queryString}`);
-  return response.data.data;
+export const relationShipRequest = async (data: SetUserRelationShipRequest) => {
+  const response = await axios.post('/users/relations', data);
+  return response.data;
 }

@@ -7,6 +7,7 @@ import {Separator} from "@/components/ui/Separator";
 import {useCallback, useRef, useState} from "react";
 import useUserSearch from "@/hooks/useUserSearch.ts";
 import SearchUserCard from "@/components/domain/user/SearchUserCard.tsx";
+import {Skeleton} from "@/components/ui/Skeleton";
 
 type User = {
   nickname: string;
@@ -15,14 +16,14 @@ type User = {
 
 const findYouForm = () => {
   const [searchType, setSearchType] = useState("EMAIL");
-  const inputRef = useRef<HTMLInputElement>(null);
-  const [pageNumber, setPageNumber] = useState(1);
+  const [searchWord, setSearchWord] = useState("");
+  const [pageNumber, setPageNumber] = useState(0);
   const {
     users,
     loading,
     error,
     hasMore
-  } = useUserSearch(searchType, inputRef.current?.value, pageNumber);
+  } = useUserSearch(searchType, searchWord, pageNumber);
 
   const observer = useRef<IntersectionObserver>();
   const lastUserElementRef = useCallback((node) => {
@@ -35,13 +36,9 @@ const findYouForm = () => {
     })
     if (node) observer.current.observe(node);
   }, [loading, hasMore]);
-  const onSearch = () => {
-    setPageNumber(0);
-  }
-
 
   return (
-    <Dialog open>
+    <Dialog>
       <p className="text-[--color__white]">상대방을 등록하고 you and i를 시작해보세요.</p>
       <DialogTrigger asChild>
         <Button variant="outline">상대방 등록하기</Button>
@@ -50,7 +47,7 @@ const findYouForm = () => {
         <div className="flex flex-col gap-2 mt-6">
           <Select defaultValue="EMAIL" onValueChange={setSearchType}>
             <SelectTrigger className="w-full">
-              <SelectValue placeholder="검색 조건을 선택해주세요."/>
+              <SelectValue placeholder="검색 조건을 선택해주세요." />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
@@ -63,12 +60,10 @@ const findYouForm = () => {
           <div className="flex gap-2">
             <Input
               id="name"
-              defaultValue=""
-              className="w-4/5"
               placeholder="검색어를 입력해주세요."
-              ref={inputRef}
+              value={searchWord}
+              onChange={(e) => setSearchWord(e.target.value)}
             />
-            <Button onClick={onSearch} className="w-1/5">검색</Button>
           </div>
           <Separator className="my-1"/>
           <div className="h-screen overflow-hidden">
@@ -76,10 +71,20 @@ const findYouForm = () => {
               <div className="space-y-4">
                 {users.map((user: User, index: number) => {
                   return (users.length === index + 1)
-                    ? <SearchUserCard user={user} lastUserElementRef={lastUserElementRef}/>
-                    : <SearchUserCard user={user}/>
+                    ? <SearchUserCard key={user.email} user={user} lastUserElementRef={lastUserElementRef} />
+                    : <SearchUserCard  key={user.email} user={user}/>
                 })}
-                {loading && <div>Loading...</div>}
+                {loading &&
+                  Array.from({length: 10}).map((_, index) => (
+                    <div className="flex items-center space-x-4">
+                      <Skeleton className="h-12 w-12 rounded-full"/>
+                      <div className="space-y-2">
+                        <Skeleton className="h-4 w-[250px]"/>
+                        <Skeleton className="h-4 w-[200px]"/>
+                      </div>
+                    </div>
+                  ))
+                }
                 {error && <div>Error</div>}
               </div>
             </ScrollArea>
