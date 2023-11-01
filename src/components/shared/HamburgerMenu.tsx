@@ -6,26 +6,32 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/DropdownMenu"
 import {GiHamburgerMenu} from "react-icons/gi";
-import {LogIn, LogOut, Settings, User, UserPlus} from "lucide-react";
+import {BellRing, LogIn, LogOut, Settings, User, UserPlus} from "lucide-react";
 import useAuthorization from "@/hooks/useAuthorization.ts";
 import {useNavigate} from "react-router-dom";
+import HasNoticeMark from "@/components/domain/notice/HasNoticeMark.tsx";
 
-const HamburgerMenu = () => {
+type Props = {
+  unreadNoticeCount: number;
+}
+
+const HamburgerMenu = ({ unreadNoticeCount }: Props) => {
   const { isLoggedIn, handleLogout } = useAuthorization();
+
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>
+      <DropdownMenuTrigger className="relative">
         <GiHamburgerMenu
           size={24}
-          color="var(--color__white)"
-        />
+          color="var(--color__white)" />
+        {unreadNoticeCount > 0 && <HasNoticeMark />}
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align="end"
         alignOffset={-10}
         className="bg-[--color__primary] shadow-2xl shadow-amber-50/30 text-[--color__white]"
       >
-      {isLoggedIn ? <LoggedInMenu onLogout={handleLogout} /> : <LoggedOutMenu />}
+      {isLoggedIn ? <LoggedInMenu onLogout={handleLogout} unreadNoticeCount={unreadNoticeCount} /> : <LoggedOutMenu />}
     </DropdownMenuContent>
     </DropdownMenu>
   )
@@ -35,17 +41,23 @@ export default HamburgerMenu;
 
 type LoggedInMenuProps = {
   onLogout: () => void;
+  unreadNoticeCount: number;
 };
 
-const LoggedInMenu = ({onLogout}: LoggedInMenuProps) => {
+const LoggedInMenu = ({onLogout, unreadNoticeCount}: LoggedInMenuProps) => {
   const navigate = useNavigate();
+
   return (
     <>
       <DropdownMenuItem onClick={() => navigate("/profile")}>
         <User className="mr-2 h-4 w-4" />
         <DropdownMenuLabel>Profile</DropdownMenuLabel>
       </DropdownMenuItem>
-      <DropdownMenuItem onClick={() => navigate("/settings")}>
+      <DropdownMenuItem onClick={() => navigate("/")}>
+        <BellRing className="mr-2 h-4 w-4" />
+        <DropdownMenuLabel>Notification({unreadNoticeCount})</DropdownMenuLabel>
+      </DropdownMenuItem>
+      <DropdownMenuItem onClick={() => navigate("/")}>
         <Settings className="mr-2 h-4 w-4" />
         <DropdownMenuLabel>Settings</DropdownMenuLabel>
       </DropdownMenuItem>
