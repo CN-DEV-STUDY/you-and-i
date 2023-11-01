@@ -35,3 +35,8 @@ export interface SetUserRelationShipRequest {
   myEmail: string,
   yourEmail: string,
 }
+
+export interface SendRelationsNoticeRequest {
+  sender: string,
+  receiver: string,
+}

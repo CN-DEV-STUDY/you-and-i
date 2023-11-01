@@ -2,9 +2,10 @@ import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/Avatar.tsx";
 import {Button} from "@/components/ui/Button.tsx";
 import {COOKIE_NAME, SearchUserResponse} from "@/services/types/user/types.ts";
 import {useMutation} from "@tanstack/react-query";
-import {relationShipRequest} from "@/services/api/user/api.ts";
+import {sendRelationsNoticeRequest} from "@/services/api/user/api.ts";
 import Cookies from "js-cookie";
-
+import {useDispatch} from "react-redux";
+import {openConfirmPopup} from "@/slices/popup/confirmPopupSlice.ts";
 
 type Props = {
   user: SearchUserResponse;
@@ -12,20 +13,24 @@ type Props = {
 }
 
 const SearchUserCard = ({user, lastUserElementRef}: Props) => {
+  const dispatch = useDispatch();
+
   const {mutate, isPending} = useMutation({
-    mutationFn: relationShipRequest,
+    mutationFn: sendRelationsNoticeRequest,
     onSuccess: (data) => {
       console.log(data);
     }
   });
 
   const setRelation = () => {
-
-
-    mutate({
-      myEmail: Cookies.get(COOKIE_NAME.EMAIL),
-      yourEmail: user.email
-    });
+    dispatch(
+      openConfirmPopup({
+          title: "상대방을 등록하시겠습니까?",
+          content: "상대방에게 알림을 보냅니다.",
+          onConfirm: () => mutate({sender: Cookies.get(COOKIE_NAME.EMAIL), receiver: user.email})
+        }
+      )
+    );
   }
 
   return (

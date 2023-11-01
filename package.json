@@ -49,6 +49,7 @@
         "date-fns": "^2.30.0",
         "dayjs": "^1.11.10",
         "env-cmd": "^10.1.0",
+        "event-source-polyfill": "^1.0.31",
         "js-cookie": "^3.0.5",
         "jwt-decode": "^3.1.2",
         "localforage": "^1.10.0",

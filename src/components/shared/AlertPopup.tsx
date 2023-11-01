@@ -17,15 +17,13 @@ type Props = {
 const AlertPopup = ({ title, content, onClose }: Props) => {
   const dispatch = useDispatch();
 
-
-  if (!onClose) {
-    onClose = () => {
-      dispatch(closeAlertPopup());
-    }
+  const closeHandler = () => {
+    dispatch(closeAlertPopup());
+    onClose && onClose();
   }
 
   return (
-    <div data-modal-backdrop="static" className="z-10 w-full h-full backdrop-blur-sm absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+    <div data-modal-backdrop="static" className="w-full h-full backdrop-blur-sm absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
       <Card className="w-4/5 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
         <CardHeader>
           <CardTitle>{title}</CardTitle>
@@ -34,7 +32,7 @@ const AlertPopup = ({ title, content, onClose }: Props) => {
           <p>{content}</p>
         </CardContent>
         <CardFooter>
-          <Button className="w-full" onClick={onClose}>확인</Button>
+          <Button className="w-full" onClick={closeHandler}>확인</Button>
         </CardFooter>
       </Card>
     </div>

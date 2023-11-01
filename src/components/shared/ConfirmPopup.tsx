@@ -1,32 +1,47 @@
 import {
-  AlertDialog, AlertDialogAction, AlertDialogCancel,
-  AlertDialogContent, AlertDialogDescription, AlertDialogFooter,
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger
 } from "@/components/ui/AlertDialog.tsx";
+import {useDispatch} from "react-redux";
+import {closeConfirmPopup} from "@/slices/popup/confirmPopupSlice.ts";
 
 type Props = {
-  trigger: React.ReactNode;
+  open: boolean;
   title: string;
+  content: string;
+  onClose?: () => void;
+  onConfirm?: () => void;
 }
 
-const ConfirmPopup = ({trigger, title}: Props) => {
+const ConfirmPopup = ({open, title, content, onClose, onConfirm}: Props) => {
+  const dispatch = useDispatch();
+
+  const closeHandler = () => {
+    dispatch(closeConfirmPopup());
+    onClose && onClose();
+  }
+
+  const confirmHandler = () => {
+    dispatch(closeConfirmPopup());
+    onConfirm && onConfirm();
+  }
 
   return (
-    <AlertDialog>
-      <AlertDialogTrigger asChild>{trigger}</AlertDialogTrigger>
-      <AlertDialogContent>
+    <AlertDialog open={open}>
+      <AlertDialogContent className="w-11/12 rounded shadow-gray-950">
         <AlertDialogHeader>
-          <AlertDialogTitle>{title}</AlertDialogTitle>
-          <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete your account
-            and remove your data from our servers.
-          </AlertDialogDescription>
+          <AlertDialogTitle className="text-black">{title}</AlertDialogTitle>
+          <AlertDialogDescription>{content}</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction>Continue</AlertDialogAction>
+          <AlertDialogCancel onClick={closeHandler}>취소</AlertDialogCancel>
+          <AlertDialogAction onClick={confirmHandler}>확인</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

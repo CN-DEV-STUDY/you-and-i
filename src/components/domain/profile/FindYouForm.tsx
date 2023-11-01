@@ -67,7 +67,7 @@ const findYouForm = () => {
           </div>
           <Separator className="my-1"/>
           <div className="h-screen overflow-hidden">
-            <ScrollArea className="h-5/6 w-full">
+            <ScrollArea className="h-3/6 w-full">
               <div className="space-y-4">
                 {users.map((user: User, index: number) => {
                   return (users.length === index + 1)

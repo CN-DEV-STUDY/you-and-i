@@ -48,7 +48,7 @@ const CreateAccountForm = () => {
     mutationFn: saveUserRequest,
     onSuccess: () => {
       // show alert popup and redirect
-      dispatch(openAlertPopup({title: "회원가입 완료", message: "회원가입이 완료되었습니다.", onClose: () => navigate("/")}));
+      dispatch(openAlertPopup({title: "회원가입 완료", content: "회원가입이 완료되었습니다.", onClose: () => navigate("/")}));
     }
   })
 
