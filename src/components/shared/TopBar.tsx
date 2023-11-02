@@ -14,7 +14,7 @@ const TopBar = () => {
   const [unreadNoticeCount, setUnreadNoticeCount] = useState(0);
   const fecthNotification = () => {
 
-    const url = `${import.meta.env.VITE_BASE_URL}/notice/connect/${Cookies.get(COOKIE_NAME.EMAIL)}`;
+    const url = `${import.meta.env.VITE_BASE_URL}/notices/connect/${Cookies.get(COOKIE_NAME.EMAIL)}`;
     const eventSource = new EventSourcePolyfill(url, {
       headers: {
         Authorization: `Bearer ${Cookies.get(COOKIE_NAME.ACCESS_TOKEN)}`,

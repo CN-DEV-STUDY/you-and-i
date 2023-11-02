@@ -1,7 +1,7 @@
 import axios from '@/services/api/AxiosInterceptor';
 import {GetChatRequest} from "@/services/types/chat/types.ts";
 
-export const saveUserRequest = async (data: GetChatRequest) => {
+export const getChats = async (data: GetChatRequest) => {
   const response = await axios.get("/chats", {
     params: {
       email: data.email,

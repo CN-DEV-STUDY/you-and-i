@@ -2,10 +2,12 @@ import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/Avatar.tsx";
 import {Button} from "@/components/ui/Button.tsx";
 import {COOKIE_NAME, SearchUserResponse} from "@/services/types/user/types.ts";
 import {useMutation} from "@tanstack/react-query";
-import {sendRelationsNoticeRequest} from "@/services/api/user/api.ts";
+import {sendRelationsNotice} from "@/services/api/notification/api";
 import Cookies from "js-cookie";
 import {useDispatch} from "react-redux";
 import {openConfirmPopup} from "@/slices/popup/confirmPopupSlice.ts";
+import {openAlertPopup} from "@/slices/popup/alertPopupSlice.ts";
+import {useNavigate} from "react-router-dom";
 
 type Props = {
   user: SearchUserResponse;
@@ -14,11 +16,12 @@ type Props = {
 
 const SearchUserCard = ({user, lastUserElementRef}: Props) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const {mutate, isPending} = useMutation({
-    mutationFn: sendRelationsNoticeRequest,
-    onSuccess: (data) => {
-      console.log(data);
+    mutationFn: sendRelationsNotice,
+    onSuccess: () => {
+      dispatch(openAlertPopup({title: "유앤아이 신청", content: "유앤아이 신청을 보냈습니다.", onClose: () => navigate("/")}))
     }
   });
 

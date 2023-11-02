@@ -16,7 +16,3 @@ export const relationShipRequest = async (data: SetUserRelationShipRequest) => {
   return response.data;
 }
 
-export const sendRelationsNoticeRequest = async (data: SendRelationsNoticeRequest) => {
-  const response = await axios.post('/notice/send', data);
-  return response.data;
-}
