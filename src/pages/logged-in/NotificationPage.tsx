@@ -45,8 +45,8 @@ const NotificationPage = () => {
           title: "유앤아이 신청 수락",
           content: "유앤아이 신청을 수락하시겠습니까?",
           onConfirm: () => {
-            mutate(noticeId);
             setNotices(notices.filter((notice) => notice.noticeId !== noticeId))
+            mutate(noticeId);
           }
         }
       )

@@ -1,13 +1,14 @@
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/Card"
-import {Button} from "@/components/ui/Button.tsx";
 import {useDispatch} from "react-redux";
 import {closeAlertPopup} from "@/slices/popup/alertPopupSlice.ts";
+import {
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle
+} from "@/components/ui/AlertDialog.tsx";
 
 type Props = {
   title: string;
@@ -23,19 +24,17 @@ const AlertPopup = ({ title, content, onClose }: Props) => {
   }
 
   return (
-    <div data-modal-backdrop="static" className="z-999 w-full h-full backdrop-blur-sm absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-      <Card className="w-4/5 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-        <CardHeader>
-          <CardTitle>{title}</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p>{content}</p>
-        </CardContent>
-        <CardFooter>
-          <Button className="w-full" onClick={closeHandler}>확인</Button>
-        </CardFooter>
-      </Card>
-    </div>
+    <AlertDialog open>
+      <AlertDialogContent className="w-11/12 rounded shadow-gray-950">
+        <AlertDialogHeader>
+          <AlertDialogTitle className="text-black">{title}</AlertDialogTitle>
+          <AlertDialogDescription>{content}</AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel onClick={closeHandler}>확인</AlertDialogCancel>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 }
 
