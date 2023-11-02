@@ -53,7 +53,7 @@ const LoggedInMenu = ({onLogout, unreadNoticeCount}: LoggedInMenuProps) => {
         <User className="mr-2 h-4 w-4" />
         <DropdownMenuLabel>Profile</DropdownMenuLabel>
       </DropdownMenuItem>
-      <DropdownMenuItem onClick={() => navigate("/")}>
+      <DropdownMenuItem onClick={() => navigate("/notification")}>
         <BellRing className="mr-2 h-4 w-4" />
         <DropdownMenuLabel>Notification({unreadNoticeCount})</DropdownMenuLabel>
       </DropdownMenuItem>

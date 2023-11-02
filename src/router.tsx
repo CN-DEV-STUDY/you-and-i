@@ -12,6 +12,9 @@ import BottomBarOnly from "@/layout/BottomBarOnly.tsx";
 import TopBottomBar from "@/layout/TopBottomBar.tsx";
 import PlanCalendar from "@/components/Calendar";
 import NewStoryPage from "@/pages/logged-in/NewStoryPage.tsx";
+import NotificationPage from "@/pages/logged-in/NotificationPage.tsx";
+import React from "react";
+import FindYouPage from "@/pages/logged-in/FindYouPage.tsx";
 
 export const router = createBrowserRouter([
     {
@@ -34,6 +37,10 @@ export const router = createBrowserRouter([
                         path: "plan",
                         element: <PlanCalendar />,
                     },
+                    {
+                        path: "notification",
+                        element: <NotificationPage />,
+                    }
                 ],
             },
 
@@ -75,6 +82,10 @@ export const router = createBrowserRouter([
                 path: "/chat",
                 element: <ChatPage />,
             },
+            {
+                path: "/find-you",
+                element: <FindYouPage />,
+            }
         ],
     },
 ]);

@@ -23,7 +23,7 @@ const AlertPopup = ({ title, content, onClose }: Props) => {
   }
 
   return (
-    <div data-modal-backdrop="static" className="w-full h-full backdrop-blur-sm absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+    <div data-modal-backdrop="static" className="z-999 w-full h-full backdrop-blur-sm absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
       <Card className="w-4/5 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
         <CardHeader>
           <CardTitle>{title}</CardTitle>

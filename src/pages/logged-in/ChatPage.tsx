@@ -96,7 +96,6 @@ const ChatPage = () => {
 
     publish(`/publish/chat/${chatRoomId}`, JSON.stringify({
       email: email,
-      chatRoomId: chatRoomId,
       message: inputRef.current.value
     }));
 
