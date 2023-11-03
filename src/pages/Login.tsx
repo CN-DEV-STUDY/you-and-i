@@ -34,7 +34,7 @@ const formSchema = z.object({
 
 const Login = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   // redirect to home if user is logged in
   const isLoggedIn = useSelector((state: RootState) => state.login.isLoggedIn);
