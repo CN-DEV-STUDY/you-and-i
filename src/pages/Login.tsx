@@ -50,10 +50,9 @@ const Login = () => {
       // set cookie
       const jwt: Jwt = jwtDecode(data.accessToken);
       const in30Minutes = new Date(jwt.exp * 1000);
-      Cookies.set(COOKIE_NAME.ACCESS_TOKEN, data.accessToken, {expires: in30Minutes})
-      Cookies.set(COOKIE_NAME.CHAT_ROOM_ID, data.chatRoomId, {expires: in30Minutes})
+      Cookies.set(COOKIE_NAME.ACCESS_TOKEN, `Bearer ${data.accessToken}`, {expires: in30Minutes})
       Cookies.set(COOKIE_NAME.EMAIL, data.email, {expires: in30Minutes})
-      Cookies.set(COOKIE_NAME.IS_LOGGED_IN, 'true', {expires: in30Minutes})
+      Cookies.set(COOKIE_NAME.CHAT_ROOM_ID, data.chatRoomId, {expires: in30Minutes})
 
       // set global state
       dispatch(login())

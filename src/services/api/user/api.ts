@@ -1,4 +1,4 @@
-import axios from '@/services/api/AxiosInterceptor';
+import axios from '@/services/api/AxiosInstance.tsx';
 import {LoginRequest, SaveUserRequest, SetUserRelationShipRequest, SendRelationsNoticeRequest } from "@/services/types/user/types.ts";
 
 export const saveUserRequest = async (data: SaveUserRequest) => {
