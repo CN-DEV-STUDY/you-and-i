@@ -6,18 +6,25 @@ import {memo, useEffect, useState} from "react";
 import Cookies from "js-cookie";
 import {COOKIE_NAME} from "@/services/types/user/types.ts";
 import {setHasUnreadNotice} from "@/slices/notice/noticeSlice.ts";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import { EventSourcePolyfill } from 'event-source-polyfill';
+import {RootState} from "@/store.ts";
 
 const TopBar = () => {
+
+  // redux
   const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state: RootState) => state.login.isLoggedIn)
+
+  // state
   const [unreadNoticeCount, setUnreadNoticeCount] = useState(0);
-  const fecthNotification = () => {
+
+  const fetchNotification = () => {
 
     const url = `${import.meta.env.VITE_BASE_URL}/notices/connect/${Cookies.get(COOKIE_NAME.EMAIL)}`;
     const eventSource = new EventSourcePolyfill(url, {
       headers: {
-        Authorization: `Bearer ${Cookies.get(COOKIE_NAME.ACCESS_TOKEN)}`,
+        Authorization: Cookies.get(COOKIE_NAME.ACCESS_TOKEN),
       },
     });
 
@@ -41,11 +48,10 @@ const TopBar = () => {
       setUnreadNoticeCount(Number(unreadNoticeCount));
       console.log(event);
     })
-
   }
 
   useEffect(() => {
-    fecthNotification();
+    isLoggedIn && fetchNotification();
   }, [])
 
   return (
@@ -70,5 +76,4 @@ const Container = styled.div`
   height: 55px;
   background: var(--color__secondary) url(${bImage}) no-repeat center 0 / cover;
   padding: 40px 20px 118px
-
 `;

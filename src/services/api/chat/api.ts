@@ -1,4 +1,4 @@
-import axios from '@/services/api/AxiosInterceptor';
+import axios from '@/services/api/AxiosInstance.tsx';
 import {GetChatRequest} from "@/services/types/chat/types.ts";
 
 export const getChats = async (data: GetChatRequest) => {

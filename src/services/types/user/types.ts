@@ -1,6 +1,5 @@
 export const COOKIE_NAME = {
   ACCESS_TOKEN : "ACCESS_TOKEN",
-  IS_LOGGED_IN : "IS_LOGGED_IN",
   EMAIL: "EMAIL",
   CHAT_ROOM_ID: "CHAT_ROOM_ID",
 } as const;

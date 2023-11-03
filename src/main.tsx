@@ -10,33 +10,29 @@ import {store} from "@/store";
 import {ClerkProvider} from "@clerk/clerk-react";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import GlobalStyles from "@/Theme/GlobalStyles.ts";
-import {AxiosInterceptor} from "@/services/api/AxiosInterceptor.tsx";
 
-const { VITE_CLERK_PUBLISHABLE_KEY, VITE_BASE_URL } = import.meta.env;
-//
+const { VITE_CLERK_PUBLISHABLE_KEY } = import.meta.env;
 
 //=== react query ===//
 const queryClient = new QueryClient({
-    defaultOptions: {
-        queries: {
-            refetchOnWindowFocus: false,
-        },
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
     },
+  },
 });
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-    // <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-        <ClerkProvider publishableKey={VITE_CLERK_PUBLISHABLE_KEY}>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <Provider store={store}>
-                      <GlobalStyles />
-                      <AxiosInterceptor>
-                        <RouterProvider router={router} />
-                      </AxiosInterceptor>
-                  </Provider>
-            </LocalizationProvider>
-        </ClerkProvider>
-    </QueryClientProvider>
-    // </React.StrictMode>
+  // <React.StrictMode>
+  <QueryClientProvider client={queryClient}>
+    <ClerkProvider publishableKey={VITE_CLERK_PUBLISHABLE_KEY}>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <Provider store={store}>
+          <GlobalStyles/>
+          <RouterProvider router={router}/>
+        </Provider>
+      </LocalizationProvider>
+    </ClerkProvider>
+  </QueryClientProvider>
+  // </React.StrictMode>
 );

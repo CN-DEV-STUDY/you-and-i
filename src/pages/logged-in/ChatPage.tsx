@@ -28,7 +28,7 @@ const ChatPage = () => {
 
   // 초기 데이터 불러오기
   useEffect(() => {
-    getChats({chatRoomId: chatRoomId, email: email})
+    getChats({email: email})
       .then((res) => {
         res.data.forEach((data: GetChatResponse) => {
           setMessages((prev) => [...prev, {

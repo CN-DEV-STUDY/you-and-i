@@ -6,8 +6,16 @@ import AlertPopup from "@/components/shared/AlertPopup.tsx";
 import {useSelector} from "react-redux";
 import {RootState} from "@/store.ts";
 import ConfirmPopup from "@/components/shared/ConfirmPopup.tsx";
+import useCheckLoginState from "@/hooks/useCheckLoginState.ts";
+import useAsyncInterceptors from "@/hooks/useAsyncInterceptors.ts";
 
+/**
+ * @description App 컴포넌트
+ */
 function App() {
+  useAsyncInterceptors();
+  useCheckLoginState();
+
   const {
     showAlertPopup,
     title: alertPopupTitle,

@@ -1,4 +1,4 @@
-import axios from "@/services/api/AxiosInterceptor";
+import axios from "@/services/api/AxiosInstance.tsx";
 
 export const savePeriodRequest = async (startedAt: string) => {
     const { data } = await axios.post(`/period?startedAt=${startedAt}`);

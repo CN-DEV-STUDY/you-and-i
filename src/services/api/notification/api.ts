@@ -1,4 +1,4 @@
-import axios from "@/services/api/AxiosInterceptor";
+import axios from "@/services/api/AxiosInstance.tsx";
 import {SendRelationsNoticeRequest} from "@/services/types/user/types.ts";
 
 export const getNotifications = async () => {
