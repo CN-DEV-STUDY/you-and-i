@@ -45,9 +45,8 @@ const useAsyncInterceptors = () => {
     }
   )
 
-  // clean-up
-  // axios.interceptors.request.eject(requestInterceptor);
-  // axios.interceptors.response.eject(responseInterceptor);
+  axios.interceptors.request.eject(requestInterceptor);
+  axios.interceptors.response.eject(responseInterceptor);
 }
 
 export default useAsyncInterceptors;
