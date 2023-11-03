@@ -40,18 +40,18 @@ const useCheckLoginState = () => {
     // 토큰값이 존재하지 않는 경우
     if (!accessToken) {
       dispatch(logout());
-      // navigate("/login")
-      dispatch(
-        openAlertPopup(
-          {
-            title: "로그인 상태가 유효하지 않습니다.",
-            content: "다시 로그인 해주세요.",
-            onClose: () => {
-              (location.pathname !== "/login") && navigate("/login");
-            }
-          }
-        )
-      )
+      navigate("/login")
+      // dispatch(
+      //   openAlertPopup(
+      //     {
+      //       title: "로그인 상태가 유효하지 않습니다.",
+      //       content: "다시 로그인 해주세요.",
+      //       onClose: () => {
+      //         (location.pathname !== "/login") && navigate("/login");
+      //       }
+      //     }
+      //   )
+      // )
     }
 
   }, [location]);
