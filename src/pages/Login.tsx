@@ -12,10 +12,11 @@ import {loginRequest} from "@/services/api/user/api.ts";
 import jwtDecode from "jwt-decode";
 import Cookies from "js-cookie";
 import {COOKIE_NAME, Jwt} from "@/services/types/user/types.ts";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {login} from "@/slices/user/loginSlice.ts";
 import {Loader2} from "lucide-react";
 import {Checkbox} from "@/components/ui/Checkbox";
+import {RootState} from "@/store.ts";
 
 const items = [
   {
@@ -34,6 +35,12 @@ const formSchema = z.object({
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch()
+
+  // redirect to home if user is logged in
+  const isLoggedIn = useSelector((state: RootState) => state.login.isLoggedIn);
+  if (isLoggedIn) {
+    navigate("/");
+  }
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

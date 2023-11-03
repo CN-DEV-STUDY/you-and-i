@@ -1,7 +1,7 @@
 import React from "react";
 import GlobalStyles from "./Theme/GlobalStyles";
 import {Outlet} from "react-router-dom";
-import { Toaster } from "@/components/ui/Toaster"
+import {Toaster} from "@/components/ui/Toaster"
 import AlertPopup from "@/components/shared/AlertPopup.tsx";
 import {useSelector} from "react-redux";
 import {RootState} from "@/store.ts";
@@ -30,7 +30,6 @@ function App() {
     onClose: onConfirmPopupClose,
     onConfirm: onConfirm
   } = useSelector((state: RootState) => state.confirmPopup);
-
 
   return (
     <>

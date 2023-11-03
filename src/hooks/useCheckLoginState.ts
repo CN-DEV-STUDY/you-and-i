@@ -20,7 +20,6 @@ const useCheckLoginState = () => {
     // 토큰 정보를 가져온다.
     const { Authorization } = axios.defaults.headers.common || {};
     const accessToken  = Cookies.get(COOKIE_NAME.ACCESS_TOKEN);
-    const referrer = document.referrer;
 
     // 로그인 상태가 유효할 경우 : 로그인 전역상태값을 계속 유지한다.
     if (Authorization && accessToken && Authorization === accessToken) {
@@ -37,9 +36,8 @@ const useCheckLoginState = () => {
       return;
     }
 
-    // 로그인 요청 이외의 요청에서 토큰이 없거나, http 헤더의 토큰값과 일치하지 않는 경우
-    if (!referrer.includes("/login") && (!Authorization || !accessToken || Authorization !== accessToken)) {
-      // 로그인 상태가 유효하지 않다는 안내 메세지 및 후처리 로직 구현
+    // 토큰값이 존재하지 않는 경우
+    if (!accessToken) {
       dispatch(logout());
       dispatch(
         openAlertPopup(
