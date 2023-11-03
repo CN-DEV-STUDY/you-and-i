@@ -1,6 +1,4 @@
 import {Navigate} from "react-router-dom";
-import Cookies from "js-cookie";
-import {COOKIE_NAME} from "@/services/types/user/types.ts";
 import {RootState} from "@/store.ts";
 import {useSelector} from "react-redux";
 
@@ -13,7 +11,7 @@ const ProtectedRoute = ({ children }: Props) => {
 
   if (!isLoggedIn) {
     // user is not authenticated
-    return <Navigate to='/login' />;
+    return <Navigate to='/login' replace />;
   }
 
   return children;
