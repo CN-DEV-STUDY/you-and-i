@@ -1,6 +1,6 @@
-import React from "react";
+import React, {useEffect} from "react";
 import GlobalStyles from "./Theme/GlobalStyles";
-import {Outlet} from "react-router-dom";
+import {Outlet, useNavigate} from "react-router-dom";
 import {Toaster} from "@/components/ui/Toaster"
 import AlertPopup from "@/components/shared/AlertPopup.tsx";
 import {useSelector} from "react-redux";
