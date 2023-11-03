@@ -15,6 +15,7 @@ import NewStoryPage from "@/pages/logged-in/NewStoryPage.tsx";
 import NotificationPage from "@/pages/logged-in/NotificationPage.tsx";
 import React from "react";
 import FindYouPage from "@/pages/logged-in/FindYouPage.tsx";
+import ProtectedRoute from "@/pages/ProtectedRoute.tsx";
 
 export const router = createBrowserRouter([
     {

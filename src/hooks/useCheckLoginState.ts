@@ -1,11 +1,12 @@
-import {useDispatch} from "react-redux";
-import {useLocation, useNavigate} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {redirect, useLocation, useNavigate} from "react-router-dom";
 import {useEffect} from "react";
 import axios from "@/services/api/AxiosInstance"
 import {COOKIE_NAME} from "@/services/types/user/types.ts";
 import Cookies from "js-cookie";
 import {openAlertPopup} from "@/slices/popup/alertPopupSlice.ts";
 import {login, logout} from "@/slices/user/loginSlice.ts";
+import {RootState} from "@/store.ts";
 
 const useCheckLoginState = () => {
   // redux
@@ -39,6 +40,7 @@ const useCheckLoginState = () => {
     // 토큰값이 존재하지 않는 경우
     if (!accessToken) {
       dispatch(logout());
+      // navigate("/login")
       dispatch(
         openAlertPopup(
           {
