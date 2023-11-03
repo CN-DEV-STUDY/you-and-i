@@ -1,15 +1,17 @@
 import {Navigate} from "react-router-dom";
 import Cookies from "js-cookie";
 import {COOKIE_NAME} from "@/services/types/user/types.ts";
+import {RootState} from "@/store.ts";
+import {useSelector} from "react-redux";
 
 type Props = {
   children: React.ReactNode;
 };
 
 const ProtectedRoute = ({ children }: Props) => {
-  const isAuthenticated = Cookies.get(COOKIE_NAME.IS_LOGGED_IN);
+  const isLoggedIn = useSelector((state: RootState) => state.login.isLoggedIn);
 
-  if (!isAuthenticated) {
+  if (!isLoggedIn) {
     // user is not authenticated
     return <Navigate to='/login' />;
   }
