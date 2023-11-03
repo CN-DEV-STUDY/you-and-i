@@ -9,7 +9,6 @@ import {Provider} from "react-redux";
 import {store} from "@/store";
 import {ClerkProvider} from "@clerk/clerk-react";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
-import GlobalStyles from "@/Theme/GlobalStyles.ts";
 
 const { VITE_CLERK_PUBLISHABLE_KEY } = import.meta.env;
 
@@ -28,7 +27,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <ClerkProvider publishableKey={VITE_CLERK_PUBLISHABLE_KEY}>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <Provider store={store}>
-          <GlobalStyles/>
           <RouterProvider router={router}/>
         </Provider>
       </LocalizationProvider>
