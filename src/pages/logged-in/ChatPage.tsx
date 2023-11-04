@@ -8,47 +8,64 @@ import {Button} from "@/components/ui/Button"
 import {Card, CardContent, CardFooter, CardHeader,} from "@/components/ui/Card"
 import {Input} from "@/components/ui/Input"
 import useWebSocket from "@/hooks/useWebSocket.ts";
-import {getChats} from "@/services/api/chat/api.ts";
+import {getChats, getConnectionId} from "@/services/api/chat/api.ts";
 import {GetChatResponse} from "@/services/types/chat/types.ts";
 import Cookies from "js-cookie";
 import {COOKIE_NAME} from "@/services/types/user/types.ts";
 import {ScrollArea} from "@/components/ui/ScrollArea.tsx";
+import {useQueries} from "@tanstack/react-query";
 
 /**
  * @see https://velog.io/@rlawogks2468/React%EB%A1%9C-Stomp%EC%99%80-Socket%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EC%B1%84%ED%8C%85%EB%B0%A9-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0
  * @constructor
  */
 const ChatPage = () => {
+
+  // ref
   const inputRef = useRef<HTMLInputElement>(null)
   const messageEndRef = useRef<HTMLDivElement | null>(null);
+
+  // state
   const {client, activate, deactivate, publish} = useMemo(() => useWebSocket(), []);
   const [messages, setMessages] = React.useState([])
+  const [connectionId, setConnectionId] = React.useState<string>("");
+
+  // cookie
   const email = Cookies.get(COOKIE_NAME.EMAIL);
-  const chatRoomId = Cookies.get(COOKIE_NAME.CHAT_ROOM_ID);
+
+  // query
+  const result = useQueries({
+    queries: [
+      {queryKey: ['chats'], queryFn: () => getChats({email: email})},
+      {queryKey: ['connectionId'], queryFn: () => getConnectionId(email)}
+    ],
+  })
 
   // 초기 데이터 불러오기
   useEffect(() => {
-    getChats({email: email})
-      .then((res) => {
-        res.data.forEach((data: GetChatResponse) => {
-          setMessages((prev) => [...prev, {
-            sender: data.sender,
-            content: data.message,
-          }])
-        })
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-  }, []);
+    if (result) {
+      if (result[0].isSuccess && result[1].isSuccess) {
+        const {data: chats} = result[0].data;
+        const {connectionId} = result[1].data;
+        setMessages(chats.map((chat) => {
+          return {
+            sender: chat.sender,
+            content: chat.message,
+          }
+        }))
+        setConnectionId(connectionId)
+      }
+    }
+  }, [result[0].isSuccess, result[1].isSuccess])
 
   useEffect(() => {
     messageEndRef.current.scrollIntoView({behavior: 'smooth'});
   }, [messages]);
 
+  // subscribe
   client.onConnect = function (frame) {
     activate();
-    client.subscribe(`/queue/chat/${chatRoomId}`, (message) => {
+    client.subscribe(`/queue/chat/${connectionId}`, (message) => {
       const chat = JSON.parse(message.body) as GetChatResponse;
       setMessages((prev) => [...prev, {
         sender: chat.sender,
@@ -57,6 +74,7 @@ const ChatPage = () => {
     })
   };
 
+  // publish
   const onSendMessage = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -64,7 +82,7 @@ const ChatPage = () => {
       return;
     }
 
-    publish(`/publish/chat/${chatRoomId}`, JSON.stringify({
+    publish(`/publish/chat/${connectionId}`, JSON.stringify({
       email: email,
       message: inputRef.current.value
     }));
