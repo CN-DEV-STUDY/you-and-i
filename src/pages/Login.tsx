@@ -17,14 +17,7 @@ import {login} from "@/slices/user/loginSlice.ts";
 import {Loader2} from "lucide-react";
 import {Checkbox} from "@/components/ui/Checkbox";
 import {RootState} from "@/store.ts";
-
-const items = [
-  {
-    id: "rememberMe",
-    label: "로그인 상태 유지",
-  },
-
-] as const
+import {useEffect} from "react";
 
 const formSchema = z.object({
   email: z.string().min(1).max(30).email(),
@@ -38,9 +31,12 @@ const Login = () => {
 
   // redirect to home if user is logged in
   const isLoggedIn = useSelector((state: RootState) => state.login.isLoggedIn);
-  if (isLoggedIn) {
-    navigate("/");
-  }
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/");
+    }
+  }, []);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
