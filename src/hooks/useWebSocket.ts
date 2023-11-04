@@ -1,12 +1,10 @@
-import { Client } from '@stomp/stompjs';
+import {Client} from '@stomp/stompjs';
 import Cookies from "js-cookie";
-import {useEffect} from "react";
 import {COOKIE_NAME} from "@/services/types/user/types.ts";
 
+const { VITE_BROKER_URL } = import.meta.env;
+
 const useWebSocket = () => {
-
-  const { VITE_BROKER_URL } = import.meta.env;
-
   const client = new Client({
     brokerURL: `ws://${VITE_BROKER_URL}/you-and-i-websocket`,
     connectHeaders: {
