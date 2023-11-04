@@ -43,36 +43,43 @@ const ChatPage = () => {
 
   // 초기 데이터 불러오기
   useEffect(() => {
-    if (result) {
-      if (result[0].isSuccess && result[1].isSuccess) {
-        const {data: chats} = result[0].data;
-        const {connectionId} = result[1].data;
-        setMessages(chats.map((chat) => {
-          return {
+    if (!result) {
+      return;
+    }
+
+    if (result[0].isSuccess && result[1].isSuccess) {
+      const {data: chats} = result[0].data;
+
+      console.log("result[1].data", result[1].data)
+      const {data: connectionId} = result[1].data;
+      setMessages(chats.map((chat) => {
+        return {
+          sender: chat.sender,
+          content: chat.message,
+        }
+      }))
+
+      console.log("connectionId", connectionId)
+      setConnectionId(connectionId)
+
+      client.onConnect = function (frame) {
+        activate();
+        client.subscribe(`/queue/chat/${connectionId}`, (message) => {
+          const chat = JSON.parse(message.body) as GetChatResponse;
+          setMessages((prev) => [...prev, {
             sender: chat.sender,
             content: chat.message,
-          }
-        }))
-        setConnectionId(connectionId)
-      }
+          }])
+        })
+      };
     }
   }, [result[0].isSuccess, result[1].isSuccess])
 
+  // 스크롤 자동 이동
   useEffect(() => {
     messageEndRef.current.scrollIntoView({behavior: 'smooth'});
   }, [messages]);
 
-  // subscribe
-  client.onConnect = function (frame) {
-    activate();
-    client.subscribe(`/queue/chat/${connectionId}`, (message) => {
-      const chat = JSON.parse(message.body) as GetChatResponse;
-      setMessages((prev) => [...prev, {
-        sender: chat.sender,
-        content: chat.message,
-      }])
-    })
-  };
 
   // publish
   const onSendMessage = (e: React.FormEvent<HTMLFormElement>) => {
