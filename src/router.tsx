@@ -10,7 +10,7 @@ import ProfilePage from "@/pages/logged-in/ProfilePage.tsx";
 import TopBarOnly from "@/layout/TopBarOnly.tsx";
 import BottomBarOnly from "@/layout/BottomBarOnly.tsx";
 import TopBottomBar from "@/layout/TopBottomBar.tsx";
-import PlanCalendar from "@/components/Calendar";
+import PlanCalendar from "@/components/domain/plan/Calendar.tsx";
 import NewStoryPage from "@/pages/logged-in/NewStoryPage.tsx";
 import NotificationPage from "@/pages/logged-in/NotificationPage.tsx";
 import React from "react";
