@@ -1,5 +1,5 @@
-import { Button } from "@/components/ui/Button";
-import { Card, CardContent } from "@/components/ui/Card";
+import { Button } from "@/components/ui/Button.tsx";
+import { Card, CardContent } from "@/components/ui/Card.tsx";
 import {
     Form,
     FormControl,
@@ -7,7 +7,7 @@ import {
     FormItem,
     FormLabel,
     FormMessage,
-} from "@/components/ui/Form";
+} from "@/components/ui/Form.tsx";
 import styled from "styled-components";
 import { CalendarIcon } from "lucide-react";
 import * as z from "zod";
@@ -17,13 +17,13 @@ import {
     Popover,
     PopoverContent,
     PopoverTrigger,
-} from "@/components/ui/Popover";
+} from "@/components/ui/Popover.tsx";
 import { cn } from "@/lib/utils.ts";
 import { format } from "date-fns";
 import { Calendar } from "@/components/ui/Calendar.tsx";
-import { toast } from "@/components/ui/use-toast";
+import { toast } from "@/components/ui/use-toast.ts";
 import { savePeriodRequest } from "@/services/api/period/api.ts";
-import { Input } from "./ui/Input";
+import { Input } from "../../ui/Input.tsx";
 import { useState } from "react";
 
 const FormSchema = z.object({
