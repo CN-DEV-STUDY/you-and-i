@@ -2,12 +2,11 @@ import styled from "styled-components";
 import {Avatar, AvatarFallback, AvatarImage} from "../ui/Avatar";
 import bImage from "./../../assets/mountains-7561636_1280.png";
 import HamburgerMenu from "@/components/shared/HamburgerMenu.tsx";
-import {memo, useEffect, useState} from "react";
+import {useState} from "react";
 import Cookies from "js-cookie";
 import {COOKIE_NAME} from "@/services/types/user/types.ts";
-import {setHasUnreadNotice} from "@/slices/notice/noticeSlice.ts";
 import {useDispatch, useSelector} from "react-redux";
-import { EventSourcePolyfill } from 'event-source-polyfill';
+import {EventSourcePolyfill} from 'event-source-polyfill';
 import {RootState} from "@/store.ts";
 
 const TopBar = () => {
@@ -44,15 +43,14 @@ const TopBar = () => {
 
     eventSource.addEventListener("unreadNoticeCount", (event) => {
       const {data: unreadNoticeCount} = event;
-      dispatch(setHasUnreadNotice({hasUnreadNotice: Number(unreadNoticeCount) > 0}));
       setUnreadNoticeCount(Number(unreadNoticeCount));
       console.log(event);
     })
   }
 
-  useEffect(() => {
-    isLoggedIn && fetchNotification();
-  }, [])
+  if (isLoggedIn) {
+    fetchNotification()
+  }
 
   return (
     <Container>
@@ -65,7 +63,7 @@ const TopBar = () => {
   );
 };
 
-export default memo(TopBar);
+export default TopBar;
 
 // style
 const Container = styled.div`
