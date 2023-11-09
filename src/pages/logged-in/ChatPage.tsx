@@ -78,7 +78,7 @@ const ChatPage = () => {
 
   return (
     <>
-      <Card className="rounded-none h-screen w-96 mx-auto shadow-lg">
+      <Card className="rounded-none h-screen max-w-sm mx-auto shadow-lg">
         <CardHeader className="flex flex-row items-center">
           <div className="flex items-center space-x-4">
             <Avatar>

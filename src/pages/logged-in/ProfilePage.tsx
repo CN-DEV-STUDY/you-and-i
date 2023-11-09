@@ -1,13 +1,11 @@
 import {ProfileForm} from "@/components/domain/profile/ProfileForm.tsx";
-import TopBar from "@/components/shared/TopBar.tsx";
-import FindYouForm from "@/components/domain/profile/FindYouForm.tsx";
 import {Button} from "@/components/ui/Button.tsx";
 import {Link} from "react-router-dom";
 
 const ProfilePage = () => {
   return (
-    <>
-      <div className="space-y-6 p-5">
+
+      <div className="max-w-sm mx-auto space-y-6 p-5 bg-[--color__primary]">
         {/*<FindYouForm />*/}
         <p className="text-[--color__white]">상대방을 등록하고 you and i를 시작해보세요.</p>
         <Button variant="outline" asChild>
@@ -18,7 +16,7 @@ const ProfilePage = () => {
         </div>
         <ProfileForm />
       </div>
-    </>
+
   );
 }
 

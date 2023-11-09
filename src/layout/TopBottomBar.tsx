@@ -5,7 +5,7 @@ import React from "react";
 
 const TopBottomBar = () => {
   return(
-    <div className="w-96 mx-auto">
+    <div className="max-w-sm mx-auto h-screen bg-[--color__primary]">
       <TopBar />
       <Outlet />
       <BottomBar />

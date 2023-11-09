@@ -67,7 +67,7 @@ const Login = () => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit((form) => submit(form))}>
-        <Card className="rounded-none mx-auto h-screen w-96">
+        <Card className="rounded-none mx-auto h-screen max-w-sm shadow-lg">
           <CardHeader className="space-y-1">
             <div className="flex justify-between items-center">
               <CardTitle className="text-2xl">Welcome</CardTitle>

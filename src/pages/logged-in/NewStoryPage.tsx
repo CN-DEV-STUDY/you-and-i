@@ -77,7 +77,7 @@ const NewStoryPage = () => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <Card className="rounded-none h-screen w-96 mx-auto p-1 pt-3 shadow-lg">
+        <Card className="rounded-none h-screen max-w-sm mx-auto p-1 pt-3 shadow-lg">
           <CardHeader className="float-right">
             <Link to="/"><Icons.close/></Link>
           </CardHeader>

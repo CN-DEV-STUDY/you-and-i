@@ -37,7 +37,7 @@ const SearchUserCard = ({user, lastUserElementRef}: Props) => {
   }
 
   return (
-    <div className="flex items-center justify-between space-x-4" ref={lastUserElementRef}>
+    <div className="flex items-center justify-between space-x-2" ref={lastUserElementRef}>
       <div className="flex items-center space-x-4">
         <Avatar>
           <AvatarImage src=""/>
