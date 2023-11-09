@@ -5,11 +5,11 @@ import React from "react";
 
 const TopBottomBar = () => {
   return(
-    <>
+    <div className="max-w-sm mx-auto h-screen bg-[--color__primary]">
       <TopBar />
       <Outlet />
       <BottomBar />
-    </>
+    </div>
   )
 }
 

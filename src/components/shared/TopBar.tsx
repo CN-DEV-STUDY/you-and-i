@@ -53,7 +53,7 @@ const TopBar = () => {
   }
 
   return (
-    <Container>
+    <Container className="max-w-sm">
       <Avatar>
         <AvatarImage src="https://github.com/shadcn.png" />
         <AvatarFallback>CN</AvatarFallback>
@@ -70,8 +70,8 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
   height: 55px;
+  margin: 0 auto;
   background: var(--color__secondary) url(${bImage}) no-repeat center 0 / cover;
   padding: 40px 20px 118px
 `;

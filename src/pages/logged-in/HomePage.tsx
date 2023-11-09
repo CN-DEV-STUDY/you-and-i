@@ -6,7 +6,6 @@ import Story from "../../components/Story";
 const HomePage = () => {
   return (
     <>
-
       <Period />
       <Recent />
       <Plan />

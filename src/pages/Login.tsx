@@ -67,11 +67,10 @@ const Login = () => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit((form) => submit(form))}>
-        <Card className="rounded-none h-screen mx-auto pt-[1vh]">
+        <Card className="rounded-none mx-auto h-screen max-w-sm shadow-lg">
           <CardHeader className="space-y-1">
             <div className="flex justify-between items-center">
               <CardTitle className="text-2xl">Welcome</CardTitle>
-              <Link to="/"><Icons.close/></Link>
             </div>
             <CardDescription>
               Sing in to continue

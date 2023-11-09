@@ -55,7 +55,7 @@ const CreateAccountForm = () => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(((form) => submit(form)))}>
-        <Card className="rounded-none h-screen mx-auto pt-[1vh]">
+        <Card className="rounded-none h-screen mx-auto max-w-sm shadow-lg pt-[1vh]">
           <CardHeader className="space-y-1">
             <div className="flex justify-between items-center">
               <CardTitle className="text-2xl">Create an account</CardTitle>

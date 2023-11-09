@@ -5,6 +5,7 @@ const Story = () => {
   return (
     <SectionContainer>
       <Title type="secondary" content="Our Stories" />
+
     </SectionContainer>
   );
 };

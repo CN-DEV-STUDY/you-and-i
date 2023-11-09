@@ -37,12 +37,12 @@ const FindYouPage = () => {
   }, [loading, hasMore]);
 
   return (
-    <Card className="sm:max-w-[425px] rounded-none">
+    <Card className="max-w-sm mx-auto min-h-screen rounded-none shadow-lg">
       <CardContent>
         <div className="flex flex-col gap-2 pt-8">
           <Select defaultValue="EMAIL" onValueChange={setSearchType}>
             <SelectTrigger className="w-full">
-              <SelectValue placeholder="검색 조건을 선택해주세요." />
+              <SelectValue placeholder="검색 조건을 선택해주세요."/>
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
@@ -61,28 +61,24 @@ const FindYouPage = () => {
             />
           </div>
           <Separator className="my-1"/>
-          <div className="h-screen overflow-hidden">
-            <ScrollArea className="h-3/6 w-full">
-              <div className="space-y-4">
-                {users.map((user: User, index: number) => {
-                  return (users.length === index + 1)
-                    ? <SearchUserCard key={user.email} user={user} lastUserElementRef={lastUserElementRef} />
-                    : <SearchUserCard  key={user.email} user={user}/>
-                })}
-                {loading &&
-                  Array.from({length: 10}).map((_, index) => (
-                    <div className="flex items-center space-x-4">
-                      <Skeleton className="h-12 w-12 rounded-full"/>
-                      <div className="space-y-2">
-                        <Skeleton className="h-4 w-[250px]"/>
-                        <Skeleton className="h-4 w-[200px]"/>
-                      </div>
-                    </div>
-                  ))
-                }
-                {error && <div>Error</div>}
-              </div>
-            </ScrollArea>
+
+          <div className="space-y-4">
+            {users.map((user: User, index: number) => {
+              return (users.length === index + 1)
+                ? <SearchUserCard key={user.email} user={user} lastUserElementRef={lastUserElementRef}/>
+                : <SearchUserCard key={user.email} user={user}/>
+            })}
+            {loading &&
+              Array.from({length: 10}).map((_, index) => (
+                <div className="flex items-center space-x-4">
+                  <Skeleton className="h-12 w-12 rounded-full"/>
+                  <div className="space-y-2">
+                    <Skeleton className="h-4 w-[250px]"/>
+                    <Skeleton className="h-4 w-[200px]"/>
+                  </div>
+                </div>
+              ))
+            }
           </div>
         </div>
       </CardContent>

@@ -26,8 +26,7 @@ const GlobalStyles = createGlobalStyle`
   
   html, body {
     font-family: 'LINESeedKR-Rg', sans-serif;
-    background-color: var(--color__tertiary);
-    
+    //background-color: var(--color__tertiary);
   }
 
   ::-webkit-scrollbar {
@@ -38,7 +37,7 @@ const GlobalStyles = createGlobalStyle`
   }
   
   #root{
-    background-color: var(--color__primary);
+    background-color: var(--color__white);
   }
   
   h1, h2 {

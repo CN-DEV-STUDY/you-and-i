@@ -65,5 +65,6 @@ export default Calendar;
 // style
 const Container = styled.div`
     width: 100%;
+    background-color: var(--color__primary);
     /* margin-bottom: 20px; */
 `;
