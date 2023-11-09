@@ -13,6 +13,7 @@ import Cookies from "js-cookie";
 import {COOKIE_NAME} from "@/services/types/user/types.ts";
 import {ScrollArea} from "@/components/ui/ScrollArea.tsx";
 import {useQuery} from "@tanstack/react-query";
+import {Skeleton} from "@/components/ui/Skeleton.tsx";
 
 /**
  * @see https://velog.io/@rlawogks2468/React%EB%A1%9C-Stomp%EC%99%80-Socket%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EC%B1%84%ED%8C%85%EB%B0%A9-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0
@@ -42,7 +43,7 @@ const ChatPage = () => {
   // query
   const {data, isSuccess} = useQuery<Message[]>({
       queryKey: ['chats'],
-      queryFn: () => getChats({email: email})
+      queryFn: () => getChats({email: email}),
   })
 
   useEffect(() => {
@@ -77,7 +78,7 @@ const ChatPage = () => {
 
   return (
     <>
-      <Card className="rounded-none h-screen">
+      <Card className="rounded-none h-screen w-96 mx-auto shadow-lg">
         <CardHeader className="flex flex-row items-center">
           <div className="flex items-center space-x-4">
             <Avatar>
@@ -85,13 +86,21 @@ const ChatPage = () => {
               <AvatarFallback>OM</AvatarFallback>
             </Avatar>
             <div>
-              <p className="text-sm font-medium leading-none">Sofia Davis</p>
-              <p className="text-sm text-muted-foreground">m@example.com</p>
+              <p className="text-sm font-medium leading-none">Nickname</p>
+              <p className="text-sm text-muted-foreground">{Cookies.get(COOKIE_NAME.EMAIL)}</p>
             </div>
           </div>
         </CardHeader>
         <ScrollArea className="h-4/5">
           <CardContent>
+            {!isSuccess && (
+              <>
+                <Skeleton className="w-[100px] h-[36px] rounded-xl ml-auto bg-primary" />
+                <Skeleton className="w-[100px] h-[36px] rounded-xl" />
+                <Skeleton className="w-[100px] h-[36px] rounded-xl ml-auto bg-primary" />
+                <Skeleton className="w-[100px] h-[36px] rounded-xl" />
+              </>
+            )}
             <div className="space-y-4">
               {messages.map((message, index) => (
                 <div

@@ -1,19 +1,16 @@
 import Title from "./ui/Title";
 import PeriodCard from "./PeriodCard";
 import styled from "styled-components";
+import SectionContainer from "@/components/SectionContainer.tsx";
 
 function Period() {
   return (
-    <Section>
+    <SectionContainer>
       <Title type="secondary" content="Period" />
       <PeriodCard />
-    </Section>
+    </SectionContainer>
   );
 }
 
 export default Period;
 
-const Section = styled.div`
-  width: 100%;
-  height: 180px;
-`;

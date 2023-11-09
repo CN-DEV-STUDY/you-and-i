@@ -17,11 +17,9 @@ const BottomBar = () => {
       <Link to="/search">
         <HiOutlineSearch />
       </Link>
-        {/*<Button variant="outlined" color="neutral">*/}
       <Link to="/new-story">
         <AiOutlinePlus />
       </Link>
-        {/*</Button>*/}
       <Link to="/plan">
         <BsCalendar2Minus />
       </Link>
@@ -40,7 +38,9 @@ const Container = styled.div`
   position:fixed;
   bottom:0;
   padding:20px;
-  width:100%; 
+  width: 344px;
+  left: 50%;
+  transform: translateX(-50%);
 `
 const Inner = styled.div`
   width: 100%;

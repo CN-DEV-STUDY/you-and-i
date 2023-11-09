@@ -5,11 +5,11 @@ import React from "react";
 
 const TopBottomBar = () => {
   return(
-    <>
+    <div className="w-96 mx-auto">
       <TopBar />
       <Outlet />
       <BottomBar />
-    </>
+    </div>
   )
 }
 

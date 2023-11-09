@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import profileImg from "../../assets/sanibell-bv-xvOML5tdKMk-unsplash.jpg";
 import {Avatar} from "@mui/joy";
-import React, {useEffect, useRef, useState} from "react";
+import React, {useRef, useState} from "react";
 import {MdAttachFile} from "react-icons/md";
 import {Textarea} from "@/components/ui/Textarea.tsx";
 import {Input} from "@/components/ui/Input.tsx";
@@ -12,7 +12,6 @@ import {Form, FormControl, FormField, FormItem} from "@/components/ui/Form.tsx";
 import {Button} from "@/components/ui/Button.tsx";
 import {Loader2} from "lucide-react";
 import {Label} from "@/components/ui/Label.tsx";
-import autosize from "autosize";
 import {saveStoryRequest} from "@/services/api/story/api.ts";
 import {Card, CardContent, CardFooter, CardHeader} from "@/components/ui/Card.tsx";
 import {Link} from "react-router-dom";
@@ -32,8 +31,6 @@ const NewStoryPage = () => {
   // ref
   const textareaRef = useAutoFocus(useRef<HTMLTextAreaElement>(null));
   const fileRef = useRef<HTMLInputElement>(null);
-  // useAutoFocus(textareaRef);
-
 
   const onFileClick = () => {
     if (fileRef.current) {
@@ -80,20 +77,20 @@ const NewStoryPage = () => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <Card className="rounded-none h-screen pt-[1vh]">
+        <Card className="rounded-none h-screen w-96 mx-auto p-1 pt-3 shadow-lg">
           <CardHeader className="float-right">
             <Link to="/"><Icons.close/></Link>
           </CardHeader>
           <CardContent className="grid gap-4">
             <Grid>
               <div className="h-full">
-                <Avatar alt="Something when wrong" src={profileImg} />
-                <VerticalLine />
+                <Avatar alt="Something when wrong" src={profileImg}/>
+                <VerticalLine/>
               </div>
               <FormField
                 control={form.control}
                 name="content"
-                render={({ field }) => (
+                render={({field}) => (
                   <FormItem>
                     <Label className="font-bold">호날두</Label>
                     <FormControl>
@@ -110,10 +107,10 @@ const NewStoryPage = () => {
               />
               {file ? (
                 <ImageContainer>
-                  <img src={previewURL} width="95%" alt="cannot upload an image" />
+                  <img src={previewURL} width="95%" alt="cannot upload an image"/>
                 </ImageContainer>
               ) : (
-                <MdAttachFile onClick={onFileClick} />
+                <MdAttachFile onClick={onFileClick}/>
               )}
             </Grid>
             <Input
@@ -154,10 +151,11 @@ const Grid = styled.div`
     justify-self: center;
     align-self: start;
     margin-top: 5px;
-    
+
     grid-row: 1/3;
 
   }
+
   div:nth-child(5) {
     justify-self: center;
     align-self: center;
@@ -191,7 +189,7 @@ const VerticalLine = styled.div`
   height: 100%;
   border: 1px solid var(--color__light__grey);
   margin: 20px auto;
-  
+
 `;
 
 const ImageContainer = styled.div`
