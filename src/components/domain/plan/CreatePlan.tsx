@@ -47,10 +47,10 @@ function CreatePlan({ onClose, date }: Props) {
 
     const { mutate } = useMutation({
         mutationFn: (data)=> {
-            const formattedStartDate = format(data.startDate, "yyyy-MM-dd");
+            const formattedStartDate = format(form.getValues("startDate"), "yyyy-MM-dd");
             const formattedEndDate = format(endDate, "yyyy-MM-dd");
             return savePlan({
-                description : data.description,
+                description : form.getValues("description"),
                 startDate: formattedStartDate,
                 endDate: formattedEndDate
             })
