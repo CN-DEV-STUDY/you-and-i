@@ -1,30 +1,20 @@
-import { Button } from "@/components/ui/Button.tsx";
-import { Card, CardContent } from "@/components/ui/Card.tsx";
-import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from "@/components/ui/Form.tsx";
+import {Button} from "@/components/ui/Button.tsx";
+import {Card, CardContent} from "@/components/ui/Card.tsx";
+import {Form, FormControl, FormField, FormItem, FormLabel,} from "@/components/ui/Form.tsx";
 import styled from "styled-components";
-import { CalendarIcon } from "lucide-react";
+import {CalendarIcon} from "lucide-react";
 import * as z from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "@/components/ui/Popover.tsx";
-import { cn } from "@/lib/utils.ts";
-import { format } from "date-fns";
-import { Calendar } from "@/components/ui/Calendar.tsx";
-import { toast } from "@/components/ui/use-toast.ts";
-import { savePeriodRequest } from "@/services/api/period/api.ts";
-import { Input } from "../../ui/Input.tsx";
-import { useState } from "react";
+import {useForm} from "react-hook-form";
+import {zodResolver} from "@hookform/resolvers/zod";
+import {Popover, PopoverContent, PopoverTrigger,} from "@/components/ui/Popover.tsx";
+import {cn} from "@/lib/utils.ts";
+import {format} from "date-fns";
+import {Calendar} from "@/components/ui/Calendar.tsx";
+import {toast} from "@/components/ui/use-toast.ts";
+import {Input} from "../../ui/Input.tsx";
+import {useState} from "react";
+import {useMutation, useQueryClient} from "@tanstack/react-query";
+import {savePlan} from "@/services/api/plan/api.ts";
 
 const FormSchema = z.object({
     startDate: z.date({
@@ -44,27 +34,38 @@ function CreatePlan({ onClose, date }: Props) {
     // hook form
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
+        defaultValues: {
+            startDate: date,
+        },
     });
 
     // state
     const [endDate, setEndDate] = useState<Date | undefined>(date);
 
-    // method
-    function onSubmit(data: z.infer<typeof FormSchema>) {
-        const formattedStartDate = format(data.startDate, "yyyy-MM-dd");
-        const formattedEndDate = format(endDate, "yyyy-MM-dd");
+    // query
+    const queryClient = useQueryClient();
 
-        toast({
-            title: "You submitted the following values:",
-            description: (
-                <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-                    <code className="text-white">
-                        {JSON.stringify(data, null, 2)}
-                    </code>
-                </pre>
-            ),
-        });
-    }
+    const { mutate } = useMutation({
+        mutationFn: (data)=> {
+            const formattedStartDate = format(data.startDate, "yyyy-MM-dd");
+            const formattedEndDate = format(endDate, "yyyy-MM-dd");
+            return savePlan({
+                description : data.description,
+                startDate: formattedStartDate,
+                endDate: formattedEndDate
+            })
+        },
+        onSuccess: () => {
+            toast({
+                description: "계획 등록 성공",
+            });
+            onClose();
+            queryClient.invalidateQueries({queryKey: ["plans", date]})
+
+        }
+    })
+
+
 
     const onChangeEndDate = (selectDate: Date) => {
         setEndDate(selectDate);
@@ -76,7 +77,7 @@ function CreatePlan({ onClose, date }: Props) {
                 <CardContent className=" p-6 flex justify-center">
                     <Form {...form}>
                         <form
-                            onSubmit={form.handleSubmit(onSubmit)}
+                            onSubmit={form.handleSubmit((data)=>mutate(data))}
                             className="space-y-4 w-full"
                         >
                             <FormField

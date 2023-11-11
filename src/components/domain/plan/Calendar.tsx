@@ -29,6 +29,7 @@ function Calendar() {
     };
 
     const onClose = () => {
+        console.log("close");
         setOpen(false);
     };
 
